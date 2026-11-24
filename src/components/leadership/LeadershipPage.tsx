@@ -29,7 +29,7 @@ export function LeadershipPage({ title, eyebrow, description, profiles, accent }
           {profiles.map((profile, index) => (
             <article
               key={profile.id}
-              className={`group flex h-full flex-col rounded-2xl border border-graphite bg-charcoal/80 p-5 shadow-glass transition-all duration-300 ${accentBorder} ${index === 4 ? 'lg:col-start-2' : ''}`}
+              className={`group flex h-full flex-col rounded-2xl border border-graphite bg-charcoal/80 p-5 shadow-glass transition-all duration-300 ${accentBorder} ${index === 4 ? 'lg:col-start-2 lg:col-span-2 lg:w-1/2 lg:justify-self-center' : ''}`}
             >
               <div className={`relative mb-5 aspect-[4/3] overflow-hidden rounded-xl border bg-[#102d35] ${accentRing}`}>
                 {profile.photo ? (
