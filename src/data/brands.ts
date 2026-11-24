@@ -58,103 +58,104 @@ export const BRANDS: Record<string, BrandData> = {
     fullName: 'LumeaCyber — Cybersecurity, AI & Data Science',
     category: 'Cybersecurity, AI & Data Science',
     kicker: 'Flagship Brand',
-    tagline: 'Cybersecurity first. Intelligence throughout.',
+    tagline: 'Clearer security. Smarter use of technology.',
     officialTagline: 'Protect Your Digital World',
     logoUrl: '/logos/lumea-cyber-crop.png',
     logoWhiteUrl: '/logos/lumea-cyber-white.png',
     markUrl: '/logos/lumea-cyber-mark.png',
-    headline: 'Understand your risk. Strengthen your defences. Build the skills to keep them strong.',
-    lede: 'Comprehensive cybersecurity consulting, defensive assessments, artificial intelligence implementations, and institutional security capability building for forward-looking organisations.',
+    headline: 'Understand your digital risks. Make technology work smarter.',
+    lede: 'LumeaCyber helps organisations understand their security exposure, apply artificial intelligence and data responsibly, and build practical cybersecurity skills through hands-on learning.',
     accentColor: '#00AEEF',
     glowColor: 'rgba(0, 174, 239, 0.25)',
     isFlagship: true,
     coreFocus: [
-      'Defensive Cybersecurity & Vulnerability Discovery',
-      'AI & Data-Science Solution Engineering',
-      'Hands-On Security Training & Capability Building',
-      'Enterprise Security Awareness & Governance'
+      'Cyber Risk Discovery & Authorised Security Assessment',
+      'Artificial Intelligence & Applied Data Science',
+      'Hands-On Cybersecurity Learning',
+      'Security Awareness & Institutional Capability Building'
     ],
-    overview: 'LumeaCyber operates as the defensive anchor of LUMEA Group. We combine technical rigour with strategic intelligence to uncover cyber risk, validate security postures through authorised testing, deploy pragmatic AI solutions, and cultivate high-calibre internal security expertise.',
+    overview: 'LumeaCyber is the flagship brand of LUMEA Group. It brings together cybersecurity, artificial intelligence and data science, helping organisations understand digital risk, use data responsibly and develop practical skills through applied learning.',
     services: [
       {
         id: 'cyber-discovery',
-        name: 'Cyber Risk Discovery & Posture Assessment',
-        description: 'Systematic architectural analysis, surface scanning, and threat modeling to reveal critical blind spots across your infrastructure.',
+        name: 'Cyber Risk Discovery',
+        description: 'A structured conversation and review that maps important systems, information and people, helping identify likely areas of exposure and practical priorities.',
         status: 'AVAILABLE'
       },
       {
         id: 'cyber-testing',
-        name: 'Authorised Security Testing & Defensive Assessment',
-        description: 'Methodical vulnerability verification conducted under strict written authorisation, adhering to international industry standards.',
+        name: 'Vulnerability Assessment & Authorised Security Testing',
+        description: 'Scoped vulnerability assessment and authorised security testing, reported in plain language with prioritised recommendations.',
         status: 'AVAILABLE',
         statusNote: 'Requires formal written legal authorization prior to initiation.'
       },
       {
         id: 'cyber-awareness',
-        name: 'Enterprise Security Awareness & Human Defense',
-        description: 'Contextual, scenario-based security education tailored for operational teams, reducing human-vector susceptibility.',
+        name: 'Security Awareness & Education',
+        description: 'Practical sessions that help staff recognise phishing, social engineering and unsafe data handling, built around situations teams actually face.',
         status: 'AVAILABLE'
       },
       {
         id: 'cyber-ai',
-        name: 'AI & Data-Science Applied Solutions',
-        description: 'Engineering intelligent predictive workflows, data sanitisation architectures, and automated analytical models.',
+        name: 'AI & Data Science',
+        description: 'Applying machine learning and data analysis to real operational questions, with security, privacy and explainability considered from the start.',
         status: 'AVAILABLE'
       },
       {
         id: 'cyber-tooling',
-        name: 'Proprietary Threat Intelligence & Automated Tooling',
-        description: 'Integrated cloud-native surveillance and automated remediation telemetry platform.',
+        name: 'Security Assessment & Learning Tools',
+        description: 'Software tools that may support assessment and learning. These concepts are being explored and are not released products.',
         status: 'PLANNED',
-        statusNote: 'Under internal active research and development. In beta review.'
+        statusNote: 'Planned exploration only; not currently available.'
       },
       {
         id: 'cyber-institutional',
-        name: 'Institutional Capability & Security Lab Setup',
-        description: 'Assisting universities, colleges, and training academies in establishing cyber warfare simulators and defensive labs.',
-        status: 'AVAILABLE'
+        name: 'Institutional Cybersecurity Learning',
+        description: 'Working with colleges and training providers to strengthen cybersecurity teaching with applied, industry-aware content.',
+        status: 'OWNER_TO_CONFIRM',
+        statusNote: 'Specific programmes and delivery arrangements require confirmation.'
       }
     ],
     engagementProcess: [
-      { step: 1, title: 'Discover', description: 'Initial alignment on environment scope, regulatory posture, and threat landscape.' },
-      { step: 2, title: 'Understand', description: 'Deep technical reconnaissance, architectural review, and risk telemetry intake.' },
-      { step: 3, title: 'Propose', description: 'Definitive engagement framework with written legal clearance and explicit rules of engagement.' },
-      { step: 4, title: 'Deliver', description: 'Methodical testing, capability implementation, or defensive workflow deployment.' },
-      { step: 5, title: 'Review', description: 'Executive debriefing, technical documentation handoff, and scheduled defensive validation.' }
+      { step: 1, title: 'Discover', description: 'We learn about your organisation, objectives, systems and constraints.' },
+      { step: 2, title: 'Understand', description: 'We identify the assets, concerns and gaps that matter most, and agree what is in and out of scope.' },
+      { step: 3, title: 'Propose', description: 'You receive a written proposal with approach, timeline, responsibilities and limitations.' },
+      { step: 4, title: 'Deliver', description: 'We carry out the agreed work with clear communication and careful handling of your information.' },
+      { step: 5, title: 'Review', description: 'We walk through findings and priorities with your team and agree practical next steps.' }
     ],
     targetAudiences: [
       {
-        title: 'Businesses & Modern Enterprises',
-        description: 'Organisations seeking proactive defensive postures, risk validation, and compliance resilience.',
-        points: ['Vulnerability discovery', 'Authorised penetration testing', 'Data protection strategies', 'AI workflow security']
+        title: 'Businesses and organisations',
+        description: 'Leaders, IT managers and teams who need a clearer view of digital risk and a practical plan.',
+        points: ['Cyber risk discovery', 'Authorised security assessment', 'Data and privacy considerations', 'Practical recommendations']
       },
       {
-        title: 'Educational & Research Institutions',
-        description: 'Universities and colleges building accredited cybersecurity curricula or dedicated security labs.',
-        points: ['Curriculum consulting', 'Lab architecture design', 'Faculty training', 'Student workshop series']
+        title: 'Teams working with AI and data',
+        description: 'Organisations exploring AI and data science and wanting to consider security, privacy and responsible use from the outset.',
+        points: ['Applied AI and data science', 'Responsible data use', 'Privacy-aware approaches', 'Practical project discussions']
       },
       {
-        title: 'Security Practitioners & IT Teams',
-        description: 'Engineers, sysadmins, and technical leads looking to level up threat identification and incident readiness.',
-        points: ['Defensive tactics', 'Secure code review fundamentals', 'Applied data science in cyber', 'Threat simulation']
+        title: 'Learners and institutions',
+        description: 'People starting or advancing in cybersecurity, and institutions looking to strengthen the way they teach it.',
+        points: ['Practical cybersecurity learning', 'Networks and systems foundations', 'Guided learning environments', 'Industry-aware teaching content']
       }
     ],
     faqs: [
       {
-        question: 'What authorisation is required before security testing begins?',
-        answer: 'LumeaCyber strictly operates within legal and ethical boundaries. Security testing and vulnerability assessments require signed bilateral nondisclosure agreements, verified proof of asset ownership, and explicit written authorisation defining rules of engagement.'
+        question: 'How do you keep security testing responsible?',
+        answer: 'Any security testing must have a written scope and explicit authorisation before it begins. We handle findings and client information confidentially and explain results in plain language.'
       },
       {
-        question: 'Do you guarantee 100% security for tested systems?',
-        answer: 'No reputable security firm guarantees complete invulnerability. Our mission is to systematically identify risks, harden defensive barriers, eliminate blind spots, and foster robust organisational resilience to make compromise economically and technically prohibitive.'
+        question: 'Will an assessment make our organisation completely secure?',
+        answer: 'No assessment can promise that an organisation is completely secure. It can help identify specific issues, prioritise improvements and support better-informed decisions.'
       },
       {
-        question: 'Are your AI solutions customized or off-the-shelf?',
-        answer: 'We architect purpose-built data science and AI models designed for your specific operational pipelines, focusing on data privacy, local inference models where necessary, and verifiable output precision.'
+        question: 'Can you help us explore an AI or data project?',
+        answer: 'We can begin with a conversation about the operational question, available data, intended outcomes and relevant privacy or security considerations. The scope and feasibility can then be discussed.'
       },
       {
-        question: 'Are proprietary software platforms currently available?',
-        answer: 'Certain integrated security intelligence tooling and autonomous telemetry platforms are currently in our planned product pipeline and will be released following formal validation.'
+        question: 'Are your own software tools available now?',
+        answer: 'Software tools for assessment and learning are ideas in exploration. They are planned concepts, not released products.'
       }
     ],
     complianceNotes: [
@@ -162,7 +163,7 @@ export const BRANDS: Record<string, BrandData> = {
       'LumeaCyber does not guarantee 100% invulnerability or claim unverified external certifications.',
       'Automated security telemetry platforms and SaaS tooling are currently planned features.'
     ],
-    ctaText: 'Consult with LumeaCyber'
+    ctaText: 'Talk to LumeaCyber'
   },
 
   nursing: {
@@ -474,16 +475,16 @@ export const GROUP_SOLUTIONS = [
   {
     id: 'cybersecurity',
     slug: 'cybersecurity',
-    title: 'Cybersecurity & Defence',
+    title: 'Cybersecurity & Digital Risk',
     brand: 'LumeaCyber',
     brandId: 'cyber',
-    shortDesc: 'Systematic vulnerability discovery, defensive posture verification, risk governance, and security training.',
-    fullDesc: 'In an interconnected digital economy, cybersecurity is not an afterthought — it is the prerequisite for all digital operations. LUMEA Group delivers comprehensive cyber risk assessment, defensive engineering, and human-centric security awareness to safeguard vital organizational assets.',
+    shortDesc: 'Cyber risk discovery, authorised security assessment, responsible data practices and practical security learning.',
+    fullDesc: 'In an interconnected digital economy, organisations need a clear understanding of their digital risks. LUMEA Group supports cyber risk discovery, authorised assessment and practical security awareness to help teams make informed improvements.',
     keyCapabilities: [
-      'Comprehensive Cyber Risk Discovery & Surface Mapping',
-      'Authorised Security Testing & Defensive Validation',
-      'Human-Centric Security Awareness & Anti-Phishing Protocols',
-      'Institutional Cybersecurity Lab Design & Capability Enablement'
+      'Cyber risk discovery and assessment',
+      'Authorised vulnerability assessment and security testing',
+      'Security awareness and practical learning',
+      'Institutional cybersecurity education support'
     ],
     complianceRequirement: 'Authorised security testing requires strict written mutual consent and verified asset ownership.'
   },
@@ -523,9 +524,9 @@ export const GROUP_SOLUTIONS = [
 
 export const PHILOSOPHY_PILLARS = [
   {
-    title: 'Protection',
-    subtitle: 'Securing the Digital Frontier',
-    description: 'We believe digital progress is only meaningful if it is resilient against disruption. Every digital asset must be defended with technical rigour and ethical responsibility.',
+    title: 'Trust',
+    subtitle: 'Responsible Digital Practice',
+    description: 'We believe digital progress should be thoughtful and responsible. We help people understand risks, respect privacy and make informed technology decisions.',
     color: '#00AEEF'
   },
   {
