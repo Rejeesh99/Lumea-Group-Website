@@ -57,7 +57,7 @@ export default function HomePage() {
             </div>
 
             <p className="max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-              We bring cybersecurity, AI, software and learning together—helping organisations protect what matters and helping people move forward with confidence.
+              We bring technology, AI, software and learning together—creating useful opportunities for organisations and people to move forward with confidence.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
@@ -107,7 +107,7 @@ export default function HomePage() {
 
               <Link href="/brands/lumeacyber" className="absolute left-1/2 top-[1%] z-20 flex w-[158px] -translate-x-1/2 items-center gap-2.5 rounded-xl border border-cerulean/50 bg-charcoal/95 p-3 shadow-glass transition-transform hover:-translate-y-1 sm:w-[184px]">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-cerulean/10"><img src="/logos/lumea-cyber-mark.png" alt="" className="h-7 w-7 object-contain" /></span>
-                <span><strong className="block text-xs text-white sm:text-sm">LumeaCyber</strong><small className="text-[10px] text-silver">Cybersecurity & AI</small></span>
+                <span><strong className="block text-xs text-white sm:text-sm">LumeaCyber</strong><small className="text-[10px] text-silver">Digital technology & AI</small></span>
               </Link>
               <Link href="/brands/lumeanursing" className="absolute right-[-1%] top-1/2 z-20 flex w-[158px] -translate-y-1/2 items-center gap-2.5 rounded-xl border border-teal-400/40 bg-charcoal/95 p-3 shadow-glass transition-transform hover:translate-x-1 sm:w-[184px]">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-400/10"><img src="/logos/lumea-nursing-mark.png" alt="" className="h-7 w-7 object-contain" /></span>
@@ -126,84 +126,48 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 2B — INTERACTIVE BRAND EXPLORER */}
-      <section className="relative mx-auto w-full max-w-7xl px-4 pb-20 sm:px-6 md:pb-24">
-        <div className="mb-8 grid grid-cols-1 items-end gap-4 border-t border-graphite/50 pt-8 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-cerulean">Explore the group</span>
-            <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Find the right LUMEA brand for you.</h2>
+      {/* SECTION 3 — THE LUMEA GROUP */}
+      <section className="relative border-y border-graphite/60 bg-charcoal/45 py-20 md:py-24">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:gap-14">
+          <div className="space-y-5 lg:col-span-5">
+            <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-cerulean">A connected group of businesses</span>
+            <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">
+              Different expertise.<br /><span className="text-cerulean">One shared purpose.</span>
+            </h2>
+            <p className="text-base leading-relaxed text-slate-300">
+              LUMEA brings together four specialist businesses across technology, professional learning, nursing education and global education guidance.
+            </p>
+            <p className="text-sm leading-relaxed text-silver">
+              Each brand has its own expertise and community. Together, they create practical opportunities for organisations, learners, professionals and families.
+            </p>
+            <blockquote className="rounded-xl border-l-2 border-cerulean bg-jet/80 p-4 text-sm italic text-white">
+              &ldquo;Technology should create opportunity. People bring it to life.&rdquo;
+            </blockquote>
+            <Link href="/about" className="inline-flex items-center gap-2 text-sm font-semibold text-cerulean transition-colors hover:text-white">
+              Discover the LUMEA story <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
-          <p className="text-sm leading-relaxed text-silver lg:col-span-5">
-            Each team brings specialist knowledge. Explore what they do, see how the brands connect, and find the right place to start.
-          </p>
-        </div>
-        <BrandOrbit />
-      </section>
 
-      {/* SECTION 3 — GROUP INTRODUCTION */}
-      <section className="py-20 md:py-28 bg-charcoal/50 border-y border-graphite/60 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-5 space-y-4">
-              <span className="text-xs uppercase tracking-widest font-semibold text-cerulean font-mono">
-                The Connected Technology Group
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-display">
-                How Security, Technology & Learning Work Together
-              </h2>
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Most organisations treat cybersecurity as an emergency defensive barrier, digital software as an operational utility, and professional learning as a separate human-resource function.
-              </p>
-              <p className="text-silver text-sm sm:text-base leading-relaxed">
-                At LUMEA Group, we recognise that these elements are fundamentally interdependent. Without robust cybersecurity, technological opportunity is perpetually vulnerable. Without human learning and clinical mastery, technology cannot deliver on its promise.
-              </p>
-              <div className="pt-2">
-                <blockquote className="p-4 rounded-xl bg-jet/80 border-l-2 border-cerulean text-sm italic text-white">
-                  &ldquo;Technology should create opportunity and protect it.&rdquo;
-                </blockquote>
-              </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-7">
+            <div className="space-y-2.5 rounded-2xl border border-graphite bg-charcoal/80 p-6 transition-colors hover:border-cerulean/50">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cerulean/15 text-cerulean"><Cpu className="h-5 w-5" /></div>
+              <h3 className="text-lg font-bold text-white">Technology & AI</h3>
+              <p className="text-sm leading-relaxed text-silver">Digital services, thoughtful technology adoption and applied intelligence that help organisations work with greater clarity.</p>
             </div>
-
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-6 rounded-2xl bg-charcoal/80 border border-graphite hover:border-cerulean/50 transition-colors space-y-2.5">
-                <div className="w-10 h-10 rounded-xl bg-cerulean/15 text-cerulean flex items-center justify-center">
-                  <Shield className="w-5 h-5" />
-                </div>
-                <h3 className="text-lg font-bold text-white">Cybersecurity First</h3>
-                <p className="text-xs sm:text-sm text-silver leading-relaxed">
-                  Defensive architectural audits, authorized testing, and risk verification to ensure operational continuity for modern enterprise systems.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-charcoal/80 border border-graphite hover:border-cerulean/50 transition-colors space-y-2.5">
-                <div className="w-10 h-10 rounded-xl bg-sky-500/15 text-sky-400 flex items-center justify-center">
-                  <Cpu className="w-5 h-5" />
-                </div>
-                <h3 className="text-lg font-bold text-white">Applied Intelligence</h3>
-                <p className="text-xs sm:text-sm text-silver leading-relaxed">
-                  Pragmatic AI deployments and sanitized data engineering designed to extract actionable insights without compromising corporate data privacy.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-charcoal/80 border border-graphite hover:border-rose/50 transition-colors space-y-2.5">
-                <div className="w-10 h-10 rounded-xl bg-rose/15 text-rose flex items-center justify-center">
-                  <GraduationCap className="w-5 h-5" />
-                </div>
-                <h3 className="text-lg font-bold text-white">Human Capability</h3>
-                <p className="text-xs sm:text-sm text-silver leading-relaxed">
-                  European CEFR language coaching, healthcare clinical training, and professional technical education to build resilient practitioners.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-charcoal/80 border border-graphite hover:border-amber-500/50 transition-colors space-y-2.5">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center">
-                  <Globe2 className="w-5 h-5" />
-                </div>
-                <h3 className="text-lg font-bold text-white">Global Horizons</h3>
-                <p className="text-xs sm:text-sm text-silver leading-relaxed">
-                  Transparent, ethical study abroad counseling and pre-departure guidance that empowers students and families to navigate international futures.
-                </p>
-              </div>
+            <div className="space-y-2.5 rounded-2xl border border-graphite bg-charcoal/80 p-6 transition-colors hover:border-rose/50">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-rose/15 text-rose"><GraduationCap className="h-5 w-5" /></div>
+              <h3 className="text-lg font-bold text-white">Skills & Careers</h3>
+              <p className="text-sm leading-relaxed text-silver">Language learning, professional development and practical skills that help people take their next step.</p>
+            </div>
+            <div className="space-y-2.5 rounded-2xl border border-graphite bg-charcoal/80 p-6 transition-colors hover:border-teal-400/50">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-400/15 text-teal-300"><HeartPulse className="h-5 w-5" /></div>
+              <h3 className="text-lg font-bold text-white">Nursing Education</h3>
+              <p className="text-sm leading-relaxed text-silver">Learning resources and educational support designed around the needs of nursing students and professionals.</p>
+            </div>
+            <div className="space-y-2.5 rounded-2xl border border-graphite bg-charcoal/80 p-6 transition-colors hover:border-amber-400/50">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-400/15 text-amber-300"><Globe2 className="h-5 w-5" /></div>
+              <h3 className="text-lg font-bold text-white">Global Education</h3>
+              <p className="text-sm leading-relaxed text-silver">Clear, personal guidance for students and families exploring international study opportunities.</p>
             </div>
           </div>
         </div>
@@ -219,7 +183,7 @@ export default function HomePage() {
             Four Operating Brands. One High Standard.
           </h2>
           <p className="text-sm sm:text-base text-silver">
-            Each brand operates autonomously within its specialised domain while sharing the LUMEA Group philosophy of security, integrity, and human progress.
+            Each brand operates autonomously within its specialised domain while sharing the LUMEA Group philosophy of integrity, innovation, and human progress.
           </p>
         </div>
 
@@ -296,104 +260,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 5 — FLAGSHIP BRAND: LUMEACYBER */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-jet via-charcoal to-jet border-y border-graphite/70 relative overflow-hidden">
-        {/* Cerulean ambient cyber glow */}
-        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-cerulean/10 blur-[130px] pointer-events-none -translate-y-1/2" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cerulean/15 border border-cerulean/30 text-cerulean text-xs font-semibold uppercase tracking-wider font-mono">
-                <Shield className="w-3.5 h-3.5" />
-                <span>Flagship Operating Vertical</span>
-              </div>
-
-              <div className="py-2">
-                <img
-                  src={cyberBrand.logoWhiteUrl}
-                  alt="LumeaCyber"
-                  className="h-12 sm:h-14 w-auto object-contain filter drop-shadow-[0_0_20px_rgba(0,174,239,0.3)]"
-                />
-              </div>
-
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-display">
-                Cybersecurity first.<br />
-                <span className="text-cerulean">Intelligence throughout.</span>
-              </h2>
-
-              <p className="text-base text-slate-300 leading-relaxed">
-                As digital systems power mission-critical infrastructure, defensive vigilance is non-negotiable. LumeaCyber serves as the high-security technical foundation of LUMEA Group, delivering rigorous risk assessments, applied AI engineering, and institutional capability building.
-              </p>
-
-              {/* Written authorization advisory note */}
-              <div className="p-4 rounded-xl bg-jet/90 border border-graphite space-y-1.5 text-xs text-silver">
-                <div className="flex items-center gap-2 text-slate-200 font-semibold">
-                  <Lock className="w-3.5 h-3.5 text-cerulean" />
-                  <span>Strict Legal & Ethical Engagement Standard</span>
-                </div>
-                <p>
-                  All security assessments, posture evaluations, and vulnerability testing are executed strictly under bilateral non-disclosure agreements and formal written authorization. We do not claim unverified certifications or promise absolute invulnerability.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Link
-                  href="/brands/lumeacyber"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-cerulean text-jet hover:bg-cerulean-400 transition-all shadow-glow-blue"
-                >
-                  <span>Explore LumeaCyber</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/solutions/cybersecurity"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white bg-charcoal border border-graphite hover:border-slate-400 transition-colors"
-                >
-                  <span>Defensive Solutions</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Right: Technical Visual & Capability Stack */}
-            <div className="lg:col-span-6">
-              <div className="bg-jet/90 border border-cerulean/30 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
-                <div className="flex items-center justify-between pb-4 mb-6 border-b border-graphite">
-                  <div className="flex items-center gap-2 font-mono text-xs text-cerulean">
-                    <span className="w-2 h-2 rounded-full bg-cerulean animate-ping" />
-                    <span>LUMEACYBER DEFENSIVE STACK</span>
-                  </div>
-                  <span className="text-[10px] uppercase font-mono text-silver px-2 py-0.5 rounded bg-charcoal">
-                    v2.4 TELEMETRY
-                  </span>
-                </div>
-
-                <div className="space-y-4">
-                  {cyberBrand.services.slice(0, 4).map((s) => (
-                    <div
-                      key={s.id}
-                      className="p-4 rounded-xl bg-charcoal/60 border border-graphite/60 flex items-start justify-between gap-3 hover:border-cerulean/40 transition-colors"
-                    >
-                      <div className="space-y-1">
-                        <div className="text-sm font-bold text-white flex items-center gap-2">
-                          <span>{s.name}</span>
-                        </div>
-                        <p className="text-xs text-silver leading-relaxed">{s.description}</p>
-                      </div>
-                      <StatusBadge status={s.status} note={s.statusNote} className="shrink-0" />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-graphite text-xs text-silver flex items-center justify-between">
-                  <span>Engagement Framework:</span>
-                  <span className="font-mono text-slate-300">Discover → Understand → Propose → Deliver → Review</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* SECTION 6 — SOLUTIONS */}
       <section className="py-20 md:py-28 px-4 sm:px-6 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
@@ -404,7 +270,7 @@ export default function HomePage() {
             Integrated Enterprise Solutions
           </h2>
           <p className="text-sm sm:text-base text-silver">
-            Tailored technical interventions engineered across defensive security, intelligent systems, and human progress.
+            Connected services across technology, intelligent systems, professional learning, and human progress.
           </p>
         </div>
 
@@ -600,7 +466,7 @@ export default function HomePage() {
               Insights & Applied Research
             </h2>
             <p className="text-xs sm:text-sm text-silver mt-1 max-w-xl">
-              Authentic technical briefs and pedagogical analysis reflecting our active focus areas across security, AI, and education.
+              Thoughtful perspectives and practical insights across technology, AI, professional learning, and education.
             </p>
           </div>
           <Link
@@ -658,7 +524,7 @@ export default function HomePage() {
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-            Whether your organisation requires defensive cybersecurity assessment, institutional capability building, language coaching, or transparent global education guidance, our coordinators in Kochi are ready to assist.
+            Whether you are exploring technology services, professional development, nursing education, or global study guidance, our team in Kochi is ready to help.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
