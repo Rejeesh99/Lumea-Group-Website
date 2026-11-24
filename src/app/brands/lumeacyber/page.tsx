@@ -1,223 +1,132 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Shield, Lock, AlertTriangle, ArrowRight, CheckCircle2, Cpu, Terminal, Layers, FileCheck } from 'lucide-react';
+import { ShieldCheck, LockKeyhole, ArrowRight, CheckCircle2, BrainCircuit, GraduationCap, Search, Users, Database, Lightbulb } from 'lucide-react';
 import { BRANDS } from '@/data/brands';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { Accordion } from '@/components/ui/Accordion';
 
 export const metadata: Metadata = {
   title: 'LumeaCyber — Cybersecurity, AI & Data Science',
-  description: 'Understand your risk. Strengthen your defences. Build the skills to keep them strong. Authorised cybersecurity assessment, defensive engineering, and AI solutions.',
+  description: 'Practical cybersecurity insight, responsible AI and data science, and hands-on learning for organisations, teams and institutions.',
 };
 
 export default function LumeaCyberPage() {
   const brand = BRANDS.cyber;
-
   return (
-    <div className="bg-jet text-silver">
-      {/* Ambient background glow */}
-      <div className="relative pt-16 pb-20 md:pt-24 md:pb-28 px-4 sm:px-6 max-w-7xl mx-auto overflow-hidden">
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-cerulean/15 blur-[120px] pointer-events-none" />
-
-        {/* Hero Section */}
-        <div className="max-w-4xl mx-auto text-center space-y-6 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-charcoal border border-cerulean/30 text-cerulean text-xs font-mono font-semibold">
-            <Shield className="w-3.5 h-3.5" />
-            <span>FLAGSHIP CYBER DEFENCE VERTICAL</span>
+    <main className="bg-jet text-silver">
+      <section className="relative mx-auto max-w-7xl overflow-hidden px-4 pb-20 pt-20 sm:px-6 md:pb-28 md:pt-28">
+        <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[760px] -translate-x-1/2 bg-cerulean/10 blur-[130px]" />
+        <div className="relative z-10 mx-auto max-w-4xl space-y-7 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-cerulean/30 bg-charcoal px-4 py-2 font-mono text-xs font-semibold text-cerulean">
+            <ShieldCheck className="h-4 w-4" /> CYBERSECURITY · AI · DATA SCIENCE
           </div>
-
-          <div className="py-2">
-            <img
-              src={brand.logoWhiteUrl}
-              alt="LumeaCyber"
-              className="h-14 sm:h-16 w-auto mx-auto object-contain filter drop-shadow-[0_0_25px_rgba(0,174,239,0.35)]"
-            />
-          </div>
-
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight font-display">
-            Understand your risk.<br />
-            <span className="text-cerulean">Strengthen your defences.</span><br />
-            Build the skills to keep them strong.
+          <img src={brand.logoWhiteUrl} alt="LumeaCyber" className="mx-auto h-14 w-auto object-contain sm:h-16" />
+          <h1 className="font-display text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl">
+            Understand your digital risks.<br /><span className="text-cerulean">Make technology work smarter.</span>
           </h1>
-
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            {brand.lede}
+          <p className="mx-auto max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
+            LumeaCyber helps organisations understand their security exposure, apply artificial intelligence and data responsibly, and build practical cybersecurity skills through hands-on learning.
           </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <Link
-              href="/contact?brand=cyber"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold bg-cerulean text-jet hover:bg-cerulean-400 transition-all shadow-glow-blue"
-            >
-              <span>Request Security Consultation</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <a
-              href="#services"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold text-white bg-charcoal border border-graphite hover:border-slate-400 transition-colors"
-            >
-              <span>Explore Services & Scope</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Mandatory Regulatory / Ethical Notice */}
-      <section className="border-y border-graphite/60 bg-charcoal/50 py-6 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto p-4 rounded-2xl bg-jet/80 border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center gap-4 text-xs text-amber-200/90 leading-relaxed">
-          <div className="w-10 h-10 rounded-xl bg-amber-950/60 text-amber-400 flex items-center justify-center shrink-0">
-            <Lock className="w-5 h-5" />
-          </div>
-          <div className="space-y-1">
-            <strong className="block text-amber-300 font-semibold text-sm">
-              Strict Legal Authorization & Verification Protocol:
-            </strong>
-            <p>
-              Security assessments, vulnerability discovery, and technical testing require bilateral nondisclosure agreements, verified proof of asset ownership, and formal written authorization. LumeaCyber never conducts unauthorised probing and does not guarantee absolute invulnerability.
-            </p>
+          <div className="flex flex-wrap justify-center gap-4 pt-2">
+            <Link href="/contact?brand=cyber" className="inline-flex items-center gap-2 rounded-full bg-cerulean px-7 py-3.5 text-sm font-semibold text-jet shadow-glow-blue transition hover:bg-cerulean-400">Talk to our team <ArrowRight className="h-4 w-4" /></Link>
+            <a href="#capabilities" className="rounded-full border border-graphite bg-charcoal px-7 py-3.5 text-sm font-semibold text-white transition hover:border-cerulean/50">Explore our capabilities</a>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto space-y-12">
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs uppercase tracking-widest font-mono text-cerulean font-semibold">
-            Capabilities & Scope
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-display">
-            Cybersecurity, AI & Data Science Services
-          </h2>
-          <p className="text-sm text-silver">
-            Clear distinction between actively available services, institutional programs, and planned technological platforms.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {brand.services.map((s) => (
-            <div
-              key={s.id}
-              className="p-6 rounded-2xl bg-charcoal/70 border border-graphite hover:border-cerulean/40 transition-colors flex flex-col justify-between space-y-4"
-            >
-              <div className="space-y-2.5">
-                <div className="flex items-start justify-between gap-2">
-                  <h3 className="text-lg font-bold text-white font-display">{s.name}</h3>
-                  <StatusBadge status={s.status} note={s.statusNote} className="shrink-0" />
-                </div>
-                <p className="text-xs sm:text-sm text-silver leading-relaxed">
-                  {s.description}
-                </p>
-              </div>
-
-              {s.statusNote && (
-                <div className="p-2.5 rounded-lg bg-jet/60 border border-graphite/60 text-[11px] text-silver/80 italic">
-                  Note: {s.statusNote}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Engagement Process (Discover → Understand → Propose → Deliver → Review) */}
-      <section className="py-20 bg-charcoal/40 border-y border-graphite/60 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-xs uppercase tracking-widest font-mono text-cerulean font-semibold">
-              Methodical Framework
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-display">
-              The 5-Stage Defensive Engagement Process
-            </h2>
-            <p className="text-sm text-silver">
-              How we engage with enterprise clients, ensure legal clearance, and deliver reproducible findings.
-            </p>
+      <section className="border-y border-graphite/60 bg-charcoal/45 px-4 py-16 sm:px-6">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-cerulean">What is LumeaCyber?</span>
+            <h2 className="mt-3 font-display text-3xl font-extrabold text-white sm:text-4xl">Clarity for a changing digital world.</h2>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            {brand.engagementProcess?.map((step) => (
-              <div
-                key={step.step}
-                className="p-5 rounded-2xl bg-jet/90 border border-graphite flex flex-col justify-between space-y-3 relative group hover:border-cerulean/50 transition-colors"
-              >
-                <div className="w-8 h-8 rounded-lg bg-cerulean/15 text-cerulean font-mono font-bold text-sm flex items-center justify-center">
-                  0{step.step}
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-white font-display">{step.title}</h3>
-                  <p className="text-xs text-silver mt-1.5 leading-relaxed">{step.description}</p>
-                </div>
-              </div>
-            ))}
+          <div className="space-y-4 text-sm leading-relaxed text-slate-300 md:col-span-7 md:text-base">
+            <p>LumeaCyber is LUMEA Group’s flagship brand, bringing together cybersecurity, artificial intelligence and data science. We work with organisations to make sense of their systems, information and exposure, while helping people develop skills they can apply in real situations.</p>
+            <p>Our work starts with listening and understanding your context. We then agree a clear scope, explain the options and provide practical recommendations in language your team can use.</p>
           </div>
         </div>
       </section>
 
-      {/* Target Audiences */}
-      <section className="py-20 px-4 sm:px-6 max-w-7xl mx-auto space-y-12">
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs uppercase tracking-widest font-mono text-cerulean font-semibold">
-            Audiences Served
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-display">
-            Who LumeaCyber Protects & Enables
-          </h2>
+      <section id="capabilities" className="mx-auto max-w-7xl space-y-10 px-4 py-20 sm:px-6">
+        <div className="max-w-3xl space-y-3">
+          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cerulean">What we offer</span>
+          <h2 className="font-display text-3xl font-extrabold text-white sm:text-4xl">Expertise shaped around your needs.</h2>
+          <p className="text-sm leading-relaxed text-silver">Engagements are shaped around your environment, priorities and objectives—not a one-size-fits-all product.</p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {brand.targetAudiences.map((aud, idx) => (
-            <div key={idx} className="p-6 rounded-2xl bg-charcoal/60 border border-graphite space-y-4">
-              <h3 className="text-xl font-bold text-white font-display">{aud.title}</h3>
-              <p className="text-xs text-silver leading-relaxed">{aud.description}</p>
-              <ul className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-graphite/40">
-                {aud.points.map((p, pIdx) => (
-                  <li key={pIdx} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-cerulean shrink-0" />
-                    <span>{p}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            {icon: Search,title:'Cyber risk discovery',desc:'A structured review of important systems, information and people to help identify likely areas of exposure and decide what deserves attention first.'},
+            {icon: ShieldCheck,title:'Authorised security assessment',desc:'Scoped vulnerability assessment and security testing, carried out only with written authorisation and explained through prioritised, practical findings.'},
+            {icon: BrainCircuit,title:'AI and data science',desc:'Machine learning and data analysis applied to real operational questions, with privacy, security and explainability considered from the beginning.'},
+            {icon: Users,title:'Security awareness',desc:'Practical sessions that help teams recognise phishing, social engineering and unsafe information handling, using situations relevant to their work.'},
+            {icon: GraduationCap,title:'Cybersecurity learning',desc:'Hands-on learning pathways for individuals and teams covering networks, systems, security concepts and practical skills in guided environments.'},
+            {icon: Lightbulb,title:'Institutional capability building',desc:'Collaboration with colleges and training providers to strengthen cybersecurity education with applied, industry-aware learning content.'},
+          ].map((item) => <article key={item.title} className="rounded-2xl border border-graphite bg-charcoal/70 p-6 transition hover:border-cerulean/40">
+            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-cerulean/10 text-cerulean"><item.icon className="h-5 w-5" /></div>
+            <h3 className="mb-2 text-lg font-bold text-white">{item.title}</h3>
+            <p className="text-sm leading-relaxed text-silver">{item.desc}</p>
+          </article>)}
         </div>
       </section>
 
-      {/* FAQs */}
-      <section className="py-20 bg-charcoal/30 border-t border-graphite/60 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto space-y-8">
-          <div className="text-center space-y-2">
-            <span className="text-xs uppercase tracking-widest font-mono text-cerulean font-semibold">
-              Governance & Queries
-            </span>
-            <h2 className="text-3xl font-extrabold text-white font-display">
-              Frequently Asked Questions
-            </h2>
+      <section className="border-y border-graphite/60 bg-charcoal/40 px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-7xl space-y-10">
+          <div className="max-w-3xl space-y-3">
+            <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cerulean">Learning and future development</span>
+            <h2 className="font-display text-3xl font-extrabold text-white sm:text-4xl">Building knowledge that people can use.</h2>
+            <p className="text-sm leading-relaxed text-silver">We support practical skill development and institutional teaching. We are also exploring tools that may support assessment and learning; these are ideas in development, not currently released products.</p>
           </div>
-          <Accordion items={brand.faqs} accentColor="#00AEEF" />
-        </div>
-      </section>
-
-      {/* Brand CTA */}
-      <section className="py-16 text-center border-t border-graphite/60 px-4">
-        <div className="max-w-2xl mx-auto space-y-4">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white font-display">
-            Ready to review your security posture?
-          </h3>
-          <p className="text-xs sm:text-sm text-silver">
-            Contact our technical team in Kochi for an initial confidential discussion.
-          </p>
-          <div className="pt-2">
-            <Link
-              href="/contact?brand=cyber"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-semibold bg-cerulean text-jet hover:bg-cerulean-400 transition-all shadow-glow-blue"
-            >
-              <span>{brand.ctaText}</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+          <div className="grid gap-5 md:grid-cols-2">
+            <div className="rounded-2xl border border-graphite bg-jet p-6"><h3 className="text-lg font-bold text-white">For individuals and teams</h3><p className="mt-2 text-sm leading-relaxed text-silver">Learning pathways that focus on doing, not just knowing—building familiarity with networks, systems, common risks and responsible digital practice.</p></div>
+            <div className="rounded-2xl border border-graphite bg-jet p-6"><h3 className="text-lg font-bold text-white">For colleges and training providers</h3><p className="mt-2 text-sm leading-relaxed text-silver">Opportunities to strengthen cybersecurity teaching through applied activities and industry-aware content. Specific programmes and delivery arrangements can be discussed and confirmed with our team.</p></div>
           </div>
         </div>
       </section>
-    </div>
+
+      <section className="mx-auto max-w-7xl space-y-10 px-4 py-20 sm:px-6">
+        <div className="max-w-3xl space-y-3"><span className="font-mono text-xs font-semibold uppercase tracking-widest text-cerulean">How we work</span><h2 className="font-display text-3xl font-extrabold text-white sm:text-4xl">A clear process, from first conversation to review.</h2><p className="text-sm leading-relaxed text-silver">Every organisation is different. We start by listening, then agree a scope you can see and question before any work begins.</p></div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {[
+            ['01','Discover','We learn about your organisation, objectives, systems and constraints.'],
+            ['02','Understand','We identify the assets, concerns and gaps that matter most, and agree what is in and out of scope.'],
+            ['03','Propose','You receive a written proposal with approach, timeline, responsibilities and limitations.'],
+            ['04','Deliver','We carry out the agreed work with clear communication and careful handling of your information.'],
+            ['05','Review','We walk through findings and priorities with your team and agree practical next steps.'],
+          ].map(([n,title,desc])=><article key={n} className="rounded-2xl border border-graphite bg-charcoal/70 p-5"><span className="font-mono text-xs font-bold tracking-widest text-cerulean">STEP {n}</span><h3 className="mt-3 text-lg font-bold text-white">{title}</h3><p className="mt-2 text-sm leading-relaxed text-silver">{desc}</p></article>)}
+        </div>
+      </section>
+
+      <section className="border-y border-graphite/60 bg-charcoal/40 px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-7xl space-y-8">
+          <div className="max-w-3xl space-y-3"><span className="font-mono text-xs font-semibold uppercase tracking-widest text-cerulean">Who we work with</span><h2 className="font-display text-3xl font-extrabold text-white sm:text-4xl">Support for organisations, teams and learners.</h2></div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              ['Businesses and organisations','Leaders, IT managers and teams who need a clearer view of digital risk and a practical plan.'],
+              ['Teams working with AI and data','Organisations exploring AI and data science and wanting to consider security, privacy and responsible use from the outset.'],
+              ['Learners and institutions','People starting or advancing in cybersecurity, and institutions looking to strengthen the way they teach it.'],
+            ].map(([title,desc])=><article key={title} className="rounded-2xl border border-graphite bg-jet p-6"><h3 className="text-lg font-bold text-white">{title}</h3><p className="mt-2 text-sm leading-relaxed text-silver">{desc}</p></article>)}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+        <div className="max-w-3xl space-y-3"><span className="font-mono text-xs font-semibold uppercase tracking-widest text-cerulean">Our commitments</span><h2 className="font-display text-3xl font-extrabold text-white sm:text-4xl">Responsible work. Clear communication.</h2></div>
+        <ul className="mt-8 divide-y divide-graphite border-y border-graphite">
+          {['Written scope and authorisation before any security testing.','Confidential handling of findings and client information.','Plain-language reporting with prioritised, practical recommendations.','Honest limits: no assessment can promise that an organisation is completely secure.'].map(x=><li key={x} className="flex gap-3 py-5 text-sm text-slate-300"><CheckCircle2 className="h-5 w-5 shrink-0 text-cerulean"/>{x}</li>)}
+        </ul>
+      </section>
+
+      <section className="border-t border-graphite/60 bg-charcoal/30 px-4 py-20 sm:px-6"><div className="mx-auto max-w-4xl space-y-8">
+        <div className="text-center"><span className="font-mono text-xs font-semibold uppercase tracking-widest text-cerulean">Questions people ask</span><h2 className="mt-2 font-display text-3xl font-extrabold text-white">Frequently asked questions</h2></div>
+        <Accordion items={brand.faqs} accentColor="#00AEEF" />
+      </div></section>
+
+      <section className="border-t border-graphite/60 px-4 py-16 text-center"><div className="mx-auto max-w-2xl space-y-5">
+        <h2 className="font-display text-3xl font-extrabold text-white sm:text-4xl">Let’s start with a conversation.</h2>
+        <p className="text-sm leading-relaxed text-silver">Tell us what you are working on. We’ll listen, understand your needs and help identify a sensible next step.</p>
+        <div className="flex flex-wrap justify-center gap-4"><Link href="/contact?brand=cyber" className="inline-flex items-center gap-2 rounded-full bg-cerulean px-7 py-3.5 text-sm font-semibold text-jet transition hover:bg-cerulean-400">Talk to LumeaCyber <ArrowRight className="h-4 w-4"/></Link><Link href="/brands" className="rounded-full border border-graphite bg-charcoal px-7 py-3.5 text-sm font-semibold text-white">Explore LUMEA Group</Link></div>
+      </div></section>
+    </main>
   );
 }
