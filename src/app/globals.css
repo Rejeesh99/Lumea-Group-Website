@@ -85,3 +85,32 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* LUMEA shared content rhythm and readable body typography.
+   The same content measure is used across all top-level pages. */
+main p[class*="text-"] {
+  font-size: 1rem !important;
+  line-height: 1.75 !important;
+}
+
+@media (min-width: 768px) {
+  main p[class*="text-"] {
+    font-size: 1.0625rem !important;
+  }
+}
+
+main :is(h1, h2, h3) {
+  text-wrap: balance;
+}
+
+main :is(a, button):focus-visible {
+  outline: 2px solid var(--color-cerulean);
+  outline-offset: 3px;
+}
+
+@media (max-width: 639px) {
+  main .max-w-7xl {
+    max-width: 100%;
+  }
+}
