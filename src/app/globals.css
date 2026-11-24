@@ -89,13 +89,15 @@ body {
 
 /* LUMEA shared content rhythm and readable body typography.
    The same content measure is used across all top-level pages. */
-main p[class*="text-"] {
+main p[class*="text-sm"],
+main p[class*="text-base"] {
   font-size: 1rem !important;
   line-height: 1.75 !important;
 }
 
 @media (min-width: 768px) {
-  main p[class*="text-"] {
+  main p[class*="text-sm"],
+  main p[class*="text-base"] {
     font-size: 1.0625rem !important;
   }
 }
