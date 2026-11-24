@@ -87,19 +87,18 @@ body {
 }
 
 
-/* LUMEA shared content rhythm and readable body typography.
-   The same content measure is used across all top-level pages. */
-main p[class*="text-sm"],
-main p[class*="text-base"] {
-  font-size: 1rem !important;
-  line-height: 1.75 !important;
+/* Shared page alignment: one content width and gutter system across routes. */
+.page-shell {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3.5vw, 1.5rem);
 }
 
-@media (min-width: 768px) {
-  main p[class*="text-sm"],
-  main p[class*="text-base"] {
-    font-size: 1.0625rem !important;
-  }
+/* Keep reading comfortable without flattening the type hierarchy in cards. */
+main p {
+  text-wrap: pretty;
 }
 
 main :is(h1, h2, h3) {
@@ -109,10 +108,4 @@ main :is(h1, h2, h3) {
 main :is(a, button):focus-visible {
   outline: 2px solid var(--color-cerulean);
   outline-offset: 3px;
-}
-
-@media (max-width: 639px) {
-  main .max-w-7xl {
-    max-width: 100%;
-  }
 }
