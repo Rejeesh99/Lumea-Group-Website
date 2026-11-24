@@ -34,62 +34,110 @@ export default function HomePage() {
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-cerulean/15 via-cerulean/5 to-transparent blur-3xl pointer-events-none" />
       <div className="absolute top-[800px] right-0 w-[500px] h-[500px] bg-rose/10 blur-[120px] pointer-events-none" />
 
-      {/* SECTION 2 — HERO */}
-      <section className="relative pt-16 pb-24 md:pt-24 md:pb-32 px-4 sm:px-6 max-w-7xl mx-auto">
-        <div className="text-center max-w-4xl mx-auto space-y-6">
-          {/* Eyebrow badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-charcoal/80 border border-graphite text-xs font-mono text-slate-300 shadow-glass">
-            <span className="w-2 h-2 rounded-full bg-cerulean animate-ping" />
-            <span className="text-cerulean font-semibold">LUMEA GROUP</span>
-            <span className="text-silver/60">·</span>
-            <span>Kochi, Kerala, India</span>
-          </div>
+      {/* SECTION 2 — HOMEPAGE HERO */}
+      <section className="relative mx-auto w-full max-w-7xl px-4 pt-14 pb-16 sm:px-6 md:pt-20 md:pb-24 lg:pt-24">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="relative z-10 space-y-6 text-left lg:col-span-5">
+            <div className="inline-flex items-center gap-2 rounded-full border border-graphite bg-charcoal/80 px-4 py-2 text-xs text-slate-300 shadow-glass">
+              <span className="h-2 w-2 rounded-full bg-cerulean" />
+              <span className="font-mono font-semibold tracking-wider text-cerulean">LUMEA GROUP</span>
+              <span className="text-silver/50">·</span>
+              <span>Kochi, Kerala, India</span>
+            </div>
 
-          {/* Hero Headline */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] font-display">
-            Securing the digital world.<br />
-            <span className="bg-gradient-to-r from-cerulean via-sky-300 to-rose bg-clip-text text-transparent">
-              Enabling human progress.
-            </span>
-          </h1>
+            <div className="space-y-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cerulean">Four brands. One shared purpose.</p>
+              <h1 className="font-display text-5xl font-extrabold leading-[1.06] tracking-tight text-white sm:text-6xl xl:text-7xl">
+                Securing the<br className="hidden sm:block" /> digital world.
+                <span className="mt-2 block bg-gradient-to-r from-cerulean via-sky-300 to-rose bg-clip-text text-transparent">
+                  Enabling human progress.
+                </span>
+              </h1>
+              <div className="h-1 w-16 rounded-full bg-gradient-to-r from-cerulean to-rose" />
+            </div>
 
-          {/* Supporting Text */}
-          <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            A cybersecurity-led technology group bringing together cybersecurity, AI, software and learning to help organisations protect what matters and help people prepare for what comes next.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <a
-              href="#brands-section"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide bg-cerulean text-jet hover:bg-cerulean-400 transition-all duration-200 shadow-glow-blue"
-            >
-              <span>Explore Our Brands</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold text-white bg-charcoal/80 border border-graphite hover:border-slate-400 hover:bg-charcoal transition-all duration-200"
-            >
-              <span>Discover LUMEA</span>
-              <ChevronRight className="w-4 h-4 text-silver" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Hero Interactive Orbit Explorer Module */}
-        <div className="mt-16 pt-8 border-t border-graphite/40">
-          <div className="text-center max-w-2xl mx-auto mb-8">
-            <span className="text-[11px] uppercase tracking-widest font-mono text-cerulean font-semibold">
-              Interactive Brand Constellation
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mt-1">Four Distinct Brands, One Cohesive Orbit</h2>
-            <p className="text-xs sm:text-sm text-silver mt-2">
-              Explore how our four operating verticals connect under the parent group&apos;s security and human-progress architecture.
+            <p className="max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
+              We bring cybersecurity, AI, software and learning together—helping organisations protect what matters and helping people move forward with confidence.
             </p>
+
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <a
+                href="#brands-section"
+                className="inline-flex items-center gap-2.5 rounded-full bg-cerulean px-6 py-3.5 text-sm font-semibold tracking-wide text-jet shadow-glow-blue transition-colors hover:bg-cerulean-400"
+              >
+                <span>Explore Our Brands</span>
+                <ArrowRight className="h-4 w-4" />
+              </a>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 rounded-full border border-graphite bg-charcoal/70 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:border-cerulean/60"
+              >
+                <span>Get to know LUMEA</span>
+                <ChevronRight className="h-4 w-4 text-cerulean" />
+              </Link>
+            </div>
+
+            <div className="flex flex-wrap gap-x-6 gap-y-2 border-t border-graphite/70 pt-5 text-xs text-silver">
+              <span><strong className="text-white">4</strong> specialist brands</span>
+              <span><strong className="text-white">1</strong> connected group</span>
+              <span>Built around people and progress</span>
+            </div>
           </div>
-          <BrandOrbit />
+
+          {/* A clear, visual map of the four operating brands */}
+          <div className="relative mx-auto flex w-full max-w-[590px] items-center justify-center lg:col-span-7">
+            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(0,174,239,0.15),transparent_66%)]" />
+            <div className="relative aspect-square w-full max-w-[540px]">
+              <div className="absolute inset-[8%] rounded-full border border-dashed border-cerulean/25" />
+              <div className="absolute inset-[20%] rounded-full border border-graphite/80" />
+              <div className="absolute inset-[32%] rounded-full border border-dashed border-rose/25" />
+              <svg viewBox="0 0 500 500" className="absolute inset-0 h-full w-full" aria-hidden="true">
+                <path d="M250 250 L250 45 M250 250 L455 250 M250 250 L250 455 M250 250 L45 250" stroke="#00AEEF" strokeOpacity=".48" strokeWidth="1.5" fill="none" />
+                <circle cx="250" cy="45" r="4" fill="#FF2E88" />
+                <circle cx="455" cy="250" r="4" fill="#00AEEF" />
+                <circle cx="250" cy="455" r="4" fill="#FF2E88" />
+                <circle cx="45" cy="250" r="4" fill="#00AEEF" />
+              </svg>
+
+              <div className="absolute left-1/2 top-1/2 z-10 flex h-32 w-32 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-cerulean/50 bg-charcoal/95 p-3 text-center shadow-[0_0_55px_rgba(0,174,239,0.18)] sm:h-40 sm:w-40">
+                <img src="/logos/lumea-group-mark.png" alt="LUMEA Group" className="mb-1 h-12 w-12 object-contain sm:h-14 sm:w-14" />
+                <span className="font-display text-sm font-extrabold tracking-[0.2em] text-white sm:text-base">LUMEA</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-cerulean">Group</span>
+              </div>
+
+              <Link href="/brands/lumeacyber" className="absolute left-1/2 top-[1%] z-20 flex w-[158px] -translate-x-1/2 items-center gap-2.5 rounded-xl border border-cerulean/50 bg-charcoal/95 p-3 shadow-glass transition-transform hover:-translate-y-1 sm:w-[184px]">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-cerulean/10"><img src="/logos/lumea-cyber-mark.png" alt="" className="h-7 w-7 object-contain" /></span>
+                <span><strong className="block text-xs text-white sm:text-sm">LumeaCyber</strong><small className="text-[10px] text-silver">Cybersecurity & AI</small></span>
+              </Link>
+              <Link href="/brands/lumeanursing" className="absolute right-[-1%] top-1/2 z-20 flex w-[158px] -translate-y-1/2 items-center gap-2.5 rounded-xl border border-teal-400/40 bg-charcoal/95 p-3 shadow-glass transition-transform hover:translate-x-1 sm:w-[184px]">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-400/10"><img src="/logos/lumea-nursing-mark.png" alt="" className="h-7 w-7 object-contain" /></span>
+                <span><strong className="block text-xs text-white sm:text-sm">LumeaNursing</strong><small className="text-[10px] text-silver">Nursing education</small></span>
+              </Link>
+              <Link href="/brands/lumeago" className="absolute bottom-[1%] left-1/2 z-20 flex w-[158px] -translate-x-1/2 items-center gap-2.5 rounded-xl border border-amber-400/40 bg-charcoal/95 p-3 shadow-glass transition-transform hover:translate-y-1 sm:w-[184px]">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-400/10"><img src="/logos/lumea-go-mark.png" alt="" className="h-7 w-7 object-contain" /></span>
+                <span><strong className="block text-xs text-white sm:text-sm">LumeaGo</strong><small className="text-[10px] text-silver">Global education</small></span>
+              </Link>
+              <Link href="/brands/lumeaskill" className="absolute left-[-1%] top-1/2 z-20 flex w-[158px] -translate-y-1/2 items-center gap-2.5 rounded-xl border border-rose/50 bg-charcoal/95 p-3 shadow-glass transition-transform hover:-translate-x-1 sm:w-[184px]">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-rose/10"><img src="/logos/lumea-skill-mark.png" alt="" className="h-7 w-7 object-contain" /></span>
+                <span><strong className="block text-xs text-white sm:text-sm">LumeaSkill</strong><small className="text-[10px] text-silver">Skills & languages</small></span>
+              </Link>
+            </div>
+          </div>
         </div>
+      </section>
+
+      {/* SECTION 2B — INTERACTIVE BRAND EXPLORER */}
+      <section className="relative mx-auto w-full max-w-7xl px-4 pb-20 sm:px-6 md:pb-24">
+        <div className="mb-8 grid grid-cols-1 items-end gap-4 border-t border-graphite/50 pt-8 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-cerulean">Explore the group</span>
+            <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Find the right LUMEA brand for you.</h2>
+          </div>
+          <p className="text-sm leading-relaxed text-silver lg:col-span-5">
+            Each team brings specialist knowledge. Explore what they do, see how the brands connect, and find the right place to start.
+          </p>
+        </div>
+        <BrandOrbit />
       </section>
 
       {/* SECTION 3 — GROUP INTRODUCTION */}
