@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 
 export default function InsightsPage() {
   return (
-    <div className="bg-jet text-silver py-16 md:py-24 px-4 sm:px-6 max-w-7xl mx-auto space-y-16">
+    <div className="bg-jet text-silver py-20 md:py-28 px-4 sm:px-6 max-w-7xl mx-auto space-y-16">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
         <span className="text-xs uppercase tracking-widest font-mono text-cerulean font-semibold">
           Applied Thought Leadership
         </span>
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight font-display">
+        <h1 className="text-5xl sm:text-6xl font-extrabold text-white tracking-tight font-display">
           Insights & Operational Research
         </h1>
         <p className="text-base text-slate-300 leading-relaxed">
