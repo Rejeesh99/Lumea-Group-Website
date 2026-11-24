@@ -46,7 +46,7 @@ export default function HomePage() {
           </div>
 
           {/* Hero Headline */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] font-display">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] font-display">
             Securing the digital world.<br />
             <span className="bg-gradient-to-r from-cerulean via-sky-300 to-rose bg-clip-text text-transparent">
               Enabling human progress.
