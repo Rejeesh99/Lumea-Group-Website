@@ -16,6 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/solutions/learning', priority: 0.8, changeFrequency: 'monthly' as const },
     { url: '/industries', priority: 0.8, changeFrequency: 'monthly' as const },
     { url: '/about', priority: 0.7, changeFrequency: 'monthly' as const },
+    { url: '/directors', priority: 0.7, changeFrequency: 'monthly' as const },
+    { url: '/advisors', priority: 0.7, changeFrequency: 'monthly' as const },
     { url: '/insights', priority: 0.8, changeFrequency: 'weekly' as const },
     { url: '/contact', priority: 0.9, changeFrequency: 'monthly' as const },
     { url: '/privacy', priority: 0.4, changeFrequency: 'yearly' as const },

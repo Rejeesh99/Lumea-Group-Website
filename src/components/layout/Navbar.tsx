@@ -286,6 +286,24 @@ export function Navbar() {
             >
               About
             </Link>
+            <Link
+              href="/directors"
+              aria-current={pathname.startsWith('/directors') ? 'page' : undefined}
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                pathname.startsWith('/directors') ? 'text-cerulean bg-charcoal/80' : 'text-slate-300 hover:text-white hover:bg-charcoal/40'
+              }`}
+            >
+              Directors
+            </Link>
+            <Link
+              href="/advisors"
+              aria-current={pathname.startsWith('/advisors') ? 'page' : undefined}
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                pathname.startsWith('/advisors') ? 'text-rose bg-charcoal/80' : 'text-slate-300 hover:text-white hover:bg-charcoal/40'
+              }`}
+            >
+              Advisors
+            </Link>
 
             <Link
               href="/insights"
@@ -391,6 +409,20 @@ export function Navbar() {
                 className="block p-3 rounded-xl text-base font-semibold text-white hover:bg-charcoal"
               >
                 About LUMEA Group
+              </Link>
+              <Link
+                href="/directors"
+                aria-current={pathname.startsWith('/directors') ? 'page' : undefined}
+                className={`block p-3 rounded-xl text-base font-semibold hover:bg-charcoal ${pathname.startsWith('/directors') ? 'text-cerulean' : 'text-white'}`}
+              >
+                Directors
+              </Link>
+              <Link
+                href="/advisors"
+                aria-current={pathname.startsWith('/advisors') ? 'page' : undefined}
+                className={`block p-3 rounded-xl text-base font-semibold hover:bg-charcoal ${pathname.startsWith('/advisors') ? 'text-rose' : 'text-white'}`}
+              >
+                Advisors
               </Link>
               <Link
                 href="/insights"

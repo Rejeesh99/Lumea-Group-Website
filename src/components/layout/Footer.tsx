@@ -166,6 +166,16 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/directors" className="hover:text-cerulean transition-colors">
+                  Directors
+                </Link>
+              </li>
+              <li>
+                <Link href="/advisors" className="hover:text-rose transition-colors">
+                  Advisors
+                </Link>
+              </li>
+              <li>
                 <Link href="/insights" className="hover:text-white transition-colors">
                   Insights & Research
                 </Link>

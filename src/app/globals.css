@@ -85,3 +85,27 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* Shared page alignment: one content width and gutter system across routes. */
+.page-shell {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3.5vw, 1.5rem);
+}
+
+/* Keep reading comfortable without flattening the type hierarchy in cards. */
+main p {
+  text-wrap: pretty;
+}
+
+main :is(h1, h2, h3) {
+  text-wrap: balance;
+}
+
+main :is(a, button):focus-visible {
+  outline: 2px solid var(--color-cerulean);
+  outline-offset: 3px;
+}
