@@ -112,7 +112,7 @@ export function Footer() {
                 <ul className="space-y-1.5 text-xs">
                   <li>
                     <Link href="/solutions/cybersecurity" className="hover:text-white transition-colors">
-                      Cybersecurity & Defensive Assessments
+                      Cybersecurity & Digital Risk
                     </Link>
                   </li>
                   <li>
