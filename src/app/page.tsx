@@ -289,13 +289,13 @@ export default function HomePage() {
                   {sol.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
                   {sol.shortDesc}
                 </p>
 
                 <div className="space-y-2 pt-2">
                   <div className="text-[11px] uppercase tracking-wider text-silver font-semibold">Key Capabilities:</div>
-                  <ul className="space-y-1.5 text-xs text-silver">
+                  <ul className="space-y-1.5 text-sm text-silver">
                     {sol.keyCapabilities.map((cap, idx) => (
                       <li key={idx} className="flex items-start gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-cerulean shrink-0 mt-0.5" />
@@ -344,7 +344,7 @@ export default function HomePage() {
                 <div className="space-y-3">
                   <span className="text-[10px] font-mono uppercase text-cerulean tracking-wider">Pathway</span>
                   <h3 className="text-lg font-bold text-white font-display">{aud.title}</h3>
-                  <p className="text-xs text-silver leading-relaxed">{aud.description}</p>
+                  <p className="text-sm text-silver leading-relaxed">{aud.description}</p>
 
                   <div className="pt-2 space-y-1.5">
                     <span className="text-[10px] uppercase font-semibold text-silver/80">Key Solutions:</span>
