@@ -174,7 +174,8 @@ export function Navbar() {
               }}
             >
               <button
-                onClick={() => setBrandsOpen(!brandsOpen)}
+                onClick={() => setBrandsOpen(true)}
+                aria-haspopup="true"
                 aria-expanded={brandsOpen}
                 className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   pathname.startsWith('/brands') ? 'text-cerulean bg-charcoal/80' : 'text-slate-300 hover:text-white hover:bg-charcoal/40'
@@ -238,7 +239,8 @@ export function Navbar() {
               }}
             >
               <button
-                onClick={() => setSolutionsOpen(!solutionsOpen)}
+                onClick={() => setSolutionsOpen(true)}
+                aria-haspopup="true"
                 aria-expanded={solutionsOpen}
                 className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   pathname.startsWith('/solutions') ? 'text-cerulean bg-charcoal/80' : 'text-slate-300 hover:text-white hover:bg-charcoal/40'
