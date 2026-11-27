@@ -10,7 +10,6 @@ import {
   GraduationCap,
   HeartPulse,
   MessageCircle,
-  Minus,
   Send,
   ShieldCheck,
   Sparkles,
@@ -183,12 +182,12 @@ export function LumeaChatbot() {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-[80] flex items-end justify-end bg-black/60 p-0 backdrop-blur-[2px] sm:items-end sm:p-5">
+        <div className="fixed bottom-24 right-4 z-[80] w-[min(410px,calc(100vw-2rem))] sm:bottom-24 sm:right-6">
           <section
             role="dialog"
-            aria-modal="true"
+            aria-modal="false"
             aria-label="LUMEA virtual assistant"
-            className="flex h-[100dvh] w-full flex-col overflow-hidden border border-[#263342] bg-[#0B1018] text-slate-100 shadow-2xl sm:h-[min(690px,calc(100dvh-40px))] sm:max-h-[calc(100dvh-40px)] sm:w-[410px] sm:rounded-[26px]"
+            className="flex h-[min(640px,calc(100dvh-140px))] w-full flex-col overflow-hidden rounded-[26px] border border-[#263342] bg-[#0B1018] text-slate-100 shadow-[0_20px_70px_rgba(0,0,0,.55)]"
           >
             <header className="relative border-b border-white/10 bg-[radial-gradient(circle_at_top_right,rgba(0,174,239,.18),transparent_48%),#111925] px-4 pb-4 pt-4">
               <div className="flex items-start justify-between gap-3">
