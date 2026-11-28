@@ -111,11 +111,27 @@ const copy = {
 
 
 function LumiRobot({ compact = false }: { compact?: boolean }) {
+  const [gaze, setGaze] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const trackPointer = (event: PointerEvent) => {
+      const x = (event.clientX / Math.max(window.innerWidth, 1) - 0.5) * 2;
+      const y = (event.clientY / Math.max(window.innerHeight, 1) - 0.5) * 2;
+      setGaze({ x: Math.max(-1, Math.min(1, x)), y: Math.max(-1, Math.min(1, y)) });
+    };
+    window.addEventListener('pointermove', trackPointer, { passive: true });
+    return () => window.removeEventListener('pointermove', trackPointer);
+  }, []);
+
+  const eyeX = gaze.x * 3.2;
+  const eyeY = gaze.y * 2.2;
+
   return (
     <motion.div
       aria-hidden="true"
       className={compact ? "relative h-12 w-12 shrink-0" : "relative h-28 w-28"}
       animate={{ y: [0, -3, 0], rotateZ: [0, 1, 0, -1, 0] }}
+      style={{ rotateX: -gaze.y * 5, rotateY: gaze.x * 8, transformPerspective: 500 }}
       transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       whileHover={{ scale: 1.04 }}
     >
@@ -145,10 +161,13 @@ function LumiRobot({ compact = false }: { compact?: boolean }) {
         <rect x="21" y="25" width="78" height="53" rx="16" fill="url(#lumi-shell)" stroke="#F7FFFF" strokeWidth="2" />
         <rect x="27" y="31" width="66" height="41" rx="12" fill="#071723" stroke="#426477" strokeWidth="1.5" />
         <circle cx="45" cy="51" r="8" fill="#52E66C" opacity=".18" filter="url(#lumi-glow)" />
-        <circle cx="45" cy="51" r="5.5" fill="#7BFA62" filter="url(#lumi-glow)" />
-        <circle cx="74" cy="51" r="5.5" fill="#31DDF5" filter="url(#lumi-glow)" />
-        <circle cx="43" cy="49" r="1.5" fill="white" />
-        <circle cx="72" cy="49" r="1.5" fill="white" />
+        <circle cx="74" cy="51" r="8" fill="#31DDF5" opacity=".18" filter="url(#lumi-glow)" />
+        <motion.g animate={{ scaleY: [1, 1, 0.08, 1, 1] }} transition={{ duration: 4.8, repeat: Infinity, repeatDelay: 1.2, times: [0, .91, .94, .97, 1] }} style={{ transformOrigin: "60px 51px" }}>
+          <circle cx={45 + eyeX} cy={51 + eyeY} r="5.5" fill="#7BFA62" filter="url(#lumi-glow)" />
+          <circle cx={74 + eyeX} cy={51 + eyeY} r="5.5" fill="#31DDF5" filter="url(#lumi-glow)" />
+          <circle cx={43 + eyeX} cy={49 + eyeY} r="1.5" fill="white" />
+          <circle cx={72 + eyeX} cy={49 + eyeY} r="1.5" fill="white" />
+        </motion.g>
         <path d="M55 62Q60 66 65 62" stroke="#8CEBF2" strokeWidth="2" strokeLinecap="round" />
         <rect x="15" y="43" width="8" height="17" rx="4" fill="url(#lumi-shell)" stroke="#B8D7E3" />
         <rect x="97" y="43" width="8" height="17" rx="4" fill="url(#lumi-shell)" stroke="#B8D7E3" />
