@@ -165,7 +165,7 @@ function RobotModel({ mood }: { mood: RobotMood }) {
 
 export default function LumiRobot3D({ mood = 'idle', compact = false }: { mood?: RobotMood; compact?: boolean }) {
   return (
-    <div className={compact ? 'h-12 w-12' : 'h-full w-full'} aria-label="Animated 3D LUMI robot" role="img">
+    <div className={compact ? 'h-12 w-12' : 'h-full w-full'} aria-label="Animated 3D LUMI robot" role="img" style={{ cursor: 'none' }}>
       <Canvas camera={{ position: [0, 0, 3.35], fov: 38 }} dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }}>
         {/* Stable three-point studio lighting; avoid animated light intensity to prevent flicker. */}
         <hemisphereLight args={['#dff7ff', '#172633', 0.9]} />
