@@ -13,6 +13,11 @@ function RobotModel({ mood }: { mood: RobotMood }) {
   const leftArm = useRef<THREE.Group>(null);
   const rightArm = useRef<THREE.Group>(null);
   const mouth = useRef<THREE.Mesh>(null);
+  const torso = useRef<THREE.Mesh>(null);
+  const chestCore = useRef<THREE.MeshStandardMaterial>(null);
+  const antennaCore = useRef<THREE.MeshStandardMaterial>(null);
+  const blinkTiming = useRef({ next: 2.8, started: -1 });
+  const motionPhase = useRef(Math.random() * Math.PI * 2);
   const leftEyeMaterial = useRef<THREE.MeshBasicMaterial>(null);
   const rightEyeMaterial = useRef<THREE.MeshBasicMaterial>(null);
   const mouthMaterial = useRef<THREE.MeshBasicMaterial>(null);
@@ -32,23 +37,29 @@ function RobotModel({ mood }: { mood: RobotMood }) {
   useFrame(({ clock }, delta) => {
     const t = clock.elapsedTime;
     if (root.current) {
-      root.current.position.y = Math.sin(t * 1.7) * 0.055;
-      // Keep the metal shell stationary relative to the lights. Rotating the whole
-      // robot made specular highlights sweep across the armour as the cursor moved.
-      root.current.rotation.y = THREE.MathUtils.damp(root.current.rotation.y, 0, 5, delta);
+      // A slow, restrained weight shift makes the robot feel present without bobbing like a toy.
+      root.current.position.y = Math.sin(t * 1.15 + motionPhase.current) * 0.025;
+      root.current.position.x = Math.sin(t * 0.62 + motionPhase.current) * 0.012;
+      root.current.rotation.z = THREE.MathUtils.damp(root.current.rotation.z, Math.sin(t * 0.72 + motionPhase.current) * 0.018, 2.4, delta);
+      // Keep the metallic shell mostly fixed relative to the studio lights.
+      root.current.rotation.y = THREE.MathUtils.damp(root.current.rotation.y, Math.sin(t * 0.38) * 0.018, 2.2, delta);
     }
     target.current.set(pointer.current.x * 0.17, -pointer.current.y * 0.12);
     // Natural glances when the visitor is not actively interacting.
     const idleLookX = mood === 'idle' ? Math.sin(t * 0.42) * 0.075 : 0;
     const idleLookY = mood === 'idle' ? Math.sin(t * 0.31 + 1.4) * 0.045 : 0;
     if (head.current) {
-      // Cursor tracking is intentionally restricted to the emissive eye group below.
-      // This prevents moving metallic head surfaces through fixed lights (the source
-      // of the distracting highlight/flicker effect).
-      head.current.rotation.y = THREE.MathUtils.damp(head.current.rotation.y, idleLookX, 3.2, delta);
-      head.current.rotation.x = THREE.MathUtils.damp(head.current.rotation.x, idleLookY, 3.2, delta);
-      const moodTilt = mood === 'thinking' ? 0.42 : mood === 'listening' ? -0.22 : mood === 'greeting' ? -0.16 : mood === 'talking' ? 0.10 : 0;
-      head.current.rotation.z = THREE.MathUtils.damp(head.current.rotation.z, moodTilt + Math.sin(t * 0.8) * 0.025, 5, delta);
+      // Small, delayed head movements read as attention rather than mechanical tracking.
+      const moodTilt = mood === 'thinking' ? 0.24 : mood === 'listening' ? -0.10 : mood === 'greeting' ? -0.13 : mood === 'talking' ? 0.055 : 0;
+      const attentiveNod = mood === 'listening' ? Math.sin(t * 2.1) * 0.025 : mood === 'talking' ? Math.sin(t * 5.2) * 0.018 : 0;
+      head.current.rotation.y = THREE.MathUtils.damp(head.current.rotation.y, idleLookX * 0.7, 2.1, delta);
+      head.current.rotation.x = THREE.MathUtils.damp(head.current.rotation.x, idleLookY + attentiveNod, 2.4, delta);
+      head.current.rotation.z = THREE.MathUtils.damp(head.current.rotation.z, moodTilt + Math.sin(t * 0.55 + motionPhase.current) * 0.018, 2.8, delta);
+    }
+    if (torso.current) {
+      const breath = 1 + Math.sin(t * 1.8 + motionPhase.current) * 0.012;
+      torso.current.scale.y = THREE.MathUtils.damp(torso.current.scale.y, breath, 2.8, delta);
+      torso.current.scale.x = THREE.MathUtils.damp(torso.current.scale.x, 1 + (breath - 1) * 0.35, 2.8, delta);
     }
     if (eyes.current) {
       // Only the emissive eyes translate; the head, armour and lights stay still.
@@ -56,19 +67,27 @@ function RobotModel({ mood }: { mood: RobotMood }) {
       const eyeTargetY = THREE.MathUtils.clamp(-pointer.current.y, -1, 1) * 0.035;
       eyes.current.position.x = THREE.MathUtils.damp(eyes.current.position.x, eyeTargetX, 9, delta);
       eyes.current.position.y = THREE.MathUtils.damp(eyes.current.position.y, 0.045 + eyeTargetY, 9, delta);
-      const blink = (Math.sin(t * 0.7) > 0.995 || Math.sin(t * 0.7 + 2.1) > 0.997) ? 0.12 : 1;
+      // Irregular, quick blinks with a short closed-eye hold.
+      if (t >= blinkTiming.current.next) {
+        blinkTiming.current.started = t;
+        blinkTiming.current.next = t + 3.1 + Math.random() * 2.8;
+      }
+      const blinkAge = t - blinkTiming.current.started;
+      const blink = blinkAge >= 0 && blinkAge < 0.19
+        ? 0.12 + 0.88 * Math.abs((blinkAge / 0.19) * 2 - 1)
+        : 1;
       const eyePulse = mood === 'thinking' ? 1 + Math.sin(t * 4) * 0.07 : mood === 'talking' ? 1 + Math.sin(t * 8) * 0.045 : 1;
       const moodEyeScale = mood === 'thinking' ? 1.35 : mood === 'listening' ? 1.3 : mood === 'greeting' ? 1.22 : 1;
       eyes.current.scale.x = THREE.MathUtils.damp(eyes.current.scale.x, eyePulse * moodEyeScale, 8, delta);
       eyes.current.scale.y = THREE.MathUtils.damp(eyes.current.scale.y, blink, 18, delta);
     }
     if (leftArm.current) {
-      const wave = mood === 'greeting' ? Math.sin(t * 13) * 0.55 : Math.sin(t * 1.4) * 0.045;
-      const gesture = mood === 'greeting' ? -1.55 + wave : mood === 'talking' ? -0.72 + Math.sin(t * 7) * 0.12 : mood === 'listening' ? 0.48 : 0.16 + wave;
+      const wave = mood === 'greeting' ? Math.sin(t * 10.5) * 0.42 : Math.sin(t * 1.05 + motionPhase.current) * 0.025;
+      const gesture = mood === 'greeting' ? -1.38 + wave : mood === 'talking' ? -0.58 + Math.sin(t * 4.8) * 0.075 : mood === 'listening' ? 0.34 + Math.sin(t * 1.7) * 0.025 : 0.12 + wave;
       leftArm.current.rotation.z = THREE.MathUtils.damp(leftArm.current.rotation.z, gesture, 6, delta);
     }
     if (rightArm.current) {
-      const rightGesture = mood === 'thinking' ? 1.12 : mood === 'talking' ? -0.48 + Math.sin(t * 7 + 1) * 0.12 : mood === 'listening' ? -0.34 : -0.16 + Math.sin(t * 1.4 + 1) * 0.045;
+      const rightGesture = mood === 'thinking' ? 0.92 : mood === 'talking' ? -0.38 + Math.sin(t * 4.8 + 1) * 0.075 : mood === 'listening' ? -0.24 : -0.12 + Math.sin(t * 1.05 + motionPhase.current + 1) * 0.025;
       rightArm.current.rotation.z = THREE.MathUtils.damp(rightArm.current.rotation.z, rightGesture, 5, delta);
     }
     const glow = mood === 'thinking' ? '#b58cff' : mood === 'listening' ? '#ffe066' : mood === 'talking' ? '#55f2d0' : mood === 'greeting' ? '#86efac' : '#67e8f9';
@@ -79,6 +98,13 @@ function RobotModel({ mood }: { mood: RobotMood }) {
     [leftEyeMaterial.current, rightEyeMaterial.current, mouthMaterial.current].forEach((material) => {
       if (material) material.color.lerp(targetGlow, 1 - Math.exp(-delta * 9));
     });
+    if (chestCore.current) {
+      chestCore.current.emissiveIntensity = 1.8 + (Math.sin(t * 2.4) + 1) * 0.45;
+      chestCore.current.emissive.lerp(targetGlow, 1 - Math.exp(-delta * 4));
+    }
+    if (antennaCore.current) {
+      antennaCore.current.emissiveIntensity = 1.7 + (Math.sin(t * 3.1) + 1) * 0.55;
+    }
     if (faceScreenMaterial.current) {
       faceScreenMaterial.current.emissive.lerp(targetGlow, 1 - Math.exp(-delta * 7));
       faceScreenMaterial.current.emissiveIntensity = mood === 'idle' ? 0.22 : 0.48;
@@ -101,7 +127,7 @@ function RobotModel({ mood }: { mood: RobotMood }) {
       <mesh position={[0.23, -0.94, 0.09]} castShadow><boxGeometry args={[0.28, 0.13, 0.38]} /><meshStandardMaterial color="#dce8ed" metalness={0.65} roughness={0.3} /></mesh>
 
       {/* torso */}
-      <mesh position={[0, -0.25, 0]} castShadow><capsuleGeometry args={[0.32, 0.42, 8, 16]} /><meshStandardMaterial color="#e6f0f4" metalness={0.72} roughness={0.24} /></mesh>
+      <mesh ref={torso} position={[0, -0.25, 0]} castShadow><capsuleGeometry args={[0.32, 0.42, 8, 16]} /><meshStandardMaterial color="#e6f0f4" metalness={0.72} roughness={0.24} /></mesh>
       <mesh position={[0, -0.18, 0.292]}><boxGeometry args={[0.22, 0.09, 0.025]} /><meshStandardMaterial color="#122c3a" metalness={0.35} roughness={0.35} /></mesh>
       <mesh position={[0, -0.18, 0.31]}><boxGeometry args={[0.13, 0.025, 0.018]} /><meshStandardMaterial color="#42e8d0" emissive="#18cdbb" emissiveIntensity={2.5} /></mesh>
 
@@ -109,7 +135,7 @@ function RobotModel({ mood }: { mood: RobotMood }) {
       <mesh position={[0, -0.25, 0.306]}><boxGeometry args={[0.34, 0.3, 0.018]} /><meshStandardMaterial color="#b7cbd4" metalness={0.85} roughness={0.25} /></mesh>
       <mesh position={[0, -0.25, 0.322]}><boxGeometry args={[0.25, 0.22, 0.018]} /><meshStandardMaterial color="#dce9ed" metalness={0.7} roughness={0.3} /></mesh>
       <mesh position={[0, -0.25, 0.34]}><circleGeometry args={[0.065, 6]} /><meshStandardMaterial color="#0c3544" metalness={0.4} roughness={0.3} /></mesh>
-      <mesh position={[0, -0.25, 0.354]}><circleGeometry args={[0.036, 6]} /><meshStandardMaterial color="#49ead5" emissive="#21d8c5" emissiveIntensity={2.5} /></mesh>
+      <mesh position={[0, -0.25, 0.354]}><circleGeometry args={[0.036, 6]} /><meshStandardMaterial ref={chestCore} color="#49ead5" emissive="#21d8c5" emissiveIntensity={2.2} /></mesh>
       <mesh position={[-0.22, -0.47, 0.19]}><boxGeometry args={[0.035, 0.16, 0.035]} /><meshStandardMaterial color="#829ba8" metalness={0.8} /></mesh>
       <mesh position={[0.22, -0.47, 0.19]}><boxGeometry args={[0.035, 0.16, 0.035]} /><meshStandardMaterial color="#829ba8" metalness={0.8} /></mesh>
 
@@ -150,7 +176,7 @@ function RobotModel({ mood }: { mood: RobotMood }) {
         <mesh position={[-0.49, -0.02, 0]}><sphereGeometry args={[0.13, 20, 20]} /><meshStandardMaterial color="#91a8b4" metalness={0.8} roughness={0.22} /></mesh>
         <mesh position={[0.49, -0.02, 0]}><cylinderGeometry args={[0.13, 0.13, 0.12, 24]} /><meshStandardMaterial color="#91a8b4" metalness={0.8} roughness={0.22} /></mesh>
         <mesh position={[0, 0.48, 0]}><cylinderGeometry args={[0.018, 0.025, 0.2, 12]} /><meshStandardMaterial color="#a9c3ce" metalness={0.7} /></mesh>
-        <mesh position={[0, 0.59, 0]}><sphereGeometry args={[0.055, 16, 16]} /><meshStandardMaterial color="#45ead6" emissive="#21d8c5" emissiveIntensity={3} /></mesh>
+        <mesh position={[0, 0.59, 0]}><sphereGeometry args={[0.055, 16, 16]} /><meshStandardMaterial ref={antennaCore} color="#45ead6" emissive="#21d8c5" emissiveIntensity={2.2} /></mesh>
         <mesh position={[-0.49, -0.02, 0.07]}><circleGeometry args={[0.072, 24]} /><meshStandardMaterial color="#40e7d5" emissive="#20cdbb" emissiveIntensity={2.5} /></mesh>
         <mesh position={[0.49, -0.02, 0.07]}><circleGeometry args={[0.072, 24]} /><meshStandardMaterial color="#40e7d5" emissive="#20cdbb" emissiveIntensity={2.5} /></mesh>
         <mesh position={[0, 0.59, 0]}><torusGeometry args={[0.075, 0.012, 8, 28]} /><meshStandardMaterial color="#48e9d7" emissive="#20cdbb" emissiveIntensity={2.5} /></mesh>
