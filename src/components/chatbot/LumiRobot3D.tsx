@@ -142,7 +142,7 @@ function RobotModel({ mood }: { mood: RobotMood }) {
       <group ref={head} position={[0, 0.57, 0]}>
         <mesh castShadow><boxGeometry args={[0.92, 0.78, 0.68, 5, 5, 5]} /><meshStandardMaterial color="#e5eef2" metalness={0.76} roughness={0.23} /></mesh>
         <mesh position={[0, 0, 0.351]}><boxGeometry args={[0.76, 0.59, 0.035]} /><meshStandardMaterial ref={faceScreenMaterial} color="#071923" emissive="#071923" emissiveIntensity={0.2} metalness={0.45} roughness={0.25} /></mesh>
-        <group ref={eyes} position={[0, 0.045, 0.38]}>
+        <group ref={eyes} position={[0, 0.045, 0.50]}>
           <mesh position={[-0.19, 0, 0]}><sphereGeometry args={[0.105, 24, 24]} /><meshBasicMaterial ref={leftEyeMaterial} color={eyeColor} toneMapped={false} /></mesh>
           <mesh position={[0.19, 0, 0]}><sphereGeometry args={[0.075, 20, 20]} /><meshBasicMaterial ref={rightEyeMaterial} color={eyeColor} toneMapped={false} /></mesh>
           <mesh ref={mouth} position={[0, -0.19, 0]}><boxGeometry args={[0.2, 0.045, 0.025]} /><meshBasicMaterial ref={mouthMaterial} color={eyeColor} toneMapped={false} /></mesh>
