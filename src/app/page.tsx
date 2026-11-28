@@ -1,4 +1,5 @@
 import React from 'react';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import Link from 'next/link';
 import { 
   Shield, 
@@ -35,6 +36,7 @@ export default function HomePage() {
       <div className="absolute top-[800px] right-0 w-[500px] h-[500px] bg-rose/10 blur-[120px] pointer-events-none" />
 
       {/* SECTION 2 — HOMEPAGE HERO */}
+      <ScrollReveal delay={0.000}>
       <section className="relative mx-auto w-full max-w-7xl px-4 pt-14 pb-16 sm:px-6 md:pt-20 md:pb-24 lg:pt-24">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="relative z-10 space-y-6 text-left lg:col-span-5">
@@ -87,10 +89,10 @@ export default function HomePage() {
           {/* A clear, visual map of the four operating brands */}
           <div className="relative mx-auto flex w-full max-w-[590px] items-center justify-center lg:col-span-7">
             <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(0,174,239,0.15),transparent_66%)]" />
-            <div className="relative aspect-square w-full max-w-[540px]">
-              <div className="absolute inset-[8%] rounded-full border border-dashed border-cerulean/25" />
-              <div className="absolute inset-[20%] rounded-full border border-graphite/80" />
-              <div className="absolute inset-[32%] rounded-full border border-dashed border-rose/25" />
+            <div className="relative aspect-square w-full max-w-[540px] lumea-orbit-stage">
+              <div className="absolute inset-[8%] rounded-full border border-dashed border-cerulean/25 lumea-orbit-ring" />
+              <div className="absolute inset-[20%] rounded-full border border-graphite/80 lumea-orbit-ring-reverse" />
+              <div className="absolute inset-[32%] rounded-full border border-dashed border-rose/25 lumea-orbit-ring" />
               <svg viewBox="0 0 500 500" className="absolute inset-0 h-full w-full" aria-hidden="true">
                 <path d="M250 250 L250 45 M250 250 L455 250 M250 250 L250 455 M250 250 L45 250" stroke="#00AEEF" strokeOpacity=".48" strokeWidth="1.5" fill="none" />
                 <circle cx="250" cy="45" r="4" fill="#FF2E88" />
@@ -99,25 +101,25 @@ export default function HomePage() {
                 <circle cx="45" cy="250" r="4" fill="#00AEEF" />
               </svg>
 
-              <div className="absolute left-1/2 top-1/2 z-10 flex h-32 w-32 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-cerulean/50 bg-charcoal/95 p-3 text-center shadow-[0_0_55px_rgba(0,174,239,0.18)] sm:h-40 sm:w-40">
+              <div className="absolute left-1/2 top-1/2 z-10 flex h-32 w-32 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-cerulean/50 bg-charcoal/95 p-3 text-center shadow-[0_0_55px_rgba(0,174,239,0.18)] sm:h-40 sm:w-40 lumea-orbit-core">
                 <img src="/logos/lumea-group-mark.png" alt="LUMEA Group" className="mb-1 h-12 w-12 object-contain sm:h-14 sm:w-14" />
                 <span className="font-display text-sm font-extrabold tracking-[0.2em] text-white sm:text-base">LUMEA</span>
                 <span className="text-[9px] uppercase tracking-[0.2em] text-cerulean">Group</span>
               </div>
 
-              <Link href="/brands/lumeacyber" className="absolute left-1/2 top-[1%] z-20 flex w-[158px] -translate-x-1/2 items-center gap-2.5 rounded-xl border border-cerulean/50 bg-charcoal/95 p-3 shadow-glass transition-transform hover:-translate-y-1 sm:w-[184px]">
+              <Link href="/brands/lumeacyber" className="absolute left-1/2 top-[1%] z-20 flex w-[158px] -translate-x-1/2 items-center gap-2.5 rounded-xl border border-cerulean/50 bg-charcoal/95 p-3 shadow-glass transition-transform hover:-translate-y-1 sm:w-[184px] lumea-orbit-node lumea-float">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-cerulean/10"><img src="/logos/lumea-cyber-mark.png" alt="" className="h-7 w-7 object-contain" /></span>
                 <span><strong className="block text-xs text-white sm:text-sm">LumeaCyber</strong><small className="text-[10px] text-silver">Digital technology & AI</small></span>
               </Link>
-              <Link href="/brands/lumeanursing" className="absolute right-[-1%] top-1/2 z-20 flex w-[158px] -translate-y-1/2 items-center gap-2.5 rounded-xl border border-teal-400/40 bg-charcoal/95 p-3 shadow-glass transition-transform hover:translate-x-1 sm:w-[184px]">
+              <Link href="/brands/lumeanursing" className="absolute right-[-1%] top-1/2 z-20 flex w-[158px] -translate-y-1/2 items-center gap-2.5 rounded-xl border border-teal-400/40 bg-charcoal/95 p-3 shadow-glass transition-transform hover:translate-x-1 sm:w-[184px] lumea-orbit-node lumea-float lumea-float-delay-1">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-400/10"><img src="/logos/lumea-nursing-mark.png" alt="" className="h-7 w-7 object-contain" /></span>
                 <span><strong className="block text-xs text-white sm:text-sm">LumeaNursing</strong><small className="text-[10px] text-silver">Nursing education</small></span>
               </Link>
-              <Link href="/brands/lumeago" className="absolute bottom-[1%] left-1/2 z-20 flex w-[158px] -translate-x-1/2 items-center gap-2.5 rounded-xl border border-amber-400/40 bg-charcoal/95 p-3 shadow-glass transition-transform hover:translate-y-1 sm:w-[184px]">
+              <Link href="/brands/lumeago" className="absolute bottom-[1%] left-1/2 z-20 flex w-[158px] -translate-x-1/2 items-center gap-2.5 rounded-xl border border-amber-400/40 bg-charcoal/95 p-3 shadow-glass transition-transform hover:translate-y-1 sm:w-[184px] lumea-orbit-node lumea-float lumea-float-delay-2">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-400/10"><img src="/logos/lumea-go-mark.png" alt="" className="h-7 w-7 object-contain" /></span>
                 <span><strong className="block text-xs text-white sm:text-sm">LumeaGo</strong><small className="text-[10px] text-silver">Global education</small></span>
               </Link>
-              <Link href="/brands/lumeaskill" className="absolute left-[-1%] top-1/2 z-20 flex w-[158px] -translate-y-1/2 items-center gap-2.5 rounded-xl border border-rose/50 bg-charcoal/95 p-3 shadow-glass transition-transform hover:-translate-x-1 sm:w-[184px]">
+              <Link href="/brands/lumeaskill" className="absolute left-[-1%] top-1/2 z-20 flex w-[158px] -translate-y-1/2 items-center gap-2.5 rounded-xl border border-rose/50 bg-charcoal/95 p-3 shadow-glass transition-transform hover:-translate-x-1 sm:w-[184px] lumea-orbit-node lumea-float lumea-float-delay-3">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-rose/10"><img src="/logos/lumea-skill-mark.png" alt="" className="h-7 w-7 object-contain" /></span>
                 <span><strong className="block text-xs text-white sm:text-sm">LumeaSkill</strong><small className="text-[10px] text-silver">Skills & languages</small></span>
               </Link>
@@ -125,8 +127,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* SECTION 3 — THE LUMEA GROUP */}
+      <ScrollReveal delay={0.035}>
       <section className="relative border-y border-graphite/60 bg-charcoal/45 py-20 md:py-24">
         <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:gap-14">
           <div className="space-y-5 lg:col-span-5">
@@ -172,8 +176,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* SECTION 4 — FOUR BRANDS DEEP DIVE */}
+      <ScrollReveal delay={0.070}>
       <section id="brands-section" className="py-20 md:py-28 px-4 sm:px-6 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <span className="text-xs uppercase tracking-widest font-mono text-cerulean font-semibold">
@@ -191,7 +197,7 @@ export default function HomePage() {
           {Object.values(BRANDS).map((brand) => (
             <div
               key={brand.id}
-              className="bg-charcoal/70 border border-graphite rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:border-graphite/80 transition-all duration-300 relative group overflow-hidden"
+              className="bg-charcoal/70 border border-graphite rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:border-graphite/80 transition-all duration-300 relative group overflow-hidden lumea-depth-card"
             >
               {/* Top ambient color edge */}
               <div
@@ -259,8 +265,10 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      </ScrollReveal>
 
       {/* SECTION 6 — SOLUTIONS */}
+      <ScrollReveal delay={0.105}>
       <section className="py-20 md:py-28 px-4 sm:px-6 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <span className="text-xs uppercase tracking-widest font-mono text-cerulean font-semibold">
@@ -319,8 +327,10 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      </ScrollReveal>
 
       {/* SECTION 7 — WHO WE HELP (4 AUDIENCE PATHWAYS) */}
+      <ScrollReveal delay={0.140}>
       <section className="py-20 md:py-28 bg-charcoal/40 border-y border-graphite/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
@@ -373,8 +383,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* SECTION 8 — THE LUMEA PHILOSOPHY */}
+      <ScrollReveal delay={0.140}>
       <section className="py-20 md:py-28 px-4 sm:px-6 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <span className="text-xs uppercase tracking-widest font-mono text-cerulean font-semibold">
@@ -409,8 +421,10 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      </ScrollReveal>
 
       {/* SECTION 9 — WHY LUMEA */}
+      <ScrollReveal delay={0.140}>
       <section className="py-20 md:py-28 bg-charcoal/40 border-y border-graphite/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -454,8 +468,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* SECTION 10 — INSIGHTS & RESEARCH */}
+      <ScrollReveal delay={0.140}>
       <section className="py-20 md:py-28 px-4 sm:px-6 max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-12">
           <div>
@@ -511,8 +527,10 @@ export default function HomePage() {
           {RESEARCH_NOTE.disclaimer}
         </div>
       </section>
+      </ScrollReveal>
 
       {/* SECTION 11 — FINAL CTA */}
+      <ScrollReveal delay={0.140}>
       <section className="py-20 md:py-28 bg-gradient-to-t from-charcoal via-jet to-jet border-t border-graphite/70 text-center px-4 sm:px-6">
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="w-12 h-12 rounded-2xl bg-cerulean/10 border border-cerulean/30 text-cerulean flex items-center justify-center mx-auto">
@@ -544,6 +562,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
     </div>
   );
 }
