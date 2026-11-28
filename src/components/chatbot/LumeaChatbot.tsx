@@ -114,30 +114,48 @@ function LumiRobot({ compact = false }: { compact?: boolean }) {
   return (
     <motion.div
       aria-hidden="true"
-      className={compact ? "relative h-12 w-12 shrink-0" : "relative h-32 w-32"}
-      style={{ perspective: 900 }}
-      animate={{ y: [0, -7, 0], rotateZ: [0, 1.5, 0, -1.5, 0] }}
+      className={compact ? "relative h-12 w-12 shrink-0" : "relative h-28 w-28"}
+      animate={{ y: [0, -3, 0], rotateZ: [0, 1, 0, -1, 0] }}
       transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      whileHover={{ scale: 1.06, rotateY: 12 }}
+      whileHover={{ scale: 1.04 }}
     >
-      <motion.div className="absolute left-1/2 top-[5%] h-[13%] w-[5%] -translate-x-1/2 rounded-full bg-[#B8F3FF] shadow-[0_0_14px_#00AEEF]" animate={{ opacity: [0.55, 1, 0.55], scaleY: [1, 1.35, 1] }} transition={{ duration: 1.8, repeat: Infinity }} />
-      <div className="absolute left-1/2 top-[15%] h-[9%] w-[32%] -translate-x-1/2 rounded-t-full border-x-2 border-t-2 border-[#B9D9E7] bg-gradient-to-b from-[#EAFBFF] to-[#9CBBCB]" />
-      <motion.div className="absolute left-1/2 top-[20%] h-[43%] w-[76%] -translate-x-1/2 rounded-[34%] border border-white/80 bg-gradient-to-br from-white via-[#D9EAF2] to-[#7896AA] shadow-[inset_-7px_-8px_13px_rgba(30,64,84,.25),inset_5px_5px_10px_white,0_9px_22px_rgba(0,174,239,.25)]" style={{ transformStyle: "preserve-3d" }} animate={{ rotateY: [0, 5, 0, -5, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
-        <div className="absolute inset-[12%] overflow-hidden rounded-[30%] border border-[#8AA8B9] bg-gradient-to-br from-[#071522] via-[#102B3C] to-[#020810] shadow-[inset_0_0_18px_rgba(0,174,239,.28)]">
-          <motion.span className="absolute left-[23%] top-[38%] h-[18%] w-[15%] rounded-full bg-[#8AF1FF] shadow-[0_0_10px_4px_rgba(0,174,239,.75)]" animate={{ scaleY: [1, .18, 1] }} transition={{ duration: 4.8, repeat: Infinity, times: [0, .08, .16], repeatDelay: 1.5 }} />
-          <motion.span className="absolute right-[23%] top-[38%] h-[18%] w-[15%] rounded-full bg-[#8AF1FF] shadow-[0_0_10px_4px_rgba(0,174,239,.75)]" animate={{ scaleY: [1, .18, 1] }} transition={{ duration: 4.8, repeat: Infinity, times: [0, .08, .16], repeatDelay: 1.5 }} />
-          <div className="absolute bottom-[17%] left-1/2 h-[2px] w-[18%] -translate-x-1/2 rounded-full bg-[#4DDDF8]/80" />
-        </div>
-        <span className="absolute -left-[5%] top-[42%] h-[22%] w-[11%] rounded-full border border-[#C9E8F2] bg-gradient-to-r from-[#7898AB] to-[#F4FCFF]" />
-        <span className="absolute -right-[5%] top-[42%] h-[22%] w-[11%] rounded-full border border-[#C9E8F2] bg-gradient-to-l from-[#7898AB] to-[#F4FCFF]" />
-      </motion.div>
-      <div className="absolute left-1/2 top-[64%] h-[26%] w-[58%] -translate-x-1/2 rounded-[30%] border border-white/80 bg-gradient-to-br from-[#F8FDFF] via-[#C7DDE8] to-[#718DA1] shadow-[inset_-5px_-5px_9px_rgba(30,64,84,.2),0_7px_14px_rgba(0,174,239,.18)]">
-        <div className="absolute left-1/2 top-[35%] -translate-x-1/2 text-[5px] font-black tracking-[.22em] text-[#168CB5]">LUMEA</div>
-        <div className="absolute bottom-[20%] left-1/2 h-[3px] w-[25%] -translate-x-1/2 rounded-full bg-[#00AEEF]/70" />
-      </div>
-      <motion.span className="absolute left-[3%] top-[69%] h-[21%] w-[15%] rounded-full border border-white/70 bg-gradient-to-br from-[#F8FDFF] to-[#8AA7B8]" animate={{ rotate: [-8, 8, -8] }} transition={{ duration: 2.5, repeat: Infinity }} />
-      <motion.span className="absolute right-[3%] top-[69%] h-[21%] w-[15%] rounded-full border border-white/70 bg-gradient-to-br from-[#F8FDFF] to-[#8AA7B8]" animate={{ rotate: [8, -8, 8] }} transition={{ duration: 2.5, repeat: Infinity }} />
-      {!compact && <div className="absolute -bottom-[2%] left-1/2 h-3 w-[78%] -translate-x-1/2 rounded-[50%] bg-[#00AEEF]/25 blur-md" />}
+      <svg viewBox="0 0 120 120" className="h-full w-full overflow-visible" fill="none">
+        <defs>
+          <linearGradient id="lumi-shell" x1="18" y1="12" x2="102" y2="104" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#FFFFFF" />
+            <stop offset=".55" stopColor="#DCEAF0" />
+            <stop offset="1" stopColor="#8FA9B8" />
+          </linearGradient>
+          <linearGradient id="lumi-body" x1="36" y1="70" x2="83" y2="116" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#F8FDFF" />
+            <stop offset="1" stopColor="#8CA9B9" />
+          </linearGradient>
+          <filter id="lumi-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+        <ellipse cx="60" cy="112" rx="31" ry="5" fill="#00C9D8" opacity=".22" filter="url(#lumi-glow)" />
+        <path d="M59 9V3" stroke="#B8DCE8" strokeWidth="3" strokeLinecap="round" />
+        <circle cx="59" cy="3" r="3" fill="#9EF4E6" filter="url(#lumi-glow)" />
+        <rect x="30" y="67" width="60" height="47" rx="17" fill="url(#lumi-body)" stroke="#F5FFFF" strokeWidth="1.5" />
+        <path d="M43 84H77" stroke="#7C9AAA" strokeWidth="2" strokeLinecap="round" />
+        <path d="M46 90H74" stroke="#20CDB7" strokeWidth="3" strokeLinecap="round" filter="url(#lumi-glow)" />
+        <path d="M49 97H71" stroke="#20CDB7" strokeWidth="2" strokeLinecap="round" opacity=".75" />
+        <rect x="21" y="25" width="78" height="53" rx="16" fill="url(#lumi-shell)" stroke="#F7FFFF" strokeWidth="2" />
+        <rect x="27" y="31" width="66" height="41" rx="12" fill="#071723" stroke="#426477" strokeWidth="1.5" />
+        <circle cx="45" cy="51" r="8" fill="#52E66C" opacity=".18" filter="url(#lumi-glow)" />
+        <circle cx="45" cy="51" r="5.5" fill="#7BFA62" filter="url(#lumi-glow)" />
+        <circle cx="74" cy="51" r="5.5" fill="#31DDF5" filter="url(#lumi-glow)" />
+        <circle cx="43" cy="49" r="1.5" fill="white" />
+        <circle cx="72" cy="49" r="1.5" fill="white" />
+        <path d="M55 62Q60 66 65 62" stroke="#8CEBF2" strokeWidth="2" strokeLinecap="round" />
+        <rect x="15" y="43" width="8" height="17" rx="4" fill="url(#lumi-shell)" stroke="#B8D7E3" />
+        <rect x="97" y="43" width="8" height="17" rx="4" fill="url(#lumi-shell)" stroke="#B8D7E3" />
+        <path d="M36 73L30 82" stroke="#DCEAF0" strokeWidth="7" strokeLinecap="round" />
+        <path d="M84 73L90 82" stroke="#DCEAF0" strokeWidth="7" strokeLinecap="round" />
+        <path d="M30 82L25 88M90 82L95 88" stroke="#A9C4D0" strokeWidth="7" strokeLinecap="round" />
+      </svg>
     </motion.div>
   );
 }
@@ -202,28 +220,28 @@ export function LumeaChatbot() {
         aria-label={t.open}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
-        className="fixed bottom-5 right-5 z-[70] group flex items-center gap-3 rounded-full border border-[#00AEEF]/40 bg-[#101722] p-2.5 pr-4 text-white shadow-[0_12px_40px_rgba(0,174,239,.24)] transition-all duration-300 hover:-translate-y-1 hover:border-[#00AEEF] hover:shadow-[0_16px_48px_rgba(0,174,239,.32)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00AEEF]"
+        className="fixed bottom-5 right-5 z-[70] group flex items-center gap-2.5 rounded-full border border-white/15 bg-[#101923]/95 p-2 pr-4 text-white shadow-[0_10px_36px_rgba(0,0,0,.32),0_0_24px_rgba(0,174,239,.12)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#37DCCB]/50 hover:shadow-[0_14px_42px_rgba(0,174,239,.2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00AEEF]"
       >
-        <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-[#00AEEF]/15 text-[#43C5F5]">
+        <span className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#45DCCB]/25 bg-gradient-to-br from-[#153746] to-[#10212D] text-[#43C5F5]">
           <LumiRobot compact />
           <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-[#101722] bg-emerald-400" />
         </span>
         <span className="text-left">
-          <span className="block text-sm font-bold tracking-wide">Ask LUMI</span>
-          <span className="block text-[10px] text-slate-400">LUMEA virtual assistant</span>
+          <span className="block text-sm font-bold tracking-wide">Chat with LUMI</span>
+          <span className="block text-[10px] text-slate-400">We’re here to help</span>
         </span>
-        <MessageCircle className="ml-1 h-4 w-4 text-[#00AEEF] transition-transform group-hover:scale-110" />
+        <ArrowRight className="ml-1 h-4 w-4 text-[#43DCCB] transition-transform group-hover:translate-x-0.5" />
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-24 right-4 z-[80] w-[min(410px,calc(100vw-2rem))] sm:bottom-24 sm:right-6">
+        <motion.div initial={{ opacity: 0, y: 16, scale: .97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: .98 }} transition={{ duration: .22, ease: "easeOut" }} className="fixed bottom-[5.25rem] right-3 z-[80] w-[min(380px,calc(100vw-1.5rem))] sm:bottom-24 sm:right-6">
           <section
             role="dialog"
             aria-modal="false"
             aria-label="LUMEA virtual assistant"
-            className="flex h-[min(640px,calc(100dvh-140px))] w-full flex-col overflow-hidden rounded-[26px] border border-[#263342] bg-[#0B1018] text-slate-100 shadow-[0_20px_70px_rgba(0,0,0,.55)]"
+            className="flex h-[min(570px,calc(100dvh-112px))] w-full flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#0D151D] text-slate-100 shadow-[0_24px_80px_rgba(0,0,0,.48),0_0_38px_rgba(0,174,239,.10)] ring-1 ring-black/20"
           >
-            <header className="relative border-b border-white/10 bg-[radial-gradient(circle_at_top_right,rgba(0,174,239,.18),transparent_48%),#111925] px-4 pb-4 pt-4">
+            <header className="relative border-b border-white/[.08] bg-[radial-gradient(circle_at_top_right,rgba(45,212,191,.12),transparent_48%),#111B25] px-4 pb-3 pt-4">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex min-w-0 items-center gap-3">
                   <div
@@ -269,7 +287,7 @@ export function LumeaChatbot() {
                 </div>
               </div>
 
-              <div className="mt-4 flex items-center justify-between gap-2">
+              <div className="mt-3 flex items-center justify-between gap-2">
                 <button type="button" onClick={() => { setAssistantMenuOpen(!assistantMenuOpen); setLanguageOpen(false); }} className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-[11px] font-semibold text-slate-200 hover:border-white/20 hover:bg-white/5">
                   <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: currentAssistant.accent }} />
                   {t.choose}
@@ -300,9 +318,9 @@ export function LumeaChatbot() {
 
             <div className="flex-1 space-y-4 overflow-y-auto px-4 py-5">
               {messages.length === 0 ? (
-                <div className="space-y-5">
-                  <div className="flex justify-center pt-2">
-                    <div className="relative flex h-24 w-24 items-center justify-center rounded-[30px] border border-[#00AEEF]/25 bg-[radial-gradient(circle,rgba(0,174,239,.2),rgba(0,174,239,.03)_70%)] shadow-[0_0_50px_rgba(0,174,239,.1)]">
+                <div className="space-y-4">
+                  <div className="flex justify-center pt-1">
+                    <div className="relative flex h-[88px] w-[88px] items-center justify-center rounded-[26px] border border-[#42DCCB]/20 bg-[radial-gradient(circle,rgba(45,212,191,.14),rgba(0,174,239,.025)_72%)] shadow-[0_0_34px_rgba(45,212,191,.08)]">
                       <div className="absolute inset-2 rounded-[24px] border border-white/5" />
                       {assistantId === 'lumi' ? <LumiRobot /> : <AssistantIcon className="h-11 w-11" style={{ color: currentAssistant.accent }} />}
                       <span className="absolute -bottom-1 -right-1 h-5 w-5 rounded-full border-4 border-[#0B1018] bg-emerald-400" />
@@ -312,10 +330,10 @@ export function LumeaChatbot() {
                     <p className="text-lg font-bold text-white">{assistantId === 'lumi' ? t.welcome : currentAssistant.label}</p>
                     <p className="mx-auto mt-2 max-w-[300px] text-sm leading-6 text-slate-400">{assistantId === 'lumi' ? t.intro : currentAssistant.description + '. ' + t.assistantIntro + ' ' + currentAssistant.name + '.'}</p>
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <p className="px-1 text-[10px] font-bold uppercase tracking-[.16em] text-slate-500">{t.explore}</p>
                     {quickReplies.map((reply) => (
-                      <button key={reply.id} type="button" onClick={() => selectAssistant(reply.id)} className="group flex w-full items-center justify-between rounded-xl border border-white/[.08] bg-white/[.03] px-3.5 py-3 text-left text-sm text-slate-200 transition hover:border-[#00AEEF]/40 hover:bg-[#00AEEF]/[.07]">
+                      <button key={reply.id} type="button" onClick={() => selectAssistant(reply.id)} className="group flex w-full items-center justify-between rounded-xl border border-white/[.07] bg-white/[.025] px-3.5 py-2.5 text-left text-[13px] text-slate-200 transition hover:border-[#45DCCB]/30 hover:bg-[#45DCCB]/[.05]">
                         <span>{reply.label}</span>
                         <ArrowRight className="h-4 w-4 text-slate-600 transition group-hover:translate-x-0.5 group-hover:text-[#43C5F5]" />
                       </button>
@@ -339,9 +357,9 @@ export function LumeaChatbot() {
               )}
             </div>
 
-            <footer className="border-t border-white/10 bg-[#0E151F] px-4 pb-4 pt-3">
-              <div className="mb-2 flex items-start gap-2 rounded-lg border border-amber-300/10 bg-amber-300/[.05] px-2.5 py-2">
-                <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-300" />
+            <footer className="border-t border-white/[.08] bg-[#0D151D] px-4 pb-3 pt-3">
+              <div className="mb-2 flex items-start gap-2 rounded-lg border border-white/[.06] bg-white/[.025] px-2.5 py-1.5">
+                <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#45DCCB]" />
                 <p className="text-[10px] leading-4 text-slate-400">{t.previewNote}</p>
               </div>
               {assistantId !== 'lumi' && (
@@ -349,7 +367,7 @@ export function LumeaChatbot() {
                   <ArrowLeft className="h-3 w-3" /> {t.switchBack}
                 </button>
               )}
-              <form onSubmit={(event) => sendMessage(event)} className="flex items-center gap-2 rounded-2xl border border-white/10 bg-[#17212E] p-1.5 pl-3 focus-within:border-[#00AEEF]/50">
+              <form onSubmit={(event) => sendMessage(event)} className="flex items-center gap-2 rounded-2xl border border-white/10 bg-[#17232D] p-1.5 pl-3 transition focus-within:border-[#45DCCB]/50 focus-within:shadow-[0_0_0_3px_rgba(45,212,191,.07)]">
                 <input
                   value={input}
                   onChange={(event) => setInput(event.target.value)}
@@ -357,14 +375,14 @@ export function LumeaChatbot() {
                   aria-label={t.placeholder}
                   className="min-w-0 flex-1 bg-transparent py-2 text-sm text-white outline-none placeholder:text-slate-500"
                 />
-                <button type="submit" aria-label="Send message" disabled={!input.trim()} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#00AEEF] text-[#061018] transition hover:bg-[#43C5F5] disabled:cursor-not-allowed disabled:opacity-40">
+                <button type="submit" aria-label="Send message" disabled={!input.trim()} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#48E2CF] to-[#26B6D7] text-[#061018] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40">
                   <Send className="h-4 w-4" />
                 </button>
               </form>
               <p className="mt-2 text-center text-[9px] tracking-wide text-slate-600">LUMEA GROUP · VIRTUAL ASSISTANT</p>
             </footer>
           </section>
-        </div>
+        </motion.div>
       )}
     </>
   );
