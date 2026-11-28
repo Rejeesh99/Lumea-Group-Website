@@ -12,6 +12,10 @@ function RobotModel({ mood }: { mood: RobotMood }) {
   const eyes = useRef<THREE.Group>(null);
   const leftArm = useRef<THREE.Group>(null);
   const rightArm = useRef<THREE.Group>(null);
+  const mouth = useRef<THREE.Mesh>(null);
+  const leftEyeMaterial = useRef<THREE.MeshStandardMaterial>(null);
+  const rightEyeMaterial = useRef<THREE.MeshStandardMaterial>(null);
+  const mouthMaterial = useRef<THREE.MeshStandardMaterial>(null);
   const pointer = useRef({ x: 0, y: 0 });
   const target = useRef(new THREE.Vector2());
 
@@ -37,24 +41,35 @@ function RobotModel({ mood }: { mood: RobotMood }) {
     if (head.current) {
       head.current.rotation.y = THREE.MathUtils.damp(head.current.rotation.y, target.current.x + idleLookX, 4.5, delta);
       head.current.rotation.x = THREE.MathUtils.damp(head.current.rotation.x, target.current.y + idleLookY, 4.5, delta);
-      head.current.rotation.z = THREE.MathUtils.damp(head.current.rotation.z, mood === 'thinking' ? 0.12 : Math.sin(t * 0.8) * 0.025, 4, delta);
+      const moodTilt = mood === 'thinking' ? 0.28 : mood === 'listening' ? -0.10 : mood === 'greeting' ? -0.08 : 0;
+      head.current.rotation.z = THREE.MathUtils.damp(head.current.rotation.z, moodTilt + Math.sin(t * 0.8) * 0.025, 5, delta);
     }
     if (eyes.current) {
       eyes.current.position.x = THREE.MathUtils.damp(eyes.current.position.x, pointer.current.x * 0.035, 7, delta);
       eyes.current.position.y = THREE.MathUtils.damp(eyes.current.position.y, -pointer.current.y * 0.025, 7, delta);
       const blink = (Math.sin(t * 0.7) > 0.995 || Math.sin(t * 0.7 + 2.1) > 0.997) ? 0.12 : 1;
       const eyePulse = mood === 'thinking' ? 1 + Math.sin(t * 4) * 0.07 : mood === 'talking' ? 1 + Math.sin(t * 8) * 0.045 : 1;
-      eyes.current.scale.x = THREE.MathUtils.damp(eyes.current.scale.x, eyePulse, 8, delta);
+      const moodEyeScale = mood === 'thinking' ? 1.28 : mood === 'listening' ? 1.18 : mood === 'greeting' ? 1.12 : 1;
+      eyes.current.scale.x = THREE.MathUtils.damp(eyes.current.scale.x, eyePulse * moodEyeScale, 8, delta);
       eyes.current.scale.y = THREE.MathUtils.damp(eyes.current.scale.y, blink, 18, delta);
     }
     if (leftArm.current) {
       const wave = mood === 'greeting' ? Math.sin(t * 13) * 0.55 : Math.sin(t * 1.4) * 0.045;
-      const gesture = mood === 'greeting' ? -1.0 + wave : mood === 'talking' ? -0.42 : mood === 'listening' ? 0.34 : 0.16 + wave;
+      const gesture = mood === 'greeting' ? -1.55 + wave : mood === 'talking' ? -0.72 + Math.sin(t * 7) * 0.12 : mood === 'listening' ? 0.48 : 0.16 + wave;
       leftArm.current.rotation.z = THREE.MathUtils.damp(leftArm.current.rotation.z, gesture, 6, delta);
     }
     if (rightArm.current) {
-      const rightGesture = mood === 'thinking' ? 0.62 : mood === 'talking' ? -0.28 : -0.16 + Math.sin(t * 1.4 + 1) * 0.045;
+      const rightGesture = mood === 'thinking' ? 1.12 : mood === 'talking' ? -0.48 + Math.sin(t * 7 + 1) * 0.12 : mood === 'listening' ? -0.34 : -0.16 + Math.sin(t * 1.4 + 1) * 0.045;
       rightArm.current.rotation.z = THREE.MathUtils.damp(rightArm.current.rotation.z, rightGesture, 5, delta);
+    }
+    const glow = mood === 'thinking' ? '#b58cff' : mood === 'listening' ? '#ffe066' : mood === 'talking' ? '#55f2d0' : mood === 'greeting' ? '#86efac' : '#67e8f9';
+    [leftEyeMaterial.current, rightEyeMaterial.current, mouthMaterial.current].forEach((material) => {
+      if (material) { material.color.set(glow); material.emissive.set(glow); material.emissiveIntensity = mood === 'idle' ? 2.2 : 4.2 + Math.sin(t * 8) * 0.8; }
+    });
+    if (mouth.current) {
+      const talking = mood === 'talking';
+      mouth.current.scale.y = THREE.MathUtils.damp(mouth.current.scale.y, talking ? 1 + Math.abs(Math.sin(t * 11)) * 5 : mood === 'thinking' ? 0.65 : 1, 14, delta);
+      mouth.current.scale.x = THREE.MathUtils.damp(mouth.current.scale.x, talking ? 1.15 : 1, 12, delta);
     }
   });
 
@@ -111,9 +126,9 @@ function RobotModel({ mood }: { mood: RobotMood }) {
         <mesh castShadow><boxGeometry args={[0.92, 0.78, 0.68, 5, 5, 5]} /><meshStandardMaterial color="#e5eef2" metalness={0.76} roughness={0.23} /></mesh>
         <mesh position={[0, 0, 0.351]}><boxGeometry args={[0.76, 0.59, 0.035]} /><meshStandardMaterial color="#071923" metalness={0.45} roughness={0.25} /></mesh>
         <group ref={eyes} position={[0, 0.045, 0.38]}>
-          <mesh position={[-0.19, 0, 0]}><sphereGeometry args={[0.075, 20, 20]} /><meshStandardMaterial color={eyeColor} emissive={eyeColor} emissiveIntensity={3.2} /></mesh>
-          <mesh position={[0.19, 0, 0]}><sphereGeometry args={[0.075, 20, 20]} /><meshStandardMaterial color={eyeColor} emissive={eyeColor} emissiveIntensity={3.2} /></mesh>
-          <mesh position={[0, -0.19, 0]}><boxGeometry args={[0.15, 0.025, 0.018]} /><meshStandardMaterial color={eyeColor} emissive={eyeColor} emissiveIntensity={2} /></mesh>
+          <mesh position={[-0.19, 0, 0]}><sphereGeometry args={[0.075, 20, 20]} /><meshStandardMaterial ref={leftEyeMaterial} color={eyeColor} emissive={eyeColor} emissiveIntensity={3.2} /></mesh>
+          <mesh position={[0.19, 0, 0]}><sphereGeometry args={[0.075, 20, 20]} /><meshStandardMaterial ref={rightEyeMaterial} color={eyeColor} emissive={eyeColor} emissiveIntensity={3.2} /></mesh>
+          <mesh ref={mouth} position={[0, -0.19, 0]}><boxGeometry args={[0.15, 0.025, 0.018]} /><meshStandardMaterial ref={mouthMaterial} color={eyeColor} emissive={eyeColor} emissiveIntensity={2} /></mesh>
         </group>
         <mesh position={[-0.49, -0.02, 0]}><sphereGeometry args={[0.13, 20, 20]} /><meshStandardMaterial color="#91a8b4" metalness={0.8} roughness={0.22} /></mesh>
         <mesh position={[0.49, -0.02, 0]}><cylinderGeometry args={[0.13, 0.13, 0.12, 24]} /><meshStandardMaterial color="#91a8b4" metalness={0.8} roughness={0.22} /></mesh>
