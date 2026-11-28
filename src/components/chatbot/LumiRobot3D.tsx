@@ -66,16 +66,34 @@ function RobotModel({ mood }: { mood: RobotMood }) {
       <mesh position={[0, -0.18, 0.292]}><boxGeometry args={[0.22, 0.09, 0.025]} /><meshStandardMaterial color="#122c3a" metalness={0.35} roughness={0.35} /></mesh>
       <mesh position={[0, -0.18, 0.31]}><boxGeometry args={[0.13, 0.025, 0.018]} /><meshStandardMaterial color="#42e8d0" emissive="#18cdbb" emissiveIntensity={2.5} /></mesh>
 
+
+      <mesh position={[0, -0.25, 0.306]}><boxGeometry args={[0.34, 0.3, 0.018]} /><meshStandardMaterial color="#b7cbd4" metalness={0.85} roughness={0.25} /></mesh>
+      <mesh position={[0, -0.25, 0.322]}><boxGeometry args={[0.25, 0.22, 0.018]} /><meshStandardMaterial color="#dce9ed" metalness={0.7} roughness={0.3} /></mesh>
+      <mesh position={[0, -0.25, 0.34]}><circleGeometry args={[0.065, 6]} /><meshStandardMaterial color="#0c3544" metalness={0.4} roughness={0.3} /></mesh>
+      <mesh position={[0, -0.25, 0.354]}><circleGeometry args={[0.036, 6]} /><meshStandardMaterial color="#49ead5" emissive="#21d8c5" emissiveIntensity={2.5} /></mesh>
+      <mesh position={[-0.22, -0.47, 0.19]}><boxGeometry args={[0.035, 0.16, 0.035]} /><meshStandardMaterial color="#829ba8" metalness={0.8} /></mesh>
+      <mesh position={[0.22, -0.47, 0.19]}><boxGeometry args={[0.035, 0.16, 0.035]} /><meshStandardMaterial color="#829ba8" metalness={0.8} /></mesh>
+
       {/* shoulder pivots and arms */}
       <mesh position={[-0.39, -0.08, 0]}><sphereGeometry args={[0.14, 20, 20]} /><meshStandardMaterial color="#879eaa" metalness={0.8} roughness={0.25} /></mesh>
       <mesh position={[0.39, -0.08, 0]}><sphereGeometry args={[0.14, 20, 20]} /><meshStandardMaterial color="#879eaa" metalness={0.8} roughness={0.25} /></mesh>
       <group ref={leftArm} position={[-0.42, -0.12, 0]}>
         <mesh position={[0, -0.23, 0]} rotation={[0, 0, -0.12]} castShadow><capsuleGeometry args={[0.105, 0.31, 5, 12]} /><meshStandardMaterial color="#dce8ed" metalness={0.72} roughness={0.27} /></mesh>
         <mesh position={[0, -0.43, 0.025]}><sphereGeometry args={[0.095, 16, 16]} /><meshStandardMaterial color="#9eb3be" metalness={0.8} roughness={0.25} /></mesh>
+      
+        <mesh position={[-0.045, -0.5, 0.035]}><capsuleGeometry args={[0.025, 0.075, 4, 8]} /><meshStandardMaterial color="#dce8ed" metalness={0.7} /></mesh>
+        <mesh position={[0, -0.515, 0.06]}><capsuleGeometry args={[0.022, 0.085, 4, 8]} /><meshStandardMaterial color="#dce8ed" metalness={0.7} /></mesh>
+        <mesh position={[0.045, -0.5, 0.035]}><capsuleGeometry args={[0.025, 0.075, 4, 8]} /><meshStandardMaterial color="#dce8ed" metalness={0.7} /></mesh>
+        <mesh position={[0, -0.32, 0]}><torusGeometry args={[0.108, 0.018, 8, 18]} /><meshStandardMaterial color="#50d9d1" metalness={0.7} emissive="#1baea7" emissiveIntensity={0.7} /></mesh>
       </group>
       <group ref={rightArm} position={[0.42, -0.12, 0]}>
         <mesh position={[0, -0.23, 0]} rotation={[0, 0, 0.12]} castShadow><capsuleGeometry args={[0.105, 0.31, 5, 12]} /><meshStandardMaterial color="#dce8ed" metalness={0.72} roughness={0.27} /></mesh>
         <mesh position={[0, -0.43, 0.025]}><sphereGeometry args={[0.095, 16, 16]} /><meshStandardMaterial color="#9eb3be" metalness={0.8} roughness={0.25} /></mesh>
+      
+        <mesh position={[-0.045, -0.5, 0.035]}><capsuleGeometry args={[0.025, 0.075, 4, 8]} /><meshStandardMaterial color="#dce8ed" metalness={0.7} /></mesh>
+        <mesh position={[0, -0.515, 0.06]}><capsuleGeometry args={[0.022, 0.085, 4, 8]} /><meshStandardMaterial color="#dce8ed" metalness={0.7} /></mesh>
+        <mesh position={[0.045, -0.5, 0.035]}><capsuleGeometry args={[0.025, 0.075, 4, 8]} /><meshStandardMaterial color="#dce8ed" metalness={0.7} /></mesh>
+        <mesh position={[0, -0.32, 0]}><torusGeometry args={[0.108, 0.018, 8, 18]} /><meshStandardMaterial color="#50d9d1" metalness={0.7} emissive="#1baea7" emissiveIntensity={0.7} /></mesh>
       </group>
 
       {/* neck */}
@@ -91,9 +109,15 @@ function RobotModel({ mood }: { mood: RobotMood }) {
           <mesh position={[0, -0.19, 0]}><boxGeometry args={[0.15, 0.025, 0.018]} /><meshStandardMaterial color={eyeColor} emissive={eyeColor} emissiveIntensity={2} /></mesh>
         </group>
         <mesh position={[-0.49, -0.02, 0]}><sphereGeometry args={[0.13, 20, 20]} /><meshStandardMaterial color="#91a8b4" metalness={0.8} roughness={0.22} /></mesh>
-        <mesh position={[0.49, -0.02, 0]}><cylinderGeometry args={[0.13, 0.13, 0.12, 24]} rotation={[0, 0, Math.PI / 2]} /><meshStandardMaterial color="#91a8b4" metalness={0.8} roughness={0.22} /></mesh>
+        <mesh position={[0.49, -0.02, 0]}><cylinderGeometry args={[0.13, 0.13, 0.12, 24]} /><meshStandardMaterial color="#91a8b4" metalness={0.8} roughness={0.22} /></mesh>
         <mesh position={[0, 0.48, 0]}><cylinderGeometry args={[0.018, 0.025, 0.2, 12]} /><meshStandardMaterial color="#a9c3ce" metalness={0.7} /></mesh>
         <mesh position={[0, 0.59, 0]}><sphereGeometry args={[0.055, 16, 16]} /><meshStandardMaterial color="#45ead6" emissive="#21d8c5" emissiveIntensity={3} /></mesh>
+        <mesh position={[-0.49, -0.02, 0.07]}><circleGeometry args={[0.072, 24]} /><meshStandardMaterial color="#40e7d5" emissive="#20cdbb" emissiveIntensity={2.5} /></mesh>
+        <mesh position={[0.49, -0.02, 0.07]}><circleGeometry args={[0.072, 24]} /><meshStandardMaterial color="#40e7d5" emissive="#20cdbb" emissiveIntensity={2.5} /></mesh>
+        <mesh position={[0, 0.59, 0]}><torusGeometry args={[0.075, 0.012, 8, 28]} /><meshStandardMaterial color="#48e9d7" emissive="#20cdbb" emissiveIntensity={2.5} /></mesh>
+        <mesh position={[0, 0.27, 0.348]}><boxGeometry args={[0.32, 0.035, 0.018]} /><meshStandardMaterial color="#9cb4bf" metalness={0.85} /></mesh>
+        <mesh position={[-0.34, -0.28, 0.27]}><boxGeometry args={[0.09, 0.13, 0.04]} /><meshStandardMaterial color="#a9bdc7" metalness={0.85} roughness={0.24} /></mesh>
+        <mesh position={[0.34, -0.28, 0.27]}><boxGeometry args={[0.09, 0.13, 0.04]} /><meshStandardMaterial color="#a9bdc7" metalness={0.85} roughness={0.24} /></mesh>
         <mesh position={[0, 0.12, 0.37]}><boxGeometry args={[0.19, 0.025, 0.02]} /><meshStandardMaterial color="#46e8d4" emissive="#25cdbd" emissiveIntensity={2} /></mesh>
       </group>
     </group>
