@@ -16,6 +16,10 @@ function RobotModel({ mood }: { mood: RobotMood }) {
   const torso = useRef<THREE.Mesh>(null);
   const chestCore = useRef<THREE.MeshStandardMaterial>(null);
   const antennaCore = useRef<THREE.MeshStandardMaterial>(null);
+  const chestOrbit = useRef<THREE.Mesh>(null);
+  const antennaRing = useRef<THREE.Mesh>(null);
+  const leftShoulder = useRef<THREE.Group>(null);
+  const rightShoulder = useRef<THREE.Group>(null);
   const blinkTiming = useRef({ next: 2.8, started: -1 });
   const motionPhase = useRef(Math.random() * Math.PI * 2);
   const leftEyeMaterial = useRef<THREE.MeshBasicMaterial>(null);
@@ -42,7 +46,7 @@ function RobotModel({ mood }: { mood: RobotMood }) {
       root.current.position.x = Math.sin(t * 0.62 + motionPhase.current) * 0.012;
       root.current.rotation.z = THREE.MathUtils.damp(root.current.rotation.z, Math.sin(t * 0.72 + motionPhase.current) * 0.018, 2.4, delta);
       // Keep the metallic shell mostly fixed relative to the studio lights.
-      root.current.rotation.y = THREE.MathUtils.damp(root.current.rotation.y, Math.sin(t * 0.38) * 0.018, 2.2, delta);
+      root.current.rotation.y = THREE.MathUtils.damp(root.current.rotation.y, Math.sin(t * 0.38) * 0.025, 2.2, delta);
     }
     target.current.set(pointer.current.x * 0.17, -pointer.current.y * 0.12);
     // Natural glances when the visitor is not actively interacting.
@@ -51,11 +55,21 @@ function RobotModel({ mood }: { mood: RobotMood }) {
     if (head.current) {
       // Small, delayed head movements read as attention rather than mechanical tracking.
       const moodTilt = mood === 'thinking' ? 0.24 : mood === 'listening' ? -0.10 : mood === 'greeting' ? -0.13 : mood === 'talking' ? 0.055 : 0;
-      const attentiveNod = mood === 'listening' ? Math.sin(t * 2.1) * 0.025 : mood === 'talking' ? Math.sin(t * 5.2) * 0.018 : 0;
+      const attentiveNod = mood === 'listening' ? Math.sin(t * 2.1) * 0.025 : mood === 'talking' ? Math.sin(t * 5.2) * 0.018 : mood === 'greeting' ? Math.sin(t * 2.8) * 0.035 : 0;
       head.current.rotation.y = THREE.MathUtils.damp(head.current.rotation.y, idleLookX * 0.7, 2.1, delta);
       head.current.rotation.x = THREE.MathUtils.damp(head.current.rotation.x, idleLookY + attentiveNod, 2.4, delta);
       head.current.rotation.z = THREE.MathUtils.damp(head.current.rotation.z, moodTilt + Math.sin(t * 0.55 + motionPhase.current) * 0.018, 2.8, delta);
     }
+    if (chestOrbit.current) {
+      chestOrbit.current.rotation.z = t * 0.42;
+      chestOrbit.current.rotation.x = Math.sin(t * 0.8) * 0.12;
+    }
+    if (antennaRing.current) {
+      antennaRing.current.rotation.y = t * 1.15;
+      antennaRing.current.rotation.x = Math.PI / 2 + Math.sin(t * 1.4) * 0.12;
+    }
+    if (leftShoulder.current) leftShoulder.current.rotation.x = Math.sin(t * 1.3) * 0.035;
+    if (rightShoulder.current) rightShoulder.current.rotation.x = Math.sin(t * 1.3 + 1) * 0.035;
     if (torso.current) {
       const breath = 1 + Math.sin(t * 1.8 + motionPhase.current) * 0.012;
       torso.current.scale.y = THREE.MathUtils.damp(torso.current.scale.y, breath, 2.8, delta);
@@ -135,13 +149,15 @@ function RobotModel({ mood }: { mood: RobotMood }) {
       <mesh position={[0, -0.25, 0.306]}><boxGeometry args={[0.34, 0.3, 0.018]} /><meshStandardMaterial color="#b7cbd4" metalness={0.85} roughness={0.25} /></mesh>
       <mesh position={[0, -0.25, 0.322]}><boxGeometry args={[0.25, 0.22, 0.018]} /><meshStandardMaterial color="#dce9ed" metalness={0.7} roughness={0.3} /></mesh>
       <mesh position={[0, -0.25, 0.34]}><circleGeometry args={[0.065, 6]} /><meshStandardMaterial color="#0c3544" metalness={0.4} roughness={0.3} /></mesh>
-      <mesh position={[0, -0.25, 0.354]}><circleGeometry args={[0.036, 6]} /><meshStandardMaterial ref={chestCore} color="#49ead5" emissive="#21d8c5" emissiveIntensity={2.2} /></mesh>
+      <mesh position={[0, -0.25, 0.354]}><circleGeometry args={[0.036, 32]} /><meshStandardMaterial ref={chestCore} color="#49ead5" emissive="#21d8c5" emissiveIntensity={2.2} /></mesh>
+      <mesh ref={chestOrbit} position={[0, -0.25, 0.365]} rotation={[0.25, 0.15, 0]}><torusGeometry args={[0.095, 0.008, 10, 64]} /><meshStandardMaterial color="#59f5e0" emissive="#20cdbb" emissiveIntensity={1.5} metalness={0.55} roughness={0.22} /></mesh>
+      <mesh position={[0, -0.25, 0.372]}><torusGeometry args={[0.125, 0.004, 8, 64]} /><meshStandardMaterial color="#8ba9b7" metalness={0.8} roughness={0.24} /></mesh>
       <mesh position={[-0.22, -0.47, 0.19]}><boxGeometry args={[0.035, 0.16, 0.035]} /><meshStandardMaterial color="#829ba8" metalness={0.8} /></mesh>
       <mesh position={[0.22, -0.47, 0.19]}><boxGeometry args={[0.035, 0.16, 0.035]} /><meshStandardMaterial color="#829ba8" metalness={0.8} /></mesh>
 
       {/* shoulder pivots and arms */}
-      <mesh position={[-0.39, -0.08, 0]}><sphereGeometry args={[0.14, 20, 20]} /><meshStandardMaterial color="#879eaa" metalness={0.8} roughness={0.25} /></mesh>
-      <mesh position={[0.39, -0.08, 0]}><sphereGeometry args={[0.14, 20, 20]} /><meshStandardMaterial color="#879eaa" metalness={0.8} roughness={0.25} /></mesh>
+      <group ref={leftShoulder} position={[-0.39, -0.08, 0]}><mesh><sphereGeometry args={[0.155, 28, 20]} /><meshStandardMaterial color="#a9bdc8" metalness={0.82} roughness={0.2} /></mesh><mesh position={[0, 0, 0.105]}><sphereGeometry args={[0.075, 20, 16]} /><meshStandardMaterial color="#153846" metalness={0.5} roughness={0.25} /></mesh><mesh position={[0, 0, 0.16]}><circleGeometry args={[0.035, 24]} /><meshBasicMaterial color="#50e8d8" toneMapped={false} /></mesh></group>
+      <group ref={rightShoulder} position={[0.39, -0.08, 0]}><mesh><sphereGeometry args={[0.155, 28, 20]} /><meshStandardMaterial color="#a9bdc8" metalness={0.82} roughness={0.2} /></mesh><mesh position={[0, 0, 0.105]}><sphereGeometry args={[0.075, 20, 16]} /><meshStandardMaterial color="#153846" metalness={0.5} roughness={0.25} /></mesh><mesh position={[0, 0, 0.16]}><circleGeometry args={[0.035, 24]} /><meshBasicMaterial color="#50e8d8" toneMapped={false} /></mesh></group>
       <group ref={leftArm} position={[-0.42, -0.12, 0]}>
         <mesh position={[0, -0.23, 0]} rotation={[0, 0, -0.12]} castShadow><capsuleGeometry args={[0.105, 0.31, 5, 12]} /><meshStandardMaterial color="#dce8ed" metalness={0.72} roughness={0.27} /></mesh>
         <mesh position={[0, -0.43, 0.025]}><sphereGeometry args={[0.095, 16, 16]} /><meshStandardMaterial color="#9eb3be" metalness={0.8} roughness={0.25} /></mesh>
@@ -166,8 +182,12 @@ function RobotModel({ mood }: { mood: RobotMood }) {
 
       {/* independently tracking head */}
       <group ref={head} position={[0, 0.57, 0]}>
-        <mesh castShadow><boxGeometry args={[0.92, 0.78, 0.68, 5, 5, 5]} /><meshStandardMaterial color="#e5eef2" metalness={0.76} roughness={0.23} /></mesh>
-        <mesh position={[0, 0, 0.351]}><boxGeometry args={[0.76, 0.59, 0.035]} /><meshStandardMaterial ref={faceScreenMaterial} color="#071923" emissive="#071923" emissiveIntensity={0.2} metalness={0.45} roughness={0.25} /></mesh>
+        <mesh castShadow scale={[0.49, 0.43, 0.37]}><sphereGeometry args={[1, 48, 32]} /><meshStandardMaterial color="#e9f2f5" metalness={0.68} roughness={0.2} /></mesh>
+        <mesh position={[0, 0.31, 0.22]} rotation={[-0.18, 0, 0]}><boxGeometry args={[0.48, 0.075, 0.12, 1, 1, 1]} /><meshStandardMaterial color="#b4c8d1" metalness={0.82} roughness={0.2} /></mesh>
+        <mesh position={[-0.34, -0.23, 0.245]} rotation={[0, -0.12, -0.18]}><boxGeometry args={[0.12, 0.18, 0.12]} /><meshStandardMaterial color="#a8bdc7" metalness={0.8} roughness={0.22} /></mesh>
+        <mesh position={[0.34, -0.23, 0.245]} rotation={[0, 0.12, 0.18]}><boxGeometry args={[0.12, 0.18, 0.12]} /><meshStandardMaterial color="#a8bdc7" metalness={0.8} roughness={0.22} /></mesh>
+        <mesh position={[0, 0, 0.326]}><boxGeometry args={[0.75, 0.48, 0.035]} /><meshStandardMaterial color="#071923" metalness={0.35} roughness={0.16} /></mesh>
+        <mesh position={[0, 0, 0.348]}><boxGeometry args={[0.70, 0.43, 0.018]} /><meshStandardMaterial ref={faceScreenMaterial} color="#071923" emissive="#071923" emissiveIntensity={0.2} metalness={0.2} roughness={0.18} /></mesh>
         <group ref={eyes} position={[0, 0.045, 0.50]}>
           <mesh position={[-0.19, 0, 0]}><sphereGeometry args={[0.105, 24, 24]} /><meshBasicMaterial ref={leftEyeMaterial} color={eyeColor} toneMapped={false} /></mesh>
           <mesh position={[0.19, 0, 0]}><sphereGeometry args={[0.075, 20, 20]} /><meshBasicMaterial ref={rightEyeMaterial} color={eyeColor} toneMapped={false} /></mesh>
@@ -179,7 +199,7 @@ function RobotModel({ mood }: { mood: RobotMood }) {
         <mesh position={[0, 0.59, 0]}><sphereGeometry args={[0.055, 16, 16]} /><meshStandardMaterial ref={antennaCore} color="#45ead6" emissive="#21d8c5" emissiveIntensity={2.2} /></mesh>
         <mesh position={[-0.49, -0.02, 0.07]}><circleGeometry args={[0.072, 24]} /><meshStandardMaterial color="#40e7d5" emissive="#20cdbb" emissiveIntensity={2.5} /></mesh>
         <mesh position={[0.49, -0.02, 0.07]}><circleGeometry args={[0.072, 24]} /><meshStandardMaterial color="#40e7d5" emissive="#20cdbb" emissiveIntensity={2.5} /></mesh>
-        <mesh position={[0, 0.59, 0]}><torusGeometry args={[0.075, 0.012, 8, 28]} /><meshStandardMaterial color="#48e9d7" emissive="#20cdbb" emissiveIntensity={2.5} /></mesh>
+        <mesh ref={antennaRing} position={[0, 0.59, 0]}><torusGeometry args={[0.085, 0.009, 8, 36]} /><meshStandardMaterial color="#48e9d7" emissive="#20cdbb" emissiveIntensity={2.1} /></mesh>
         <mesh position={[0, 0.27, 0.348]}><boxGeometry args={[0.32, 0.035, 0.018]} /><meshStandardMaterial color="#9cb4bf" metalness={0.85} /></mesh>
         <mesh position={[-0.34, -0.28, 0.27]}><boxGeometry args={[0.09, 0.13, 0.04]} /><meshStandardMaterial color="#a9bdc7" metalness={0.85} roughness={0.24} /></mesh>
         <mesh position={[0.34, -0.28, 0.27]}><boxGeometry args={[0.09, 0.13, 0.04]} /><meshStandardMaterial color="#a9bdc7" metalness={0.85} roughness={0.24} /></mesh>
