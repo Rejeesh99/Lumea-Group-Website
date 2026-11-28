@@ -31,27 +31,34 @@ function RobotModel({ mood }: { mood: RobotMood }) {
       root.current.rotation.y = THREE.MathUtils.damp(root.current.rotation.y, pointer.current.x * 0.18, 4, delta);
     }
     target.current.set(pointer.current.x * 0.17, -pointer.current.y * 0.12);
+    // Natural glances when the visitor is not actively interacting.
+    const idleLookX = mood === 'idle' ? Math.sin(t * 0.42) * 0.075 : 0;
+    const idleLookY = mood === 'idle' ? Math.sin(t * 0.31 + 1.4) * 0.045 : 0;
     if (head.current) {
-      head.current.rotation.y = THREE.MathUtils.damp(head.current.rotation.y, target.current.x, 5, delta);
-      head.current.rotation.x = THREE.MathUtils.damp(head.current.rotation.x, target.current.y, 5, delta);
-      head.current.rotation.z = Math.sin(t * 0.8) * 0.025;
+      head.current.rotation.y = THREE.MathUtils.damp(head.current.rotation.y, target.current.x + idleLookX, 4.5, delta);
+      head.current.rotation.x = THREE.MathUtils.damp(head.current.rotation.x, target.current.y + idleLookY, 4.5, delta);
+      head.current.rotation.z = THREE.MathUtils.damp(head.current.rotation.z, mood === 'thinking' ? 0.12 : Math.sin(t * 0.8) * 0.025, 4, delta);
     }
     if (eyes.current) {
       eyes.current.position.x = THREE.MathUtils.damp(eyes.current.position.x, pointer.current.x * 0.035, 7, delta);
       eyes.current.position.y = THREE.MathUtils.damp(eyes.current.position.y, -pointer.current.y * 0.025, 7, delta);
       const blink = (Math.sin(t * 0.7) > 0.995 || Math.sin(t * 0.7 + 2.1) > 0.997) ? 0.12 : 1;
+      const eyePulse = mood === 'thinking' ? 1 + Math.sin(t * 4) * 0.07 : mood === 'talking' ? 1 + Math.sin(t * 8) * 0.045 : 1;
+      eyes.current.scale.x = THREE.MathUtils.damp(eyes.current.scale.x, eyePulse, 8, delta);
       eyes.current.scale.y = THREE.MathUtils.damp(eyes.current.scale.y, blink, 18, delta);
     }
     if (leftArm.current) {
       const wave = mood === 'greeting' ? Math.sin(t * 13) * 0.55 : Math.sin(t * 1.4) * 0.045;
-      leftArm.current.rotation.z = THREE.MathUtils.damp(leftArm.current.rotation.z, mood === 'greeting' ? -1.0 + wave : 0.16 + wave, 8, delta);
+      const gesture = mood === 'greeting' ? -1.0 + wave : mood === 'talking' ? -0.42 : mood === 'listening' ? 0.34 : 0.16 + wave;
+      leftArm.current.rotation.z = THREE.MathUtils.damp(leftArm.current.rotation.z, gesture, 6, delta);
     }
     if (rightArm.current) {
-      rightArm.current.rotation.z = THREE.MathUtils.damp(rightArm.current.rotation.z, -0.16 + Math.sin(t * 1.4 + 1) * 0.045, 5, delta);
+      const rightGesture = mood === 'thinking' ? 0.62 : mood === 'talking' ? -0.28 : -0.16 + Math.sin(t * 1.4 + 1) * 0.045;
+      rightArm.current.rotation.z = THREE.MathUtils.damp(rightArm.current.rotation.z, rightGesture, 5, delta);
     }
   });
 
-  const eyeColor = mood === 'thinking' ? '#a78bfa' : mood === 'listening' ? '#facc15' : mood === 'talking' ? '#55f2d0' : '#67e8f9';
+  const eyeColor = mood === 'thinking' ? '#a78bfa' : mood === 'listening' ? '#facc15' : mood === 'talking' ? '#55f2d0' : mood === 'greeting' ? '#86efac' : '#67e8f9';
 
   return (
     <group ref={root}>
