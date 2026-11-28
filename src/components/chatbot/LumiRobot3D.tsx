@@ -194,7 +194,7 @@ function RobotModel({ mood }: { mood: RobotMood }) {
           <mesh ref={mouth} position={[0, -0.16, 0]} scale={[1, 1, 0.5]}><capsuleGeometry args={[0.012, 0.09, 4, 12]} /><meshBasicMaterial color={eyeColor} toneMapped={false} /></mesh>
         </group>
         {/* Side audio pods and illuminated signature strips */}
-        <mesh position={[-0.5, -0.01, 0.02]}><cylinderGeometry args={[0.12, 0.12, 0.1, 32]} rotation={[0, 0, Math.PI / 2]} /><meshStandardMaterial color={material.titanium} metalness={0.9} roughness={0.2} /></mesh>
+        <mesh position={[-0.5, -0.01, 0.02]} rotation={[0, 0, Math.PI / 2]}><cylinderGeometry args={[0.12, 0.12, 0.1, 32]} /><meshStandardMaterial color={material.titanium} metalness={0.9} roughness={0.2} /></mesh>
         <mesh position={[0.5, -0.01, 0.02]} rotation={[0, 0, Math.PI / 2]}><cylinderGeometry args={[0.12, 0.12, 0.1, 32]} /><meshStandardMaterial color={material.titanium} metalness={0.9} roughness={0.2} /></mesh>
         <mesh position={[-0.5, -0.01, 0.08]}><circleGeometry args={[0.065, 32]} /><meshBasicMaterial color={material.teal} toneMapped={false} /></mesh>
         <mesh position={[0.5, -0.01, 0.08]}><circleGeometry args={[0.065, 32]} /><meshBasicMaterial color={material.teal} toneMapped={false} /></mesh>
