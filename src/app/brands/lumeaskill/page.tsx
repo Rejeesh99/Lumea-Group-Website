@@ -103,7 +103,7 @@ export default function LumeaSkillPage() {
                   <h3 className="text-lg font-bold text-white font-display">{s.name}</h3>
                   <StatusBadge status={s.status} note={s.statusNote} className="shrink-0" />
                 </div>
-                <p className="text-xs sm:text-sm text-silver leading-relaxed">
+                <p className="text-sm sm:text-base text-silver leading-relaxed">
                   {s.description}
                 </p>
               </div>
@@ -134,8 +134,8 @@ export default function LumeaSkillPage() {
             {brand.targetAudiences.map((aud, idx) => (
               <div key={idx} className="p-6 rounded-2xl bg-jet/90 border border-graphite space-y-4">
                 <h3 className="text-xl font-bold text-white font-display">{aud.title}</h3>
-                <p className="text-xs text-silver leading-relaxed">{aud.description}</p>
-                <ul className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-graphite/40">
+                <p className="text-sm text-silver leading-relaxed">{aud.description}</p>
+                <ul className="space-y-1.5 text-sm text-slate-300 pt-2 border-t border-graphite/40">
                   {aud.points.map((p, pIdx) => (
                     <li key={pIdx} className="flex items-center gap-2">
                       <CheckCircle2 className="w-3.5 h-3.5 text-rose shrink-0" />

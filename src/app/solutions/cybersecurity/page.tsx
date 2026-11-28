@@ -6,7 +6,7 @@ import { GROUP_SOLUTIONS, BRANDS } from '@/data/brands';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity & Defence Solutions',
+  title: 'Cybersecurity & Digital Risk Solutions',
   description: 'Enterprise cybersecurity posture assessment, authorised defensive testing, risk discovery, and institutional capability building led by LumeaCyber.',
 };
 
@@ -22,7 +22,7 @@ export default function CybersecuritySolutionPage() {
           Solution Vertical · {solution.brand}
         </span>
         <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight font-display">
-          Cybersecurity & Enterprise Defence
+          Cybersecurity & Enterprise Risk
         </h1>
         <p className="text-base text-slate-300 leading-relaxed">
           {solution.fullDesc}
@@ -41,7 +41,7 @@ export default function CybersecuritySolutionPage() {
       {/* Detailed Capabilities */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="p-8 rounded-3xl bg-charcoal/70 border border-graphite space-y-4">
-          <h2 className="text-2xl font-bold text-white font-display">Risk Discovery & Defensive Assessment</h2>
+          <h2 className="text-2xl font-bold text-white font-display">Cyber Risk Discovery & Security Assessment</h2>
           <p className="text-sm text-silver leading-relaxed">
             Modern enterprise perimeters are dynamic and fluid. We evaluate cloud exposure, web applications, and network topologies to expose actionable attack surfaces before adversaries exploit them.
           </p>
@@ -62,7 +62,7 @@ export default function CybersecuritySolutionPage() {
         </div>
 
         <div className="p-8 rounded-3xl bg-charcoal/70 border border-graphite space-y-4">
-          <h2 className="text-2xl font-bold text-white font-display">Human Defence & Security Awareness</h2>
+          <h2 className="text-2xl font-bold text-white font-display">Human Security & Awareness</h2>
           <p className="text-sm text-silver leading-relaxed">
             Technology firewalls fail when human trust is deceived. We deliver structured, realistic security awareness workshops that equip operational teams to identify sophisticated phishing, pretexting, and social engineering attempts.
           </p>
@@ -104,7 +104,7 @@ export default function CybersecuritySolutionPage() {
       {/* CTA Box */}
       <div className="text-center p-8 rounded-3xl bg-charcoal border border-graphite max-w-2xl mx-auto space-y-4">
         <h3 className="text-xl sm:text-2xl font-bold text-white font-display">Consult with LumeaCyber</h3>
-        <p className="text-xs text-silver">Initiate a formal, confidential scoping call with our defensive cybersecurity team.</p>
+        <p className="text-xs text-silver">Initiate a formal, confidential scoping call with our cybersecurity team.</p>
         <Link
           href="/contact?brand=cyber"
           className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-semibold bg-cerulean text-jet hover:bg-cerulean-400 transition-all shadow-glow-blue"

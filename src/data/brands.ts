@@ -278,7 +278,7 @@ export const BRANDS: Record<string, BrandData> = {
     logoWhiteUrl: '/logos/lumea-skill-white.png',
     markUrl: '/logos/lumea-skill-mark.png',
     headline: 'Skills and languages that open the next door.',
-    lede: 'Comprehensive linguistic mastery, certified examination preparation, and practical digital skills engineered to bridge the talent divide between ambition and global career opportunities.',
+    lede: 'Comprehensive linguistic mastery, structured examination preparation, and practical digital skills engineered to bridge the talent divide between ambition and global career opportunities.',
     accentColor: '#FF2E88',
     glowColor: 'rgba(255, 46, 136, 0.25)',
     isFlagship: false,

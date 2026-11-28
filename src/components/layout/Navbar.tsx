@@ -79,9 +79,9 @@ export function Navbar() {
 
   const solutionsList = [
     {
-      name: 'Cybersecurity & Defence',
+      name: 'Cybersecurity & Risk Management',
       href: '/solutions/cybersecurity',
-      desc: 'Authorised risk assessments, defensive postures & awareness',
+      desc: 'Authorised security assessments, cyber risk management & awareness',
       icon: <Lock className="w-4 h-4 text-cerulean" />
     },
     {
@@ -168,9 +168,14 @@ export function Navbar() {
               className="relative"
               onMouseEnter={() => setBrandsOpen(true)}
               onMouseLeave={() => setBrandsOpen(false)}
+              onFocus={() => setBrandsOpen(true)}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setBrandsOpen(false);
+              }}
             >
               <button
-                onClick={() => setBrandsOpen(!brandsOpen)}
+                onClick={() => setBrandsOpen(true)}
+                aria-haspopup="true"
                 aria-expanded={brandsOpen}
                 className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   pathname.startsWith('/brands') ? 'text-cerulean bg-charcoal/80' : 'text-slate-300 hover:text-white hover:bg-charcoal/40'
@@ -182,7 +187,7 @@ export function Navbar() {
 
               {/* Brands Dropdown Menu */}
               {brandsOpen && (
-                <div className="absolute top-full left-0 w-80 p-2 mt-1 rounded-2xl bg-charcoal border border-graphite shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="absolute top-full left-0 z-50 w-80 p-2 rounded-2xl bg-charcoal border border-graphite shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="text-[10px] uppercase tracking-wider font-semibold text-silver/60 px-3 py-1.5">
                     Operating Verticals
                   </div>
@@ -228,9 +233,14 @@ export function Navbar() {
               className="relative"
               onMouseEnter={() => setSolutionsOpen(true)}
               onMouseLeave={() => setSolutionsOpen(false)}
+              onFocus={() => setSolutionsOpen(true)}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setSolutionsOpen(false);
+              }}
             >
               <button
-                onClick={() => setSolutionsOpen(!solutionsOpen)}
+                onClick={() => setSolutionsOpen(true)}
+                aria-haspopup="true"
                 aria-expanded={solutionsOpen}
                 className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   pathname.startsWith('/solutions') ? 'text-cerulean bg-charcoal/80' : 'text-slate-300 hover:text-white hover:bg-charcoal/40'
@@ -242,7 +252,7 @@ export function Navbar() {
 
               {/* Solutions Dropdown Menu */}
               {solutionsOpen && (
-                <div className="absolute top-full left-0 w-80 p-2 mt-1 rounded-2xl bg-charcoal border border-graphite shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="absolute top-full left-0 z-50 w-80 p-2 rounded-2xl bg-charcoal border border-graphite shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="text-[10px] uppercase tracking-wider font-semibold text-silver/60 px-3 py-1.5">
                     Core Capabilities
                   </div>
