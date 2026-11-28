@@ -163,8 +163,8 @@ export function LumeaChatbot() {
     const text = (suggestedText ?? input).trim();
     if (!text) return;
     setRobotMood('thinking');
-    window.setTimeout(() => setRobotMood((mood) => mood === 'thinking' ? 'talking' : mood), 850);
-    window.setTimeout(() => setRobotMood((mood) => mood === 'talking' ? 'idle' : mood), 2600);
+    window.setTimeout(() => setRobotMood((mood) => mood === 'thinking' ? 'talking' : mood), 1400);
+    window.setTimeout(() => setRobotMood((mood) => mood === 'talking' ? 'idle' : mood), 5200);
     setMessages((current) => [
       ...current,
       { id: Date.now(), role: 'user', text },
