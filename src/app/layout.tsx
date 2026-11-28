@@ -4,6 +4,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CookieBanner } from '@/components/ui/CookieBanner';
 import { BackToTop } from '@/components/ui/BackToTop';
+import { LumeaChatbot } from '@/components/chatbot/LumeaChatbot';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.lumeagroup.in'),
@@ -131,6 +132,7 @@ export default function RootLayout({
         <Footer />
         <CookieBanner />
         <BackToTop />
+        <LumeaChatbot />
       </body>
     </html>
   );
