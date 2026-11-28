@@ -123,58 +123,71 @@ function LumiRobot({ compact = false }: { compact?: boolean }) {
     return () => window.removeEventListener('pointermove', trackPointer);
   }, []);
 
-  const eyeX = gaze.x * 3.2;
-  const eyeY = gaze.y * 2.2;
+  const eyeX = gaze.x * 3;
+  const eyeY = gaze.y * 2;
+  const scale = compact ? 'scale(.78)' : 'scale(1)';
 
   return (
     <motion.div
       aria-hidden="true"
       className={compact ? "relative h-12 w-12 shrink-0" : "relative h-28 w-28"}
-      animate={{ y: [0, -3, 0], rotateZ: [0, 1, 0, -1, 0] }}
-      style={{ rotateX: -gaze.y * 5, rotateY: gaze.x * 8, transformPerspective: 500 }}
-      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      whileHover={{ scale: 1.04 }}
+      style={{ perspective: 520 }}
     >
-      <svg viewBox="0 0 120 120" className="h-full w-full overflow-visible" fill="none">
-        <defs>
-          <linearGradient id="lumi-shell" x1="18" y1="12" x2="102" y2="104" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#FFFFFF" />
-            <stop offset=".55" stopColor="#DCEAF0" />
-            <stop offset="1" stopColor="#8FA9B8" />
-          </linearGradient>
-          <linearGradient id="lumi-body" x1="36" y1="70" x2="83" y2="116" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#F8FDFF" />
-            <stop offset="1" stopColor="#8CA9B9" />
-          </linearGradient>
-          <filter id="lumi-glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-          </filter>
-        </defs>
-        <ellipse cx="60" cy="112" rx="31" ry="5" fill="#00C9D8" opacity=".22" filter="url(#lumi-glow)" />
-        <path d="M59 9V3" stroke="#B8DCE8" strokeWidth="3" strokeLinecap="round" />
-        <circle cx="59" cy="3" r="3" fill="#9EF4E6" filter="url(#lumi-glow)" />
-        <rect x="30" y="67" width="60" height="47" rx="17" fill="url(#lumi-body)" stroke="#F5FFFF" strokeWidth="1.5" />
-        <path d="M43 84H77" stroke="#7C9AAA" strokeWidth="2" strokeLinecap="round" />
-        <path d="M46 90H74" stroke="#20CDB7" strokeWidth="3" strokeLinecap="round" filter="url(#lumi-glow)" />
-        <path d="M49 97H71" stroke="#20CDB7" strokeWidth="2" strokeLinecap="round" opacity=".75" />
-        <rect x="21" y="25" width="78" height="53" rx="16" fill="url(#lumi-shell)" stroke="#F7FFFF" strokeWidth="2" />
-        <rect x="27" y="31" width="66" height="41" rx="12" fill="#071723" stroke="#426477" strokeWidth="1.5" />
-        <circle cx="45" cy="51" r="8" fill="#52E66C" opacity=".18" filter="url(#lumi-glow)" />
-        <circle cx="74" cy="51" r="8" fill="#31DDF5" opacity=".18" filter="url(#lumi-glow)" />
-        <motion.g animate={{ scaleY: [1, 1, 0.08, 1, 1] }} transition={{ duration: 4.8, repeat: Infinity, repeatDelay: 1.2, times: [0, .91, .94, .97, 1] }} style={{ transformOrigin: "60px 51px" }}>
-          <circle cx={45 + eyeX} cy={51 + eyeY} r="5.5" fill="#7BFA62" filter="url(#lumi-glow)" />
-          <circle cx={74 + eyeX} cy={51 + eyeY} r="5.5" fill="#31DDF5" filter="url(#lumi-glow)" />
-          <circle cx={43 + eyeX} cy={49 + eyeY} r="1.5" fill="white" />
-          <circle cx={72 + eyeX} cy={49 + eyeY} r="1.5" fill="white" />
-        </motion.g>
-        <path d="M55 62Q60 66 65 62" stroke="#8CEBF2" strokeWidth="2" strokeLinecap="round" />
-        <rect x="15" y="43" width="8" height="17" rx="4" fill="url(#lumi-shell)" stroke="#B8D7E3" />
-        <rect x="97" y="43" width="8" height="17" rx="4" fill="url(#lumi-shell)" stroke="#B8D7E3" />
-        <path d="M36 73L30 82" stroke="#DCEAF0" strokeWidth="7" strokeLinecap="round" />
-        <path d="M84 73L90 82" stroke="#DCEAF0" strokeWidth="7" strokeLinecap="round" />
-        <path d="M30 82L25 88M90 82L95 88" stroke="#A9C4D0" strokeWidth="7" strokeLinecap="round" />
-      </svg>
+      <motion.div
+        className="relative h-full w-full"
+        animate={{ y: [0, -4, 0], rotateZ: [0, .8, 0, -.8, 0] }}
+        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+        style={{ transform: scale, transformStyle: "preserve-3d", rotateX: -gaze.y * 4, rotateY: gaze.x * 7 }}
+      >
+        {/* Antenna */}
+        <motion.div className="absolute left-1/2 top-[1%] z-0 h-[13%] w-[3%] -translate-x-1/2 rounded-full bg-gradient-to-r from-slate-400 via-white to-slate-500" animate={{ rotateZ: [-3, 3, -3] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }} />
+        <motion.div className="absolute left-[47%] top-[-1%] z-10 h-[9%] w-[9%] rounded-full border border-cyan-100/70 bg-cyan-300 shadow-[0_0_12px_4px_rgba(45,230,220,.55)]" animate={{ opacity: [.65, 1, .65], scale: [1, 1.14, 1] }} transition={{ duration: 1.8, repeat: Infinity }} />
+
+        {/* Legs */}
+        <motion.div className="absolute bottom-[4%] left-[34%] z-0 h-[19%] w-[19%] origin-top rounded-b-xl rounded-t-md border border-white/70 bg-gradient-to-br from-white via-slate-200 to-slate-500 shadow-[inset_-5px_-3px_8px_rgba(30,60,75,.22),4px_5px_8px_rgba(0,0,0,.2)]" animate={{ rotateZ: [-2, 2, -2] }} transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}>
+          <div className="absolute -bottom-[12%] -left-[17%] h-[38%] w-[125%] rounded-[9px] border border-slate-300 bg-gradient-to-b from-slate-100 to-slate-500 shadow-md" />
+        </motion.div>
+        <motion.div className="absolute bottom-[4%] right-[29%] z-0 h-[19%] w-[19%] origin-top rounded-b-xl rounded-t-md border border-white/70 bg-gradient-to-br from-white via-slate-200 to-slate-500 shadow-[inset_-5px_-3px_8px_rgba(30,60,75,.22),4px_5px_8px_rgba(0,0,0,.2)]" animate={{ rotateZ: [2, -2, 2] }} transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}>
+          <div className="absolute -bottom-[12%] -left-[8%] h-[38%] w-[125%] rounded-[9px] border border-slate-300 bg-gradient-to-b from-slate-100 to-slate-500 shadow-md" />
+        </motion.div>
+
+        {/* Arms and shoulder joints */}
+        <motion.div className="absolute left-[12%] top-[57%] z-20 h-[34%] w-[18%] origin-top rounded-full border border-slate-300 bg-gradient-to-r from-slate-500 via-white to-slate-300 shadow-[4px_5px_9px_rgba(0,0,0,.25)]" animate={{ rotateZ: [10, 18, 10] }} transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}>
+          <span className="absolute -bottom-[8%] left-[5%] h-[27%] w-[90%] rounded-full bg-gradient-to-b from-slate-200 to-slate-500" />
+        </motion.div>
+        <motion.div className="absolute right-[12%] top-[57%] z-20 h-[34%] w-[18%] origin-top rounded-full border border-slate-300 bg-gradient-to-r from-slate-500 via-white to-slate-300 shadow-[4px_5px_9px_rgba(0,0,0,.25)]" animate={{ rotateZ: [-10, -18, -10] }} transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}>
+          <span className="absolute -bottom-[8%] left-[5%] h-[27%] w-[90%] rounded-full bg-gradient-to-b from-slate-200 to-slate-500" />
+        </motion.div>
+        <div className="absolute left-[17%] top-[57%] z-30 h-[18%] w-[18%] rounded-full border-[3px] border-slate-400 bg-gradient-to-br from-white to-slate-500 shadow-[0_0_0_2px_rgba(30,60,75,.25)]" />
+        <div className="absolute right-[17%] top-[57%] z-30 h-[18%] w-[18%] rounded-full border-[3px] border-slate-400 bg-gradient-to-br from-white to-slate-500 shadow-[0_0_0_2px_rgba(30,60,75,.25)]" />
+
+        {/* Torso */}
+        <motion.div className="absolute bottom-[13%] left-[27%] z-10 h-[39%] w-[48%] overflow-hidden rounded-[25%] border border-white/80 bg-gradient-to-br from-white via-slate-200 to-slate-500 shadow-[inset_-8px_-5px_12px_rgba(35,65,80,.22),0_8px_14px_rgba(0,0,0,.22)]" animate={{ rotateZ: [0, .6, 0, -.6, 0] }} transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}>
+          <div className="absolute left-[18%] right-[18%] top-[25%] h-[2px] rounded-full bg-slate-500/60" />
+          <div className="absolute left-[30%] right-[30%] top-[43%] h-[5px] rounded-full bg-gradient-to-r from-cyan-300 to-emerald-300 shadow-[0_0_9px_2px_rgba(45,220,200,.7)]" />
+          <div className="absolute left-[36%] right-[36%] top-[61%] h-[2px] rounded-full bg-slate-400/70" />
+          <div className="absolute inset-x-0 bottom-0 h-[22%] bg-gradient-to-t from-slate-500/25 to-transparent" />
+        </motion.div>
+
+        {/* Head: independent cursor-responsive movement */}
+        <motion.div
+          className="absolute left-[16%] top-[13%] z-40 h-[53%] w-[68%] rounded-[27%] border-2 border-white/90 bg-gradient-to-br from-white via-slate-200 to-slate-500 shadow-[inset_-8px_-6px_12px_rgba(35,65,80,.24),0_9px_18px_rgba(0,0,0,.28)]"
+          animate={{ rotateZ: [0, 1.8, 0, -1.8, 0], y: [0, -1, 0] }}
+          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+          style={{ rotateX: -gaze.y * 7, rotateY: gaze.x * 11, transformStyle: "preserve-3d" }}
+        >
+          <div className="absolute inset-[9%] overflow-hidden rounded-[23%] border border-cyan-100/40 bg-gradient-to-br from-[#102432] via-[#06131E] to-[#020910] shadow-[inset_0_0_16px_rgba(0,0,0,.9)]">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_15%,rgba(41,214,230,.16),transparent_65%)]" />
+            <motion.div className="absolute left-[20%] top-[40%] h-[23%] w-[17%] rounded-full bg-emerald-300 shadow-[0_0_9px_4px_rgba(92,255,155,.65)]" animate={{ scaleY: [1, 1, .08, 1, 1] }} transition={{ duration: 4.8, repeat: Infinity, repeatDelay: 1.2, times: [0, .91, .94, .97, 1] }} style={{ x: eyeX, y: eyeY, transformOrigin: "center" }} />
+            <motion.div className="absolute right-[20%] top-[40%] h-[23%] w-[17%] rounded-full bg-cyan-300 shadow-[0_0_9px_4px_rgba(45,220,255,.65)]" animate={{ scaleY: [1, 1, .08, 1, 1] }} transition={{ duration: 4.8, repeat: Infinity, repeatDelay: 1.2, times: [0, .91, .94, .97, 1] }} style={{ x: eyeX, y: eyeY, transformOrigin: "center" }} />
+            <motion.div className="absolute bottom-[17%] left-1/2 h-[5%] w-[22%] -translate-x-1/2 rounded-full bg-cyan-200 shadow-[0_0_8px_2px_rgba(45,220,255,.6)]" animate={{ scaleX: [1, .72, 1] }} transition={{ duration: 2.4, repeat: Infinity }} />
+          </div>
+          <div className="absolute -left-[8%] top-[34%] h-[30%] w-[12%] rounded-full border border-slate-300 bg-gradient-to-r from-slate-500 to-white shadow-md" />
+          <div className="absolute -right-[8%] top-[34%] h-[30%] w-[12%] rounded-full border border-slate-300 bg-gradient-to-r from-white to-slate-500 shadow-md" />
+          <div className="absolute -inset-[3px] -z-10 rounded-[29%] border border-cyan-300/60 shadow-[0_0_12px_2px_rgba(45,220,220,.35)]" />
+        </motion.div>
+      </motion.div>
+      <div className="pointer-events-none absolute bottom-[1%] left-[20%] h-[8%] w-[60%] rounded-full bg-cyan-300/20 blur-md" />
     </motion.div>
   );
 }
