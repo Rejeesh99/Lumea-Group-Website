@@ -20,6 +20,7 @@ import {
 type AssistantId = 'lumi' | 'cyber' | 'nurse' | 'skill' | 'go';
 type Language = 'en' | 'ml' | 'hi';
 type ChatMessage = { id: number; role: 'assistant' | 'user'; text: string };
+type RobotMood = 'idle' | 'greeting' | 'listening' | 'thinking' | 'talking';
 
 const assistants: {
   id: AssistantId;
@@ -110,7 +111,7 @@ const copy = {
 };
 
 
-function LumiRobot({ compact = false }: { compact?: boolean }) {
+function LumiRobot({ compact = false, mood = 'idle' }: { compact?: boolean; mood?: RobotMood }) {
   const [gaze, setGaze] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -126,6 +127,7 @@ function LumiRobot({ compact = false }: { compact?: boolean }) {
   const eyeX = gaze.x * 3;
   const eyeY = gaze.y * 2;
   const scale = compact ? 'scale(.78)' : 'scale(1)';
+  const eyeColor = mood === 'thinking' ? '#A78BFA' : mood === 'talking' ? '#55F2D0' : mood === 'listening' ? '#FACC15' : '#67E8F9';
 
   return (
     <motion.div
@@ -141,7 +143,7 @@ function LumiRobot({ compact = false }: { compact?: boolean }) {
       >
         {/* Antenna */}
         <motion.div className="absolute left-1/2 top-[1%] z-0 h-[13%] w-[3%] -translate-x-1/2 rounded-full bg-gradient-to-r from-slate-400 via-white to-slate-500" animate={{ rotateZ: [-3, 3, -3] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }} />
-        <motion.div className="absolute left-[47%] top-[-1%] z-10 h-[9%] w-[9%] rounded-full border border-cyan-100/70 bg-cyan-300 shadow-[0_0_12px_4px_rgba(45,230,220,.55)]" animate={{ opacity: [.65, 1, .65], scale: [1, 1.14, 1] }} transition={{ duration: 1.8, repeat: Infinity }} />
+        <motion.div className="absolute left-[47%] top-[-1%] z-10 h-[9%] w-[9%] rounded-full border border-cyan-100/70 bg-cyan-300 shadow-[0_0_12px_4px_rgba(45,230,220,.55)]" animate={mood === 'thinking' ? { opacity: [0.5, 1, 0.5], scale: [1, 1.5, 1] } : { opacity: [.65, 1, .65], scale: [1, 1.14, 1] }} transition={{ duration: mood === 'thinking' ? .65 : 1.8, repeat: Infinity }} />
 
         {/* Legs */}
         <motion.div className="absolute bottom-[4%] left-[34%] z-0 h-[19%] w-[19%] origin-top rounded-b-xl rounded-t-md border border-white/70 bg-gradient-to-br from-white via-slate-200 to-slate-500 shadow-[inset_-5px_-3px_8px_rgba(30,60,75,.22),4px_5px_8px_rgba(0,0,0,.2)]" animate={{ rotateZ: [-2, 2, -2] }} transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}>
@@ -155,7 +157,7 @@ function LumiRobot({ compact = false }: { compact?: boolean }) {
         <motion.div className="absolute left-[12%] top-[57%] z-20 h-[34%] w-[18%] origin-top rounded-full border border-slate-300 bg-gradient-to-r from-slate-500 via-white to-slate-300 shadow-[4px_5px_9px_rgba(0,0,0,.25)]" animate={{ rotateZ: [10, 18, 10] }} transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}>
           <span className="absolute -bottom-[8%] left-[5%] h-[27%] w-[90%] rounded-full bg-gradient-to-b from-slate-200 to-slate-500" />
         </motion.div>
-        <motion.div className="absolute right-[12%] top-[57%] z-20 h-[34%] w-[18%] origin-top rounded-full border border-slate-300 bg-gradient-to-r from-slate-500 via-white to-slate-300 shadow-[4px_5px_9px_rgba(0,0,0,.25)]" animate={{ rotateZ: [-10, -18, -10] }} transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}>
+        <motion.div className="absolute right-[12%] top-[57%] z-20 h-[34%] w-[18%] origin-top rounded-full border border-slate-300 bg-gradient-to-r from-slate-500 via-white to-slate-300 shadow-[4px_5px_9px_rgba(0,0,0,.25)]" animate={mood === 'greeting' ? { rotateZ: [-10, -48, 12, -42, 8, -10] } : { rotateZ: [-10, -18, -10] }} transition={{ duration: mood === 'greeting' ? 1.15 : 3.6, repeat: mood === 'greeting' ? 1 : Infinity, ease: "easeInOut" }}>
           <span className="absolute -bottom-[8%] left-[5%] h-[27%] w-[90%] rounded-full bg-gradient-to-b from-slate-200 to-slate-500" />
         </motion.div>
         <div className="absolute left-[17%] top-[57%] z-30 h-[18%] w-[18%] rounded-full border-[3px] border-slate-400 bg-gradient-to-br from-white to-slate-500 shadow-[0_0_0_2px_rgba(30,60,75,.25)]" />
@@ -178,9 +180,9 @@ function LumiRobot({ compact = false }: { compact?: boolean }) {
         >
           <div className="absolute inset-[9%] overflow-hidden rounded-[23%] border border-cyan-100/40 bg-gradient-to-br from-[#102432] via-[#06131E] to-[#020910] shadow-[inset_0_0_16px_rgba(0,0,0,.9)]">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_15%,rgba(41,214,230,.16),transparent_65%)]" />
-            <motion.div className="absolute left-[20%] top-[40%] h-[23%] w-[17%] rounded-full bg-emerald-300 shadow-[0_0_9px_4px_rgba(92,255,155,.65)]" animate={{ scaleY: [1, 1, .08, 1, 1] }} transition={{ duration: 4.8, repeat: Infinity, repeatDelay: 1.2, times: [0, .91, .94, .97, 1] }} style={{ x: eyeX, y: eyeY, transformOrigin: "center" }} />
-            <motion.div className="absolute right-[20%] top-[40%] h-[23%] w-[17%] rounded-full bg-cyan-300 shadow-[0_0_9px_4px_rgba(45,220,255,.65)]" animate={{ scaleY: [1, 1, .08, 1, 1] }} transition={{ duration: 4.8, repeat: Infinity, repeatDelay: 1.2, times: [0, .91, .94, .97, 1] }} style={{ x: eyeX, y: eyeY, transformOrigin: "center" }} />
-            <motion.div className="absolute bottom-[17%] left-1/2 h-[5%] w-[22%] -translate-x-1/2 rounded-full bg-cyan-200 shadow-[0_0_8px_2px_rgba(45,220,255,.6)]" animate={{ scaleX: [1, .72, 1] }} transition={{ duration: 2.4, repeat: Infinity }} />
+            <motion.div className="absolute left-[20%] top-[40%] h-[23%] w-[17%] rounded-full shadow-[0_0_9px_4px_rgba(92,255,155,.65)]" style={{ backgroundColor: eyeColor, boxShadow: `0 0 10px 4px ${eyeColor}88` }} animate={{ scaleY: [1, 1, .08, 1, 1] }} transition={{ duration: 4.8, repeat: Infinity, repeatDelay: 1.2, times: [0, .91, .94, .97, 1] }} style={{ x: eyeX, y: eyeY, transformOrigin: "center" }} />
+            <motion.div className="absolute right-[20%] top-[40%] h-[23%] w-[17%] rounded-full shadow-[0_0_9px_4px_rgba(45,220,255,.65)]" style={{ backgroundColor: eyeColor, boxShadow: `0 0 10px 4px ${eyeColor}88` }} animate={{ scaleY: [1, 1, .08, 1, 1] }} transition={{ duration: 4.8, repeat: Infinity, repeatDelay: 1.2, times: [0, .91, .94, .97, 1] }} style={{ x: eyeX, y: eyeY, transformOrigin: "center" }} />
+            <motion.div className="absolute bottom-[17%] left-1/2 h-[5%] w-[22%] -translate-x-1/2 rounded-full bg-cyan-200 shadow-[0_0_8px_2px_rgba(45,220,255,.6)]" animate={mood === 'talking' ? { scaleX: [1, .55, 1.25, .65, 1], scaleY: [1, 1.8, 1, 1.6, 1] } : mood === 'thinking' ? { scaleX: [.7, .7, .7], opacity: [.45, .8, .45] } : { scaleX: [1, .72, 1], scaleY: 1 }} transition={{ duration: mood === 'talking' ? .48 : 2.4, repeat: Infinity }} />
           </div>
           <div className="absolute -left-[8%] top-[34%] h-[30%] w-[12%] rounded-full border border-slate-300 bg-gradient-to-r from-slate-500 to-white shadow-md" />
           <div className="absolute -right-[8%] top-[34%] h-[30%] w-[12%] rounded-full border border-slate-300 bg-gradient-to-r from-white to-slate-500 shadow-md" />
@@ -200,6 +202,7 @@ export function LumeaChatbot() {
   const [assistantMenuOpen, setAssistantMenuOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [robotMood, setRobotMood] = useState<RobotMood>('idle');
   const messageEndRef = useRef<HTMLDivElement>(null);
   const t = copy[language];
   const currentAssistant = assistants.find((assistant) => assistant.id === assistantId) || assistants[0];
@@ -218,10 +221,17 @@ export function LumeaChatbot() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
 
+  const openChat = () => {
+    setIsOpen(true);
+    setRobotMood('greeting');
+    window.setTimeout(() => setRobotMood((mood) => mood === 'greeting' ? 'idle' : mood), 1500);
+  };
+
   const selectAssistant = (id: AssistantId) => {
     setAssistantId(id);
     setAssistantMenuOpen(false);
     setMessages([]);
+    setRobotMood('idle');
   };
 
   const sendMessage = (event?: FormEvent, suggestedText?: string) => {
@@ -248,14 +258,14 @@ export function LumeaChatbot() {
     <>
       <button
         type="button"
-        onClick={() => setIsOpen(true)}
+        onClick={openChat}
         aria-label={t.open}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         className="fixed bottom-5 right-5 z-[70] group flex items-center gap-2.5 rounded-full border border-white/15 bg-[#101923]/95 p-2 pr-4 text-white shadow-[0_10px_36px_rgba(0,0,0,.32),0_0_24px_rgba(0,174,239,.12)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#37DCCB]/50 hover:shadow-[0_14px_42px_rgba(0,174,239,.2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00AEEF]"
       >
         <span className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#45DCCB]/25 bg-gradient-to-br from-[#153746] to-[#10212D] text-[#43C5F5]">
-          <LumiRobot compact />
+          <LumiRobot compact mood={robotMood} />
           <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-[#101722] bg-emerald-400" />
         </span>
         <span className="text-left">
@@ -313,7 +323,7 @@ export function LumeaChatbot() {
                       </div>
                     )}
                   </div>
-                  <button type="button" onClick={() => setIsOpen(false)} aria-label={t.close} className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white">
+                  <button type="button" onClick={() => { setIsOpen(false); setRobotMood('idle'); }} aria-label={t.close} className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white">
                     <X className="h-4 w-4" />
                   </button>
                 </div>
@@ -354,7 +364,7 @@ export function LumeaChatbot() {
                   <div className="flex justify-center pt-1">
                     <div className="relative flex h-[88px] w-[88px] items-center justify-center rounded-[26px] border border-[#42DCCB]/20 bg-[radial-gradient(circle,rgba(45,212,191,.14),rgba(0,174,239,.025)_72%)] shadow-[0_0_34px_rgba(45,212,191,.08)]">
                       <div className="absolute inset-2 rounded-[24px] border border-white/5" />
-                      {assistantId === 'lumi' ? <LumiRobot /> : <AssistantIcon className="h-11 w-11" style={{ color: currentAssistant.accent }} />}
+                      {assistantId === 'lumi' ? <LumiRobot mood={robotMood} /> : <AssistantIcon className="h-11 w-11" style={{ color: currentAssistant.accent }} />}
                       <span className="absolute -bottom-1 -right-1 h-5 w-5 rounded-full border-4 border-[#0B1018] bg-emerald-400" />
                     </div>
                   </div>
@@ -402,7 +412,9 @@ export function LumeaChatbot() {
               <form onSubmit={(event) => sendMessage(event)} className="flex items-center gap-2 rounded-2xl border border-white/10 bg-[#17232D] p-1.5 pl-3 transition focus-within:border-[#45DCCB]/50 focus-within:shadow-[0_0_0_3px_rgba(45,212,191,.07)]">
                 <input
                   value={input}
-                  onChange={(event) => setInput(event.target.value)}
+                  onChange={(event) => { setInput(event.target.value); setRobotMood(event.target.value ? 'listening' : 'idle'); }}
+                  onFocus={() => setRobotMood('listening')}
+                  onBlur={() => { if (!input.trim()) setRobotMood('idle'); }}
                   placeholder={t.placeholder}
                   aria-label={t.placeholder}
                   className="min-w-0 flex-1 bg-transparent py-2 text-sm text-white outline-none placeholder:text-slate-500"
