@@ -182,7 +182,7 @@ function RobotModel({ mood }: { mood: RobotMood }) {
 
       {/* independently tracking head */}
       <group ref={head} position={[0, 0.57, 0]}>
-        <mesh castShadow scale={[0.49, 0.43, 0.37]}><sphereGeometry args={[1, 48, 32]} /><meshStandardMaterial color="#e9f2f5" metalness={0.68} roughness={0.2} /></mesh>
+        <mesh castShadow scale={[0.49, 0.43, 0.34]}><sphereGeometry args={[1, 48, 32]} /><meshStandardMaterial color="#e9f2f5" metalness={0.68} roughness={0.2} /></mesh>
         <mesh position={[0, 0.31, 0.22]} rotation={[-0.18, 0, 0]}><boxGeometry args={[0.48, 0.075, 0.12, 1, 1, 1]} /><meshStandardMaterial color="#b4c8d1" metalness={0.82} roughness={0.2} /></mesh>
         <mesh position={[-0.34, -0.23, 0.245]} rotation={[0, -0.12, -0.18]}><boxGeometry args={[0.12, 0.18, 0.12]} /><meshStandardMaterial color="#a8bdc7" metalness={0.8} roughness={0.22} /></mesh>
         <mesh position={[0.34, -0.23, 0.245]} rotation={[0, 0.12, 0.18]}><boxGeometry args={[0.12, 0.18, 0.12]} /><meshStandardMaterial color="#a8bdc7" metalness={0.8} roughness={0.22} /></mesh>
