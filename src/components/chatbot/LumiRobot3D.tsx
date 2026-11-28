@@ -90,7 +90,7 @@ function RobotModel({ mood }: { mood: RobotMood }) {
           <mesh position={[0.19, 0, 0]}><sphereGeometry args={[0.075, 20, 20]} /><meshStandardMaterial color={eyeColor} emissive={eyeColor} emissiveIntensity={3.2} /></mesh>
           <mesh position={[0, -0.19, 0]}><boxGeometry args={[0.15, 0.025, 0.018]} /><meshStandardMaterial color={eyeColor} emissive={eyeColor} emissiveIntensity={2} /></mesh>
         </group>
-        <mesh position={[-0.49, -0.02, 0]}><cylinderGeometry args={[0.13, 0.13, 0.12, 24]} rotation={[0, 0, Math.PI / 2]} /><meshStandardMaterial color="#91a8b4" metalness={0.8} roughness={0.22} /></mesh>
+        <mesh position={[-0.49, -0.02, 0]}><sphereGeometry args={[0.13, 20, 20]} /><meshStandardMaterial color="#91a8b4" metalness={0.8} roughness={0.22} /></mesh>
         <mesh position={[0.49, -0.02, 0]}><cylinderGeometry args={[0.13, 0.13, 0.12, 24]} rotation={[0, 0, Math.PI / 2]} /><meshStandardMaterial color="#91a8b4" metalness={0.8} roughness={0.22} /></mesh>
         <mesh position={[0, 0.48, 0]}><cylinderGeometry args={[0.018, 0.025, 0.2, 12]} /><meshStandardMaterial color="#a9c3ce" metalness={0.7} /></mesh>
         <mesh position={[0, 0.59, 0]}><sphereGeometry args={[0.055, 16, 16]} /><meshStandardMaterial color="#45ead6" emissive="#21d8c5" emissiveIntensity={3} /></mesh>
