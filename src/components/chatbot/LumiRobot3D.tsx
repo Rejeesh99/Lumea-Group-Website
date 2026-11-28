@@ -64,10 +64,20 @@ function RobotModel({ mood }: { mood: RobotMood }) {
       rightArm.current.rotation.z = THREE.MathUtils.damp(rightArm.current.rotation.z, rightGesture, 5, delta);
     }
     const glow = mood === 'thinking' ? '#b58cff' : mood === 'listening' ? '#ffe066' : mood === 'talking' ? '#55f2d0' : mood === 'greeting' ? '#86efac' : '#67e8f9';
+    // Keep illumination steady: animate colour, not the light intensity.
+    const targetGlow = new THREE.Color(glow);
+    const eyeIntensity = mood === 'idle' ? 2.6 : 3.8;
     [leftEyeMaterial.current, rightEyeMaterial.current, mouthMaterial.current].forEach((material) => {
-      if (material) { material.color.set(glow); material.emissive.set(glow); material.emissiveIntensity = mood === 'idle' ? 2.2 : 4.2 + Math.sin(t * 8) * 0.8; }
+      if (material) {
+        material.color.lerp(targetGlow, 1 - Math.exp(-delta * 9));
+        material.emissive.lerp(targetGlow, 1 - Math.exp(-delta * 9));
+        material.emissiveIntensity = eyeIntensity;
+      }
     });
-    if (faceScreenMaterial.current) { faceScreenMaterial.current.emissive.set(glow); faceScreenMaterial.current.emissiveIntensity = mood === 'idle' ? 0.18 : 0.9 + Math.sin(t * 5) * 0.25; }
+    if (faceScreenMaterial.current) {
+      faceScreenMaterial.current.emissive.lerp(targetGlow, 1 - Math.exp(-delta * 7));
+      faceScreenMaterial.current.emissiveIntensity = mood === 'idle' ? 0.22 : 0.48;
+    }
     if (mouth.current) {
       const talking = mood === 'talking';
       mouth.current.scale.y = THREE.MathUtils.damp(mouth.current.scale.y, talking ? 1 + Math.abs(Math.sin(t * 11)) * 9 : mood === 'thinking' ? 0.65 : mood === 'greeting' ? 1.5 : 1, 14, delta);
@@ -152,9 +162,12 @@ export default function LumiRobot3D({ mood = 'idle', compact = false }: { mood?:
   return (
     <div className={compact ? 'h-12 w-12' : 'h-full w-full'} aria-label="Animated 3D LUMI robot" role="img">
       <Canvas camera={{ position: [0, 0, 3.35], fov: 38 }} dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }}>
-        <ambientLight intensity={1.15} />
-        <directionalLight position={[3, 4, 5]} intensity={2.1} />
-        <pointLight position={[-2, 1, 2]} intensity={1.3} color="#47dccc" />
+        {/* Stable three-point studio lighting; avoid animated light intensity to prevent flicker. */}
+        <hemisphereLight args={['#dff7ff', '#172633', 0.9]} />
+        <ambientLight intensity={0.65} />
+        <directionalLight position={[3, 4, 5]} intensity={1.65} />
+        <directionalLight position={[-3, 1.5, -2]} intensity={0.85} color="#72d9ee" />
+        <pointLight position={[-1.8, 0.6, 2]} intensity={0.45} color="#47dccc" distance={5} decay={2} />
         <Suspense fallback={null}>
           <RobotModel mood={mood} />
         </Suspense>
