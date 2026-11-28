@@ -109,3 +109,89 @@ main :is(a, button):focus-visible {
   outline: 2px solid var(--color-cerulean);
   outline-offset: 3px;
 }
+
+
+/* LUMEA motion system: restrained depth, ambient movement and reduced-motion support. */
+@keyframes lumea-orbit-rotate {
+  to { rotate: 360deg; }
+}
+
+@keyframes lumea-orbit-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -8px; }
+}
+
+@keyframes lumea-core-breathe {
+  0%, 100% {
+    box-shadow: 0 0 38px rgba(0, 174, 239, 0.14), inset 0 0 24px rgba(0, 174, 239, 0.035);
+  }
+  50% {
+    box-shadow: 0 0 62px rgba(0, 174, 239, 0.28), inset 0 0 30px rgba(0, 174, 239, 0.07);
+  }
+}
+
+.lumea-orbit-ring {
+  transform-origin: center;
+  animation: lumea-orbit-rotate 42s linear infinite;
+}
+
+.lumea-orbit-ring-reverse {
+  transform-origin: center;
+  animation: lumea-orbit-rotate 58s linear infinite reverse;
+}
+
+.lumea-orbit-core {
+  animation: lumea-core-breathe 5s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.lumea-orbit-node {
+  transform-style: preserve-3d;
+  transition: rotate 300ms ease, translate 300ms ease, box-shadow 300ms ease;
+  will-change: translate;
+}
+
+.lumea-orbit-node:hover {
+  rotate: x 3deg y -3deg;
+  translate: 0 -5px;
+  box-shadow: 0 18px 38px rgba(0, 174, 239, 0.16);
+}
+
+.lumea-float {
+  animation: lumea-orbit-float 5.8s ease-in-out infinite;
+}
+
+.lumea-float-delay-1 { animation-delay: -1.45s; }
+.lumea-float-delay-2 { animation-delay: -2.9s; }
+.lumea-float-delay-3 { animation-delay: -4.35s; }
+
+.lumea-depth-card {
+  transform-style: preserve-3d;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 380ms ease, border-color 380ms ease;
+}
+
+.lumea-depth-card:hover {
+  transform: perspective(1100px) translateY(-7px) rotateX(1deg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28), 0 0 28px rgba(0, 174, 239, 0.07);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumea-orbit-ring,
+  .lumea-orbit-ring-reverse,
+  .lumea-orbit-core,
+  .lumea-float {
+    animation: none !important;
+  }
+
+  .lumea-orbit-node,
+  .lumea-depth-card {
+    transition: none !important;
+  }
+
+  .lumea-orbit-node:hover,
+  .lumea-depth-card:hover {
+    rotate: none;
+    translate: none;
+    transform: none;
+  }
+}
