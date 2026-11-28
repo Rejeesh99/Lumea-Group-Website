@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   ArrowLeft,
   ArrowRight,
@@ -108,6 +109,39 @@ const copy = {
   },
 };
 
+
+function LumiRobot({ compact = false }: { compact?: boolean }) {
+  return (
+    <motion.div
+      aria-hidden="true"
+      className={compact ? "relative h-12 w-12 shrink-0" : "relative h-32 w-32"}
+      style={{ perspective: 900 }}
+      animate={{ y: [0, -7, 0], rotateZ: [0, 1.5, 0, -1.5, 0] }}
+      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      whileHover={{ scale: 1.06, rotateY: 12 }}
+    >
+      <motion.div className="absolute left-1/2 top-[5%] h-[13%] w-[5%] -translate-x-1/2 rounded-full bg-[#B8F3FF] shadow-[0_0_14px_#00AEEF]" animate={{ opacity: [0.55, 1, 0.55], scaleY: [1, 1.35, 1] }} transition={{ duration: 1.8, repeat: Infinity }} />
+      <div className="absolute left-1/2 top-[15%] h-[9%] w-[32%] -translate-x-1/2 rounded-t-full border-x-2 border-t-2 border-[#B9D9E7] bg-gradient-to-b from-[#EAFBFF] to-[#9CBBCB]" />
+      <motion.div className="absolute left-1/2 top-[20%] h-[43%] w-[76%] -translate-x-1/2 rounded-[34%] border border-white/80 bg-gradient-to-br from-white via-[#D9EAF2] to-[#7896AA] shadow-[inset_-7px_-8px_13px_rgba(30,64,84,.25),inset_5px_5px_10px_white,0_9px_22px_rgba(0,174,239,.25)]" style={{ transformStyle: "preserve-3d" }} animate={{ rotateY: [0, 5, 0, -5, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
+        <div className="absolute inset-[12%] overflow-hidden rounded-[30%] border border-[#8AA8B9] bg-gradient-to-br from-[#071522] via-[#102B3C] to-[#020810] shadow-[inset_0_0_18px_rgba(0,174,239,.28)]">
+          <motion.span className="absolute left-[23%] top-[38%] h-[18%] w-[15%] rounded-full bg-[#8AF1FF] shadow-[0_0_10px_4px_rgba(0,174,239,.75)]" animate={{ scaleY: [1, .18, 1] }} transition={{ duration: 4.8, repeat: Infinity, times: [0, .08, .16], repeatDelay: 1.5 }} />
+          <motion.span className="absolute right-[23%] top-[38%] h-[18%] w-[15%] rounded-full bg-[#8AF1FF] shadow-[0_0_10px_4px_rgba(0,174,239,.75)]" animate={{ scaleY: [1, .18, 1] }} transition={{ duration: 4.8, repeat: Infinity, times: [0, .08, .16], repeatDelay: 1.5 }} />
+          <div className="absolute bottom-[17%] left-1/2 h-[2px] w-[18%] -translate-x-1/2 rounded-full bg-[#4DDDF8]/80" />
+        </div>
+        <span className="absolute -left-[5%] top-[42%] h-[22%] w-[11%] rounded-full border border-[#C9E8F2] bg-gradient-to-r from-[#7898AB] to-[#F4FCFF]" />
+        <span className="absolute -right-[5%] top-[42%] h-[22%] w-[11%] rounded-full border border-[#C9E8F2] bg-gradient-to-l from-[#7898AB] to-[#F4FCFF]" />
+      </motion.div>
+      <div className="absolute left-1/2 top-[64%] h-[26%] w-[58%] -translate-x-1/2 rounded-[30%] border border-white/80 bg-gradient-to-br from-[#F8FDFF] via-[#C7DDE8] to-[#718DA1] shadow-[inset_-5px_-5px_9px_rgba(30,64,84,.2),0_7px_14px_rgba(0,174,239,.18)]">
+        <div className="absolute left-1/2 top-[35%] -translate-x-1/2 text-[5px] font-black tracking-[.22em] text-[#168CB5]">LUMEA</div>
+        <div className="absolute bottom-[20%] left-1/2 h-[3px] w-[25%] -translate-x-1/2 rounded-full bg-[#00AEEF]/70" />
+      </div>
+      <motion.span className="absolute left-[3%] top-[69%] h-[21%] w-[15%] rounded-full border border-white/70 bg-gradient-to-br from-[#F8FDFF] to-[#8AA7B8]" animate={{ rotate: [-8, 8, -8] }} transition={{ duration: 2.5, repeat: Infinity }} />
+      <motion.span className="absolute right-[3%] top-[69%] h-[21%] w-[15%] rounded-full border border-white/70 bg-gradient-to-br from-[#F8FDFF] to-[#8AA7B8]" animate={{ rotate: [8, -8, 8] }} transition={{ duration: 2.5, repeat: Infinity }} />
+      {!compact && <div className="absolute -bottom-[2%] left-1/2 h-3 w-[78%] -translate-x-1/2 rounded-[50%] bg-[#00AEEF]/25 blur-md" />}
+    </motion.div>
+  );
+}
+
 export function LumeaChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [assistantId, setAssistantId] = useState<AssistantId>('lumi');
@@ -171,7 +205,7 @@ export function LumeaChatbot() {
         className="fixed bottom-5 right-5 z-[70] group flex items-center gap-3 rounded-full border border-[#00AEEF]/40 bg-[#101722] p-2.5 pr-4 text-white shadow-[0_12px_40px_rgba(0,174,239,.24)] transition-all duration-300 hover:-translate-y-1 hover:border-[#00AEEF] hover:shadow-[0_16px_48px_rgba(0,174,239,.32)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00AEEF]"
       >
         <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-[#00AEEF]/15 text-[#43C5F5]">
-          <Bot className="h-6 w-6" />
+          <LumiRobot compact />
           <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-[#101722] bg-emerald-400" />
         </span>
         <span className="text-left">
@@ -196,7 +230,7 @@ export function LumeaChatbot() {
                     className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border"
                     style={{ color: currentAssistant.accent, backgroundColor: currentAssistant.softAccent, borderColor: currentAssistant.accent + '55' }}
                   >
-                    <AssistantIcon className="h-6 w-6" />
+                    {assistantId === 'lumi' ? <LumiRobot compact /> : <AssistantIcon className="h-6 w-6" />}
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
@@ -270,7 +304,7 @@ export function LumeaChatbot() {
                   <div className="flex justify-center pt-2">
                     <div className="relative flex h-24 w-24 items-center justify-center rounded-[30px] border border-[#00AEEF]/25 bg-[radial-gradient(circle,rgba(0,174,239,.2),rgba(0,174,239,.03)_70%)] shadow-[0_0_50px_rgba(0,174,239,.1)]">
                       <div className="absolute inset-2 rounded-[24px] border border-white/5" />
-                      <AssistantIcon className="h-11 w-11" style={{ color: currentAssistant.accent }} />
+                      {assistantId === 'lumi' ? <LumiRobot /> : <AssistantIcon className="h-11 w-11" style={{ color: currentAssistant.accent }} />}
                       <span className="absolute -bottom-1 -right-1 h-5 w-5 rounded-full border-4 border-[#0B1018] bg-emerald-400" />
                     </div>
                   </div>
