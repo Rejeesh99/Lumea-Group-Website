@@ -13,9 +13,9 @@ function RobotModel({ mood }: { mood: RobotMood }) {
   const leftArm = useRef<THREE.Group>(null);
   const rightArm = useRef<THREE.Group>(null);
   const mouth = useRef<THREE.Mesh>(null);
-  const leftEyeMaterial = useRef<THREE.MeshStandardMaterial>(null);
-  const rightEyeMaterial = useRef<THREE.MeshStandardMaterial>(null);
-  const mouthMaterial = useRef<THREE.MeshStandardMaterial>(null);
+  const leftEyeMaterial = useRef<THREE.MeshBasicMaterial>(null);
+  const rightEyeMaterial = useRef<THREE.MeshBasicMaterial>(null);
+  const mouthMaterial = useRef<THREE.MeshBasicMaterial>(null);
   const faceScreenMaterial = useRef<THREE.MeshStandardMaterial>(null);
   const pointer = useRef({ x: 0, y: 0 });
   const target = useRef(new THREE.Vector2());
@@ -74,13 +74,10 @@ function RobotModel({ mood }: { mood: RobotMood }) {
     const glow = mood === 'thinking' ? '#b58cff' : mood === 'listening' ? '#ffe066' : mood === 'talking' ? '#55f2d0' : mood === 'greeting' ? '#86efac' : '#67e8f9';
     // Keep illumination steady: animate colour, not the light intensity.
     const targetGlow = new THREE.Color(glow);
-    const eyeIntensity = mood === 'idle' ? 2.6 : 3.8;
+    // Eyes and mouth use unlit materials: cursor tracking cannot move highlights,
+    // shadows or light gradients across the face beneath them.
     [leftEyeMaterial.current, rightEyeMaterial.current, mouthMaterial.current].forEach((material) => {
-      if (material) {
-        material.color.lerp(targetGlow, 1 - Math.exp(-delta * 9));
-        material.emissive.lerp(targetGlow, 1 - Math.exp(-delta * 9));
-        material.emissiveIntensity = eyeIntensity;
-      }
+      if (material) material.color.lerp(targetGlow, 1 - Math.exp(-delta * 9));
     });
     if (faceScreenMaterial.current) {
       faceScreenMaterial.current.emissive.lerp(targetGlow, 1 - Math.exp(-delta * 7));
@@ -146,9 +143,9 @@ function RobotModel({ mood }: { mood: RobotMood }) {
         <mesh castShadow><boxGeometry args={[0.92, 0.78, 0.68, 5, 5, 5]} /><meshStandardMaterial color="#e5eef2" metalness={0.76} roughness={0.23} /></mesh>
         <mesh position={[0, 0, 0.351]}><boxGeometry args={[0.76, 0.59, 0.035]} /><meshStandardMaterial ref={faceScreenMaterial} color="#071923" emissive="#071923" emissiveIntensity={0.2} metalness={0.45} roughness={0.25} /></mesh>
         <group ref={eyes} position={[0, 0.045, 0.38]}>
-          <mesh position={[-0.19, 0, 0]}><sphereGeometry args={[0.105, 24, 24]} /><meshStandardMaterial ref={leftEyeMaterial} color={eyeColor} emissive={eyeColor} emissiveIntensity={3.2} /></mesh>
-          <mesh position={[0.19, 0, 0]}><sphereGeometry args={[0.075, 20, 20]} /><meshStandardMaterial ref={rightEyeMaterial} color={eyeColor} emissive={eyeColor} emissiveIntensity={3.2} /></mesh>
-          <mesh ref={mouth} position={[0, -0.19, 0]}><boxGeometry args={[0.2, 0.045, 0.025]} /><meshStandardMaterial ref={mouthMaterial} color={eyeColor} emissive={eyeColor} emissiveIntensity={2} /></mesh>
+          <mesh position={[-0.19, 0, 0]}><sphereGeometry args={[0.105, 24, 24]} /><meshBasicMaterial ref={leftEyeMaterial} color={eyeColor} toneMapped={false} /></mesh>
+          <mesh position={[0.19, 0, 0]}><sphereGeometry args={[0.075, 20, 20]} /><meshBasicMaterial ref={rightEyeMaterial} color={eyeColor} toneMapped={false} /></mesh>
+          <mesh ref={mouth} position={[0, -0.19, 0]}><boxGeometry args={[0.2, 0.045, 0.025]} /><meshBasicMaterial ref={mouthMaterial} color={eyeColor} toneMapped={false} /></mesh>
         </group>
         <mesh position={[-0.49, -0.02, 0]}><sphereGeometry args={[0.13, 20, 20]} /><meshStandardMaterial color="#91a8b4" metalness={0.8} roughness={0.22} /></mesh>
         <mesh position={[0.49, -0.02, 0]}><cylinderGeometry args={[0.13, 0.13, 0.12, 24]} /><meshStandardMaterial color="#91a8b4" metalness={0.8} roughness={0.22} /></mesh>
