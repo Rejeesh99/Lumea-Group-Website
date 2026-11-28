@@ -33,21 +33,29 @@ function RobotModel({ mood }: { mood: RobotMood }) {
     const t = clock.elapsedTime;
     if (root.current) {
       root.current.position.y = Math.sin(t * 1.7) * 0.055;
-      root.current.rotation.y = THREE.MathUtils.damp(root.current.rotation.y, pointer.current.x * 0.18, 4, delta);
+      // Keep the metal shell stationary relative to the lights. Rotating the whole
+      // robot made specular highlights sweep across the armour as the cursor moved.
+      root.current.rotation.y = THREE.MathUtils.damp(root.current.rotation.y, 0, 5, delta);
     }
     target.current.set(pointer.current.x * 0.17, -pointer.current.y * 0.12);
     // Natural glances when the visitor is not actively interacting.
     const idleLookX = mood === 'idle' ? Math.sin(t * 0.42) * 0.075 : 0;
     const idleLookY = mood === 'idle' ? Math.sin(t * 0.31 + 1.4) * 0.045 : 0;
     if (head.current) {
-      head.current.rotation.y = THREE.MathUtils.damp(head.current.rotation.y, target.current.x + idleLookX, 4.5, delta);
-      head.current.rotation.x = THREE.MathUtils.damp(head.current.rotation.x, target.current.y + idleLookY, 4.5, delta);
+      // Cursor tracking is intentionally restricted to the emissive eye group below.
+      // This prevents moving metallic head surfaces through fixed lights (the source
+      // of the distracting highlight/flicker effect).
+      head.current.rotation.y = THREE.MathUtils.damp(head.current.rotation.y, idleLookX, 3.2, delta);
+      head.current.rotation.x = THREE.MathUtils.damp(head.current.rotation.x, idleLookY, 3.2, delta);
       const moodTilt = mood === 'thinking' ? 0.42 : mood === 'listening' ? -0.22 : mood === 'greeting' ? -0.16 : mood === 'talking' ? 0.10 : 0;
       head.current.rotation.z = THREE.MathUtils.damp(head.current.rotation.z, moodTilt + Math.sin(t * 0.8) * 0.025, 5, delta);
     }
     if (eyes.current) {
-      eyes.current.position.x = THREE.MathUtils.damp(eyes.current.position.x, pointer.current.x * 0.035, 7, delta);
-      eyes.current.position.y = THREE.MathUtils.damp(eyes.current.position.y, -pointer.current.y * 0.025, 7, delta);
+      // Only the emissive eyes translate; the head, armour and lights stay still.
+      const eyeTargetX = THREE.MathUtils.clamp(pointer.current.x, -1, 1) * 0.055;
+      const eyeTargetY = THREE.MathUtils.clamp(-pointer.current.y, -1, 1) * 0.035;
+      eyes.current.position.x = THREE.MathUtils.damp(eyes.current.position.x, eyeTargetX, 9, delta);
+      eyes.current.position.y = THREE.MathUtils.damp(eyes.current.position.y, 0.045 + eyeTargetY, 9, delta);
       const blink = (Math.sin(t * 0.7) > 0.995 || Math.sin(t * 0.7 + 2.1) > 0.997) ? 0.12 : 1;
       const eyePulse = mood === 'thinking' ? 1 + Math.sin(t * 4) * 0.07 : mood === 'talking' ? 1 + Math.sin(t * 8) * 0.045 : 1;
       const moodEyeScale = mood === 'thinking' ? 1.35 : mood === 'listening' ? 1.3 : mood === 'greeting' ? 1.22 : 1;
