@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import {
   ArrowLeft,
   ArrowRight,
@@ -111,87 +112,10 @@ const copy = {
 };
 
 
+const LumiRobot3D = dynamic(() => import('./LumiRobot3D'), { ssr: false });
+
 function LumiRobot({ compact = false, mood = 'idle' }: { compact?: boolean; mood?: RobotMood }) {
-  const [gaze, setGaze] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const trackPointer = (event: PointerEvent) => {
-      const x = (event.clientX / Math.max(window.innerWidth, 1) - 0.5) * 2;
-      const y = (event.clientY / Math.max(window.innerHeight, 1) - 0.5) * 2;
-      setGaze({ x: Math.max(-1, Math.min(1, x)), y: Math.max(-1, Math.min(1, y)) });
-    };
-    window.addEventListener('pointermove', trackPointer, { passive: true });
-    return () => window.removeEventListener('pointermove', trackPointer);
-  }, []);
-
-  const eyeX = gaze.x * 3;
-  const eyeY = gaze.y * 2;
-  const scale = compact ? 'scale(.78)' : 'scale(1)';
-  const eyeColor = mood === 'thinking' ? '#A78BFA' : mood === 'talking' ? '#55F2D0' : mood === 'listening' ? '#FACC15' : '#67E8F9';
-
-  return (
-    <motion.div
-      aria-hidden="true"
-      className={compact ? "relative h-12 w-12 shrink-0" : "relative h-28 w-28"}
-      style={{ perspective: 520 }}
-    >
-      <motion.div
-        className="relative h-full w-full"
-        animate={{ y: [0, -4, 0], rotateZ: [0, .8, 0, -.8, 0] }}
-        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
-        style={{ transform: scale, transformStyle: "preserve-3d", rotateX: -gaze.y * 4, rotateY: gaze.x * 7 }}
-      >
-        {/* Antenna */}
-        <motion.div className="absolute left-1/2 top-[1%] z-0 h-[13%] w-[3%] -translate-x-1/2 rounded-full bg-gradient-to-r from-slate-400 via-white to-slate-500" animate={{ rotateZ: [-3, 3, -3] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }} />
-        <motion.div className="absolute left-[47%] top-[-1%] z-10 h-[9%] w-[9%] rounded-full border border-cyan-100/70 bg-cyan-300 shadow-[0_0_12px_4px_rgba(45,230,220,.55)]" animate={mood === 'thinking' ? { opacity: [0.5, 1, 0.5], scale: [1, 1.5, 1] } : { opacity: [.65, 1, .65], scale: [1, 1.14, 1] }} transition={{ duration: mood === 'thinking' ? .65 : 1.8, repeat: Infinity }} />
-
-        {/* Legs */}
-        <motion.div className="absolute bottom-[4%] left-[34%] z-0 h-[19%] w-[19%] origin-top rounded-b-xl rounded-t-md border border-white/70 bg-gradient-to-br from-white via-slate-200 to-slate-500 shadow-[inset_-5px_-3px_8px_rgba(30,60,75,.22),4px_5px_8px_rgba(0,0,0,.2)]" animate={{ rotateZ: [-2, 2, -2] }} transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}>
-          <div className="absolute -bottom-[12%] -left-[17%] h-[38%] w-[125%] rounded-[9px] border border-slate-300 bg-gradient-to-b from-slate-100 to-slate-500 shadow-md" />
-        </motion.div>
-        <motion.div className="absolute bottom-[4%] right-[29%] z-0 h-[19%] w-[19%] origin-top rounded-b-xl rounded-t-md border border-white/70 bg-gradient-to-br from-white via-slate-200 to-slate-500 shadow-[inset_-5px_-3px_8px_rgba(30,60,75,.22),4px_5px_8px_rgba(0,0,0,.2)]" animate={{ rotateZ: [2, -2, 2] }} transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}>
-          <div className="absolute -bottom-[12%] -left-[8%] h-[38%] w-[125%] rounded-[9px] border border-slate-300 bg-gradient-to-b from-slate-100 to-slate-500 shadow-md" />
-        </motion.div>
-
-        {/* Arms and shoulder joints */}
-        <motion.div className="absolute left-[12%] top-[57%] z-20 h-[34%] w-[18%] origin-top rounded-full border border-slate-300 bg-gradient-to-r from-slate-500 via-white to-slate-300 shadow-[4px_5px_9px_rgba(0,0,0,.25)]" animate={{ rotateZ: [10, 18, 10] }} transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}>
-          <span className="absolute -bottom-[8%] left-[5%] h-[27%] w-[90%] rounded-full bg-gradient-to-b from-slate-200 to-slate-500" />
-        </motion.div>
-        <motion.div className="absolute right-[12%] top-[57%] z-20 h-[34%] w-[18%] origin-top rounded-full border border-slate-300 bg-gradient-to-r from-slate-500 via-white to-slate-300 shadow-[4px_5px_9px_rgba(0,0,0,.25)]" animate={mood === 'greeting' ? { rotateZ: [-10, -48, 12, -42, 8, -10] } : { rotateZ: [-10, -18, -10] }} transition={{ duration: mood === 'greeting' ? 1.15 : 3.6, repeat: mood === 'greeting' ? 1 : Infinity, ease: "easeInOut" }}>
-          <span className="absolute -bottom-[8%] left-[5%] h-[27%] w-[90%] rounded-full bg-gradient-to-b from-slate-200 to-slate-500" />
-        </motion.div>
-        <div className="absolute left-[17%] top-[57%] z-30 h-[18%] w-[18%] rounded-full border-[3px] border-slate-400 bg-gradient-to-br from-white to-slate-500 shadow-[0_0_0_2px_rgba(30,60,75,.25)]" />
-        <div className="absolute right-[17%] top-[57%] z-30 h-[18%] w-[18%] rounded-full border-[3px] border-slate-400 bg-gradient-to-br from-white to-slate-500 shadow-[0_0_0_2px_rgba(30,60,75,.25)]" />
-
-        {/* Torso */}
-        <motion.div className="absolute bottom-[13%] left-[27%] z-10 h-[39%] w-[48%] overflow-hidden rounded-[25%] border border-white/80 bg-gradient-to-br from-white via-slate-200 to-slate-500 shadow-[inset_-8px_-5px_12px_rgba(35,65,80,.22),0_8px_14px_rgba(0,0,0,.22)]" animate={{ rotateZ: [0, .6, 0, -.6, 0] }} transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}>
-          <div className="absolute left-[18%] right-[18%] top-[25%] h-[2px] rounded-full bg-slate-500/60" />
-          <div className="absolute left-[30%] right-[30%] top-[43%] h-[5px] rounded-full bg-gradient-to-r from-cyan-300 to-emerald-300 shadow-[0_0_9px_2px_rgba(45,220,200,.7)]" />
-          <div className="absolute left-[36%] right-[36%] top-[61%] h-[2px] rounded-full bg-slate-400/70" />
-          <div className="absolute inset-x-0 bottom-0 h-[22%] bg-gradient-to-t from-slate-500/25 to-transparent" />
-        </motion.div>
-
-        {/* Head: independent cursor-responsive movement */}
-        <motion.div
-          className="absolute left-[16%] top-[13%] z-40 h-[53%] w-[68%] rounded-[27%] border-2 border-white/90 bg-gradient-to-br from-white via-slate-200 to-slate-500 shadow-[inset_-8px_-6px_12px_rgba(35,65,80,.24),0_9px_18px_rgba(0,0,0,.28)]"
-          animate={{ rotateZ: [0, 1.8, 0, -1.8, 0], y: [0, -1, 0] }}
-          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-          style={{ rotateX: -gaze.y * 7, rotateY: gaze.x * 11, transformStyle: "preserve-3d" }}
-        >
-          <div className="absolute inset-[9%] overflow-hidden rounded-[23%] border border-cyan-100/40 bg-gradient-to-br from-[#102432] via-[#06131E] to-[#020910] shadow-[inset_0_0_16px_rgba(0,0,0,.9)]">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_15%,rgba(41,214,230,.16),transparent_65%)]" />
-            <motion.div className="absolute left-[20%] top-[40%] h-[23%] w-[17%] rounded-full shadow-[0_0_9px_4px_rgba(92,255,155,.65)]" style={{ backgroundColor: eyeColor, boxShadow: `0 0 10px 4px ${eyeColor}88` }} animate={{ scaleY: [1, 1, .08, 1, 1] }} transition={{ duration: 4.8, repeat: Infinity, repeatDelay: 1.2, times: [0, .91, .94, .97, 1] }} style={{ x: eyeX, y: eyeY, transformOrigin: "center" }} />
-            <motion.div className="absolute right-[20%] top-[40%] h-[23%] w-[17%] rounded-full shadow-[0_0_9px_4px_rgba(45,220,255,.65)]" style={{ backgroundColor: eyeColor, boxShadow: `0 0 10px 4px ${eyeColor}88` }} animate={{ scaleY: [1, 1, .08, 1, 1] }} transition={{ duration: 4.8, repeat: Infinity, repeatDelay: 1.2, times: [0, .91, .94, .97, 1] }} style={{ x: eyeX, y: eyeY, transformOrigin: "center" }} />
-            <motion.div className="absolute bottom-[17%] left-1/2 h-[5%] w-[22%] -translate-x-1/2 rounded-full bg-cyan-200 shadow-[0_0_8px_2px_rgba(45,220,255,.6)]" animate={mood === 'talking' ? { scaleX: [1, .55, 1.25, .65, 1], scaleY: [1, 1.8, 1, 1.6, 1] } : mood === 'thinking' ? { scaleX: [.7, .7, .7], opacity: [.45, .8, .45] } : { scaleX: [1, .72, 1], scaleY: 1 }} transition={{ duration: mood === 'talking' ? .48 : 2.4, repeat: Infinity }} />
-          </div>
-          <div className="absolute -left-[8%] top-[34%] h-[30%] w-[12%] rounded-full border border-slate-300 bg-gradient-to-r from-slate-500 to-white shadow-md" />
-          <div className="absolute -right-[8%] top-[34%] h-[30%] w-[12%] rounded-full border border-slate-300 bg-gradient-to-r from-white to-slate-500 shadow-md" />
-          <div className="absolute -inset-[3px] -z-10 rounded-[29%] border border-cyan-300/60 shadow-[0_0_12px_2px_rgba(45,220,220,.35)]" />
-        </motion.div>
-      </motion.div>
-      <div className="pointer-events-none absolute bottom-[1%] left-[20%] h-[8%] w-[60%] rounded-full bg-cyan-300/20 blur-md" />
-    </motion.div>
-  );
+  return <LumiRobot3D compact={compact} mood={mood} />;
 }
 
 export function LumeaChatbot() {
